@@ -1,0 +1,16 @@
+---
+alwaysApply: false
+---
+
+- **Project:** Cub3D – Build a first-person 3D maze renderer (Wolfenstein 3D style) with ray-casting in C, using MinilibX.
+- **Main goal:** Create a dynamic 3D view in a labyrinth, move and rotate the player, find the exit.
+- **Language:** C only, strict 42 Norme, no leaks, no crashes.
+- **Graphics:** MinilibX (window, textures, input).
+- **Controls:** W/A/S/D for movement, arrows for rotation, ESC and window close for clean exit.
+- **Map file:** `.cub` extension, describes textures (NO/SO/WE/EA), floor/ceiling colors (F/C), and the map grid (0=empty, 1=wall, N/S/E/W=start).
+- **Parsing:** Map must be closed by walls, only allowed chars, robust error handling (print `Error\n` + message).
+- **Required Makefile targets:** all, clean, fclean, re, bonus (if bonus part implemented).
+- **Allowed functions:** Standard libc, math lib, MinilibX, (optional) libft.
+- **Bonus (if mandatory part is perfect):** wall collision, minimap, doors, animated sprites, mouse view.
+- **Submission:** Only via assigned git repo; only submitted code is graded.
+- **Testing:** Recommended to create your own test programs, but not graded.
