@@ -6,17 +6,12 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/02 13:17:57 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:56:48 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../include/cub3d.h"
 
-int	add(int a, int b)
+int	main(void)
 {
-	return (a + b);
 }
-
-// int	main(int ac, char **av)
-// {
-// }

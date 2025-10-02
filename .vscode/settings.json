@@ -4,6 +4,9 @@
     "cub3d.h": "c",
     "graphics.h": "c",
     "utils.h": "c",
-    "map_parser.h": "c"
+    "map_parser.h": "c",
+    "fcntl.h": "c",
+    "libft.h": "c",
+    "stdlib.h": "c"
   }
 }
