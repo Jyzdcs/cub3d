@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:01:21 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/02 12:51:51 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/02 13:47:33 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,5 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 }				t_game;
+
+int				add(int a, int b);
