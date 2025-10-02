@@ -1,13 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parser.h                                       :+:      :+:    :+:   */
+/*   file_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/02 12:56:31 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/02 12:56:35 by kclaudan         ###   ########.fr       */
+/*   Created: 2025/10/02 12:55:04 by kclaudan          #+#    #+#             */
+/*   Updated: 2025/10/02 12:56:27 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	check_extension(char *path);
+#include "map_parser.h"
+
+int	check_extension(char *path)
+{
+}
