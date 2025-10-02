@@ -6,11 +6,11 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:55:04 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/02 14:04:08 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/02 18:21:03 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map_parser.h"
+#include "../../include/map_parser.h"
 
 int	check_extension(char *file_path)
 {
