@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:25:01 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/02 13:35:43 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/02 14:12:58 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,53 @@ void	test_bad_extension_name(void)
 	TEST_ASSERT_EQUAL_INT(FALSE, result);
 }
 
+void	test_multilple_bad_extension(void)
+{
+	int	result;
+
+	result = check_extension("map.cub.txt");
+	TEST_ASSERT_EQUAL_INT(FALSE, result);
+}
+
+void	test_with_null_param(void)
+{
+	int	result;
+
+	result = check_extension(NULL);
+	TEST_ASSERT_EQUAL_INT(FALSE, result);
+}
+
+void	test_with_right_extension(void)
+{
+	int	result;
+
+	result = check_extension("map.cub");
+	TEST_ASSERT_EQUAL_INT(TRUE, result);
+}
+
+void	test_with_multiple_extensions(void)
+{
+	int	result;
+
+	result = check_extension("map.cub.cub");
+	TEST_ASSERT_EQUAL_INT(TRUE, result);
+}
+
+void	test_with_minimum_file_name(void)
+{
+	int	result;
+
+	result = check_extension("a.cub");
+	TEST_ASSERT_EQUAL_INT(TRUE, result);
+}
+
+void	test_with_only_extension(void)
+{
+	int	result;
+
+	result = check_extension(".cub");
+	TEST_ASSERT_EQUAL_INT(FALSE, result);
+}
 /*
 ** Main function to run all tests
 */
@@ -48,6 +95,12 @@ int	main(void)
 	UNITY_BEGIN();
 	/* Run tests - add each test here */
 	RUN_TEST(test_bad_extension_name);
+	RUN_TEST(test_multilple_bad_extension);
+	RUN_TEST(test_with_right_extension);
+	RUN_TEST(test_with_null_param);
+	RUN_TEST(test_with_multiple_extensions);
+	RUN_TEST(test_with_minimum_file_name);
+	RUN_TEST(test_with_only_extension);
 	/* Return failure count from Unity */
 	return (UNITY_END());
 }
