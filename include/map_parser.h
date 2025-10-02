@@ -6,10 +6,11 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:56:31 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/02 13:42:05 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/02 18:19:15 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
 int	check_extension(char *path);
+int	check_border_closed(char **map);
