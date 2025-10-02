@@ -1,6 +1,6 @@
 #include "../../include/map_parser.h"
 
-int	check_border_closed(char **map)
+int	map_is_closed(char **map)
 {
 	// Implementes ton code ici avec tes fonctions utilitaires
 	// Si t'as besoin de + de 5 fonctions creer un fichier

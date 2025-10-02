@@ -6,11 +6,11 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:25:01 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/02 14:12:58 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/02 18:25:13 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/map_parser.h"
 #include "../Unity/src/unity.h"
 #include <stdio.h>
 #include <stdlib.h>
