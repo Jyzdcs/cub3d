@@ -10,7 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MAP_PARSER_H
+# define MAP_PARSER_H
+
 #include "utils.h"
 
+typedef struct s_map t_map;
+typedef struct s_player t_player;
+
 int	check_extension(char *path);
-int	map_is_closed(char **map);
+int	map_is_closed(char **map_copy, t_map *map, t_player *player);
+
+#endif

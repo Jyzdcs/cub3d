@@ -41,6 +41,9 @@ typedef struct s_map
 	void		*mlx;
 	void		*mlx_win;
 	char		**map;
+	int			width;
+	int			height;
+	int			is_closed;
 	t_texture	no_wall;
 	t_texture	so_wall;
 	t_texture	we_wall;
