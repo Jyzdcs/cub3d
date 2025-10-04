@@ -15,7 +15,8 @@ LIBFT_DIR = $(LIBS_DIR)/libft
 
 # Source files
 SRC_FILES = $(SRC_DIR)/map_parser/file_check.c \
-						$(SRC_DIR)/map_parser/map_is_closed.c
+						$(SRC_DIR)/map_parser/map_is_closed.c \
+						$(SRC_DIR)/map_parser/file_content_check.c \
 # Add more source files as needed
 
 # Test files
