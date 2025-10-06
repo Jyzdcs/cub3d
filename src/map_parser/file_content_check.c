@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/06 00:41:37 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:08:38 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int ft_isspace(char c)
 
 int ft_is_identifier(char *id)
 {
-	return (ft_strncmp(id, "NO", 2) || ft_strncmp(id, "SO", 2) || ft_strncmp(id, "WE", 2) || ft_strncmp(id, "EA", 2) || ft_strncmp(id, "F", 1) || ft_strncmp(id, "F", 1) || ft_strncmp(id, "C", 1));
+	return (!ft_strncmp(id, "NO", 2) || !ft_strncmp(id, "SO", 2) ||
+					!ft_strncmp(id, "WE", 2) || !ft_strncmp(id, "EA", 2) ||
+					!ft_strncmp(id, "F", 1) || !ft_strncmp(id, "C", 1));
 }
 
 char **export_file_content(char *path)
@@ -76,44 +78,67 @@ int file_is_empty(char **file)
 	return (TRUE);
 }
 
-int check_file_content(char **file, t_game *game)
+int ft_textures_handler(char **file, t_game *game)
+{
+	(void)file;
+	(void)game;
+	return (TRUE);
+}
+
+int ft_color_handler(char **file, t_game *game)
+{
+	(void)file;
+	(void)game;
+	return (TRUE);
+}
+
+/*
+fonction qui check boucle jusquau premier char visible
+si apres avoir skip les white space file[i][j] != un id valide
+return FALSE
+*/
+int check_file_content(t_game *game)
 {
 	int i;
 	int j;
+	int id_counter = 0;
 
 	i = 0;
-	j = 0;
-	while (file[i])
+	while (game->file[i])
 	{
 		j = 0;
-		while (ft_isspace(file[i][j]) == TRUE)
+		while (ft_isspace(game->file[i][j]) == TRUE)
 			j++;
-		if (ft_is_identifier(file[i][j]) == TRUE)
+		if (ft_is_identifier(game->file[i]) == TRUE)
 		{
+			id_counter++;
 			j += 3;
-			if (ft_is_valid_texture(file[i][j], game) == TRUE)
+			// if (ft_doublon_detect(game->file, game) == TRUE)
+			// 	exit_game(game, "Error: Map contain doublon");
+			if (ft_color_handler(game->file, game) == TRUE || ft_textures_handler(game->file, game) == TRUE)
 				;
 		}
+		else if (id_counter != 5)
+			return (exit_game(game, "Error: Invalid Map format identifier missing\n")), FALSE;
 		i++;
 	}
+	return (TRUE);
 }
 
-int parse_content(char *path)
+int parse_content(char *path, t_game *game)
 {
-	char **file;
-
-	file = export_file_content(path);
-	if (!file)
+	game->file = export_file_content(path);
+	if (!game->file)
 		return (FALSE);
-	if (file_is_empty(file) == TRUE)
+	if (file_is_empty(game->file) == TRUE)
 		return (FALSE);
-	if (check_file_content(file) == TRUE)
+	if (check_file_content(game) == TRUE)
 		return (FALSE);
 	return (TRUE);
 }
 
 // Return true si le content est bon
-int check_file_content(char *path)
+int file_handler(char *path, t_game *game)
 {
 	int fd = open(path, O_RDONLY);
 	if (fd < 0)
@@ -121,7 +146,7 @@ int check_file_content(char *path)
 		ft_putstr_fd("Error: file doesnt exist\n", 2);
 		return (FALSE);
 	}
-	if (parse_content(path) == FALSE)
+	if (parse_content(path, game) == FALSE)
 		return (FALSE);
 	close(fd);
 	return (TRUE);

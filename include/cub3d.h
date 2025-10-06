@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:01:21 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/04 17:34:07 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/06 12:21:28 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_game
 {
 	t_map map;
 	t_player player;
+	char **file;
 } t_game;
 
-void free_game(t_game *game);
 void free_all(char **str);

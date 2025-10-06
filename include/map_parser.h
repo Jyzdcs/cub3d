@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:56:31 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/04 15:53:40 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/06 11:42:03 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 
 typedef struct s_map t_map;
 typedef struct s_player t_player;
+typedef struct s_game t_game;
 
 int check_extension(char *path);
 int map_is_closed(char **map_copy, t_map *map, t_player *player);
-int check_file_content(char *path);
+int file_handler(char *path, t_game *game);
 
 #endif

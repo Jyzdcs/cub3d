@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:41:44 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/04 17:21:38 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/06 14:48:01 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,3 +15,7 @@
 
 #define TRUE 0
 #define FALSE 1
+
+typedef struct s_game t_game;
+
+void exit_game(t_game *game, char *message);
