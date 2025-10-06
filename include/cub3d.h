@@ -9,11 +9,13 @@
 /*   Updated: 2025/10/02 18:26:26 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#ifndef CUB3D_H
+# define CUB3D_H
 
-#include "controls.h"
-#include "graphics.h"
-#include "map_parser.h"
-#include "utils.h"
+#include "../libs/libft/libft.h"
+
+#define TRUE 0
+#define FALSE 1
 
 typedef struct s_texture
 {
@@ -57,3 +59,5 @@ typedef struct s_game
 	t_map		map;
 	t_player	player;
 }				t_game;
+
+#endif
