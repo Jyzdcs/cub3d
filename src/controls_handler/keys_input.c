@@ -1,58 +1,45 @@
 #include "../../include/controls.h"
 #include "../../include/cub3d.h"
 
-// These 4 functions are used for tests only, in order to TDD correctly.
-// These are stub functions.
-// They need to be uncommented to run the tests.
-
-// static int	handle_key_w_s_movement(int keycode, t_game *game)
-// {
-// 	(void)keycode;
-// 	(void)game;
-// 	return (TRUE);
-// }
-// static int	handle_key_a_d_movement(int keycode, t_game *game)
-// {
-// 	(void)keycode;
-// 	(void)game;
-// 	return (TRUE);
-// }
-// static int	handle_key_left_right_rotation(int keycode, t_game *game)
-// {
-// 	(void)keycode;
-// 	(void)game;
-// 	return (TRUE);
-// }
-// static int	launch_rendering_function(t_game *game)
-// {
-// 	(void)game;
-// 	return (TRUE);
-// }
-
-// This function only take the information from the key pressed and is used to handle the key pressed
-// In casee of Esc key pressed, this will either return false or launch the exit function for the program.
-// In case of Left or Right key pressed, this will trigger the rotation of the camera.
-// If a key is pressed, we move the position of the player and then we render the view of the new position.
+// This function updates the key state when a key is pressed.
+// ESC key returns FALSE to exit the program.
+// Other keys update the corresponding state in game->keys.
 int	handle_key_press(int keycode, t_game *game)
 {
-	int key_is_pressed;
-
-	key_is_pressed = FALSE;
 	if (keycode == XK_Escape)
+	{
+		game->keys.escape_pressed = 1;
 		return (FALSE);
+	}
 	if (keycode == XK_W)
-		key_is_pressed = handle_key_w_s_movement(keycode, game);
+		game->keys.w_pressed = 1;
 	if (keycode == XK_A)
-		key_is_pressed = handle_key_a_d_movement(keycode, game);
+		game->keys.a_pressed = 1;
 	if (keycode == XK_S)
-		key_is_pressed = handle_key_w_s_movement(keycode, game);
+		game->keys.s_pressed = 1;
 	if (keycode == XK_D)
-		key_is_pressed = handle_key_a_d_movement(keycode, game);
+		game->keys.d_pressed = 1;
 	if (keycode == XK_Left)
-		key_is_pressed = handle_key_left_right_rotation(keycode, game);
+		game->keys.left_pressed = 1;
 	if (keycode == XK_Right)
-		key_is_pressed = handle_key_left_right_rotation(keycode, game);
-	if (key_is_pressed)
-		launch_rendering_function(game);
+		game->keys.right_pressed = 1;
+	return (TRUE);
+}
+
+// This function updates the key state when a key is released.
+int	handle_key_release(int keycode, t_game *game)
+{
+	if (keycode == XK_W)
+		game->keys.w_pressed = 0;
+	if (keycode == XK_A)
+		game->keys.a_pressed = 0;
+	if (keycode == XK_S)
+		game->keys.s_pressed = 0;
+	if (keycode == XK_D)
+		game->keys.d_pressed = 0;
+	if (keycode == XK_Left)
+		game->keys.left_pressed = 0;
+	if (keycode == XK_Right)
+		game->keys.right_pressed = 0;
 	return (TRUE);
 }

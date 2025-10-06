@@ -17,6 +17,17 @@
 #define TRUE 0
 #define FALSE 1
 
+typedef struct s_keys
+{
+	int		w_pressed;
+	int		a_pressed;
+	int		s_pressed;
+	int		d_pressed;
+	int		left_pressed;
+	int		right_pressed;
+	int		escape_pressed;
+}				t_keys;
+
 typedef struct s_texture
 {
 	void		*img;
@@ -58,6 +69,7 @@ typedef struct s_game
 {
 	t_map		map;
 	t_player	player;
+	t_keys		keys;
 }				t_game;
 
 #endif

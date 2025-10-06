@@ -37,8 +37,12 @@ void tearDown(void)
 void test_key_press_basic(void)
 {
 	t_game game;
+	game.keys.w_pressed = 0;
+
 	int result = handle_key_press(XK_W, &game);
+
 	TEST_ASSERT_EQUAL_INT(TRUE, result);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.w_pressed);
 }
 
 /*
@@ -46,9 +50,13 @@ void test_key_press_basic(void)
 */
 void test_key_release_basic(void)
 {
-	// Note: This test is for key release, but handle_hey_press only handles key press
-	// This would need a separate handle_key_release function
-	TEST_ASSERT_TRUE(1); // Placeholder until key release function is implemented
+	t_game game;
+	game.keys.w_pressed = 1;
+
+	int result = handle_key_release(XK_W, &game);
+
+	TEST_ASSERT_EQUAL_INT(TRUE, result);
+	TEST_ASSERT_EQUAL_INT(0, game.keys.w_pressed);
 }
 
 /*
@@ -57,22 +65,26 @@ void test_key_release_basic(void)
 void test_movement_keys(void)
 {
 	t_game game;
+	game.keys.w_pressed = 0;
+	game.keys.a_pressed = 0;
+	game.keys.s_pressed = 0;
+	game.keys.d_pressed = 0;
 
 	// Test W key (forward movement)
-	int w_result = handle_key_press(XK_W, &game);
-	TEST_ASSERT_EQUAL_INT(TRUE, w_result);
+	handle_key_press(XK_W, &game);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.w_pressed);
 
 	// Test A key (left movement)
-	int a_result = handle_key_press(XK_A, &game);
-	TEST_ASSERT_EQUAL_INT(TRUE, a_result);
+	handle_key_press(XK_A, &game);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.a_pressed);
 
 	// Test S key (backward movement)
-	int s_result = handle_key_press(XK_S, &game);
-	TEST_ASSERT_EQUAL_INT(TRUE, s_result);
+	handle_key_press(XK_S, &game);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.s_pressed);
 
 	// Test D key (right movement)
-	int d_result = handle_key_press(XK_D, &game);
-	TEST_ASSERT_EQUAL_INT(TRUE, d_result);
+	handle_key_press(XK_D, &game);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.d_pressed);
 }
 
 /*
@@ -81,14 +93,16 @@ void test_movement_keys(void)
 void test_rotation_keys(void)
 {
 	t_game game;
+	game.keys.left_pressed = 0;
+	game.keys.right_pressed = 0;
 
 	// Test left arrow key
-	int left_result = handle_key_press(XK_Left, &game);
-	TEST_ASSERT_EQUAL_INT(TRUE, left_result);
+	handle_key_press(XK_Left, &game);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.left_pressed);
 
 	// Test right arrow key
-	int right_result = handle_key_press(XK_Right, &game);
-	TEST_ASSERT_EQUAL_INT(TRUE, right_result);
+	handle_key_press(XK_Right, &game);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.right_pressed);
 }
 
 /*
@@ -97,8 +111,12 @@ void test_rotation_keys(void)
 void test_escape_key(void)
 {
 	t_game game;
+	game.keys.escape_pressed = 0;
+
 	int result = handle_key_press(XK_Escape, &game);
+
 	TEST_ASSERT_EQUAL_INT(FALSE, result);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.escape_pressed);
 }
 
 /*
@@ -131,12 +149,21 @@ void test_multiple_key_presses(void)
 void test_key_state_management(void)
 {
 	t_game game;
+	game.keys.w_pressed = 0;
+	game.keys.a_pressed = 0;
 
-	// Test that different keys return consistent results
-	TEST_ASSERT_EQUAL_INT(TRUE, handle_key_press(XK_W, &game));
-	TEST_ASSERT_EQUAL_INT(TRUE, handle_key_press(XK_A, &game));
-	TEST_ASSERT_EQUAL_INT(FALSE, handle_key_press(XK_Escape, &game));
-	TEST_ASSERT_EQUAL_INT(TRUE, handle_key_press(XK_W, &game));
+	// Test that keys can be pressed and released properly
+	handle_key_press(XK_W, &game);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.w_pressed);
+
+	handle_key_release(XK_W, &game);
+	TEST_ASSERT_EQUAL_INT(0, game.keys.w_pressed);
+
+	// Test multiple keys pressed simultaneously
+	handle_key_press(XK_W, &game);
+	handle_key_press(XK_A, &game);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.w_pressed);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.a_pressed);
 }
 
 /*
@@ -145,11 +172,18 @@ void test_key_state_management(void)
 void test_key_input_with_game_state(void)
 {
 	t_game game;
+	game.keys.w_pressed = 0;
+	game.keys.left_pressed = 0;
+	game.keys.right_pressed = 0;
 
-	// Test that keys work with game state (using stubs)
-	TEST_ASSERT_EQUAL_INT(TRUE, handle_key_press(XK_W, &game));
-	TEST_ASSERT_EQUAL_INT(TRUE, handle_key_press(XK_Left, &game));
-	TEST_ASSERT_EQUAL_INT(TRUE, handle_key_press(XK_Right, &game));
+	// Test that keys update state properly
+	handle_key_press(XK_W, &game);
+	handle_key_press(XK_Left, &game);
+	handle_key_press(XK_Right, &game);
+
+	TEST_ASSERT_EQUAL_INT(1, game.keys.w_pressed);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.left_pressed);
+	TEST_ASSERT_EQUAL_INT(1, game.keys.right_pressed);
 }
 
 /*
@@ -158,15 +192,20 @@ void test_key_input_with_game_state(void)
 void test_key_input_performance(void)
 {
 	t_game game;
+	game.keys.w_pressed = 0;
 
 	// Test rapid key presses
 	for (int i = 0; i < 100; i++)
 	{
-		TEST_ASSERT_EQUAL_INT(TRUE, handle_key_press(XK_W, &game));
+		handle_key_press(XK_W, &game);
+		TEST_ASSERT_EQUAL_INT(1, game.keys.w_pressed);
+		handle_key_release(XK_W, &game);
+		TEST_ASSERT_EQUAL_INT(0, game.keys.w_pressed);
 	}
 
 	// Test escape still works after rapid presses
-	TEST_ASSERT_EQUAL_INT(FALSE, handle_key_press(XK_Escape, &game));
+	int result = handle_key_press(XK_Escape, &game);
+	TEST_ASSERT_EQUAL_INT(FALSE, result);
 }
 
 /*

@@ -6,5 +6,6 @@
 # include "cub3d.h"
 
 int	handle_key_press(int keycode, t_game *game);
+int	handle_key_release(int keycode, t_game *game);
 
 #endif
