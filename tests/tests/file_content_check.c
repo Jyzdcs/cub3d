@@ -32,29 +32,23 @@ void tearDown(void)
 void test_multiple_case(void)
 {
 	test_case_t test_cases[] = {
-			{"../maps/invalids/glsrkgnsl.cub", "map dont exist", FALSE},
-			{"../maps/invalids/empty_map.cub", "empty map", FALSE},
-			// {"../maps/bad/color_invalid_rgb.cub", "color invalid rgb", FALSE},
-			// {"../maps/bad/color_missing.cub", "color missing", FALSE},
-			// {"../maps/bad/color_missing_ceiling_rgb.cub", "color missing ceiling rgb", FALSE},
-			// {"../maps/bad/color_missing_floor_rgb.cub", "color missing floor rgb", FALSE},
-			// {"../maps/bad/file_letter_end.cub", "file letter end", FALSE},
-			{"../maps/bad/map_first.cub", "map first", FALSE},
-			// {"../maps/bad/map_missing.cub", "map missing", FALSE},
-			{"../maps/bad/map_only.cub", "map only", FALSE},
-			// {"../maps/bad/textures_dir.cub", "textures dir", FALSE},
+			{"../maps/invalids/glsrkgnsl.cub", "MAP DONT EXIST !!!!!", FALSE},
+			{"../maps/invalids/empty_map.cub", "EMPTY MAP !!!!!", FALSE},
+			{"../maps/bad/map_first.cub", "MAP FIRST !!!!!", FALSE},
+			{"../maps/bad/map_only.cub", "MAP ONLY !!!!!", FALSE},
 			// {"../maps/bad/textures_duplicates.cub", "textures duplicates", FALSE},
-			// {"../maps/bad/textures_invalid.cub", "textures invalid", FALSE},
-			// {"../maps/bad/textures_forbidden.cub", "textures forbidden", FALSE},
-			// {"../maps/bad/textures_missing.cub", "textures missing", FALSE},
-			// {"../maps/bad/textures_none.cub", "textures none", FALSE},
-			// {"../maps/bad/textures_not_xpm.cub", "textures not xpm", FALSE},
-			{"../maps/valids/a.cub", NULL, TRUE},
+			{"../maps/bad/color_none.cub", "COLOR NONE !!!!!", FALSE},
+			{"../maps/bad/textures_none.cub", "TEXTURES NONE !!!!!", FALSE},
+			// {"../maps/bad/file_letter_end.cub", "file letter end", FALSE},
+			// {"../maps/bad/map_missing.cub", "map missing", FALSE},
+			{"../maps/bad/textures_missing.cub", "TEXTURES MISSING !!!!!", FALSE},
+			{"../maps/good/subject_map.cub", "MAP IS VALID !!!!!", TRUE},
 	};
 
 	for (unsigned long i = 0; i < sizeof(test_cases) / sizeof(test_case_t); i++)
 	{
 		int result = file_handler(test_cases[i].file_path, game);
+		printf("test : %s\n", test_cases[i].message);
 		TEST_ASSERT_EQUAL_INT_MESSAGE(test_cases[i].code, result, test_cases[i].message);
 	};
 }
