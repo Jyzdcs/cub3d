@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/07 14:08:11 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/07 22:58:49 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,61 @@ int ft_isspace(char c)
 	return (FALSE);
 }
 
-int ft_comp(char *s1, char *s2, int n)
+int ft_comp(char *s1, char *s2)
 {
 	int i;
 
 	i = 0;
-	if (n <= 0)
-		return (FALSE);
 	if (!s1 || !s2)
 		return (FALSE);
-	while (i < n && (s1[i] && s2[i]))
+	while (s1[i] == s2[i] && (s1[i] && s2[i]))
+		i++;
+	if (!s2[i] && s1[i] == ' ')
+		return (TRUE);
+	return (FALSE);
+}
+
+int ft_is_line_empty(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i])
 	{
-		if (s1[i] != s2[i])
+		if (ft_isspace(line[i]) != TRUE)
 			return (FALSE);
 		i++;
 	}
-	if (i < n)
-		return (FALSE);
+	return (TRUE);
+}
+
+int identifiers_register_check(char id[6])
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (id[i])
+	{
+		j = i + 1;
+		while (id[j])
+		{
+			if (id[i] == id[j++])
+				return (FALSE);
+		}
+		i++;
+	}
 	return (TRUE);
 }
 
 int ft_is_identifier(char *id)
 {
-	if (ft_comp(id, "NO", 2) == TRUE || ft_comp(id, "SO", 2) == TRUE ||
-			ft_comp(id, "WE", 2) == TRUE || ft_comp(id, "EA", 2) == TRUE ||
-			ft_comp(id, "F", 1) == TRUE || ft_comp(id, "C", 1) == TRUE)
-		return (TRUE);
-	return (FALSE);
+	if (ft_comp(id, "NO") == TRUE || ft_comp(id, "SO") == TRUE ||
+			ft_comp(id, "WE") == TRUE || ft_comp(id, "EA") == TRUE)
+		return (1);
+	else if (ft_comp(id, "F") == TRUE || ft_comp(id, "C") == TRUE)
+		return (2);
+	return (0);
 }
 
 void print_2d_array(char **arr)
@@ -119,20 +147,39 @@ int structure_file_is_valid(t_game *game)
 {
 	int i;
 	int id_counter;
+	char id[6];
+	// int id_type;
+	int id_index;
 
 	i = 0;
 	id_counter = 0;
+	id_index = 0;
 	while (game->file[i])
 	{
-		if (ft_is_identifier(game->file[i]) == TRUE)
+		// id_type = ft_is_identifier(game->file[i]);
+		if (ft_is_identifier(game->file[i]) > 0)
 		{
-			printf("%d : %s\n", i, game->file[i]);
+			id[id_index++] = game->file[i][0];
 			id_counter++;
+		}
+		else if (id_counter != 6 && ft_is_identifier(game->file[i]) == 0 && ft_is_line_empty(game->file[i]) == FALSE)
+		{
+			ft_putstr_fd("Error: invalid line before identifiers\n", 2);
+			return (FALSE);
 		}
 		i++;
 	}
+	if (identifiers_register_check(id) == FALSE)
+	{
+		ft_putstr_fd("Error: identifier duplicate\n", 2);
+		return (FALSE);
+	}
 	if (id_counter != 6)
-		return (printf("numbers of id : %d\n", id_counter), exit_game(game, "Error: all identifers not found at the beginning of the file\n\n\n"), FALSE);
+	{
+		ft_putstr_fd("Error: invalids number of identifier\n", 2);
+		return (FALSE);
+	}
+	// return (printf("numbers of id : %d\n", id_counter), exit_game(game, "Error: all identifers not found at the beginning of the file\n\n\n"), FALSE);
 	return (TRUE);
 }
 
@@ -148,7 +195,9 @@ int file_handler(char *path, t_game *game)
 	if (export_file(game, fd, path) == FALSE)
 		return (FALSE);
 	if (structure_file_is_valid(game) == FALSE)
+	{
 		return (FALSE);
+	}
 	ft_putstr_fd("Succes: map is valid\n", 1);
 	return (TRUE);
 }
