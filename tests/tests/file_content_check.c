@@ -42,8 +42,9 @@ void test_multiple_case(void)
 			{"../maps/bad/textures_missing.cub", "TEXTURES MISSING !!!!!", FALSE},
 			{"../maps/bad/textures_duplicates_2.cub", "4 TEXTURES WITH DUPLICATES !!!!!", FALSE},
 			{"../maps/bad/textures_name_modified.cub", "TEXTURES NAME IS NORTH !!!!!", FALSE},
-			// {"../maps/bad/file_letter_end.cub", "file letter end", FALSE},
+			// {"../maps/bad/custom.cub", "CUSTOM !!!!!", FALSE},
 			// {"../maps/bad/map_missing.cub", "map missing", FALSE},
+			// {"../maps/bad/file_letter_end.cub", "file letter end", FALSE},
 			{"../maps/good/subject_map.cub", "MAP IS VALID !!!!!", TRUE},
 	};
 

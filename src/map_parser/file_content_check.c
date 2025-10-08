@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/07 22:58:49 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/08 17:02:38 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ int identifiers_register_check(char id[6])
 
 int ft_is_identifier(char *id)
 {
-	if (ft_comp(id, "NO") == TRUE || ft_comp(id, "SO") == TRUE ||
-			ft_comp(id, "WE") == TRUE || ft_comp(id, "EA") == TRUE)
+	if (ft_comp(id, "NO") == TRUE || ft_comp(id, "SO") == TRUE || ft_comp(id, "WE") == TRUE || ft_comp(id, "EA") == TRUE)
 		return (1);
 	else if (ft_comp(id, "F") == TRUE || ft_comp(id, "C") == TRUE)
 		return (2);
@@ -79,9 +78,10 @@ int ft_is_identifier(char *id)
 
 void print_2d_array(char **arr)
 {
-	int i = 0;
+	int i;
 	int j;
 
+	i = 0;
 	while (arr[i])
 	{
 		j = 0;
@@ -143,12 +143,56 @@ int export_file(t_game *game, int fd, char *path)
 	return (TRUE);
 }
 
+int is_char_accepted_in_map(char c)
+{
+	if (c == '0' || c == '1' || c == 'N' || c == 'W' || c == 'E' || c == 'S')
+		return (TRUE);
+	return (FALSE);
+}
+
+int first_line_of_the_map(char **file)
+{
+	int i;
+
+	i = 0;
+	while (file[i])
+	{
+		if (ft_is_identifier(file[i]) > 0 || ft_is_line_empty(file[i]) == TRUE)
+			i++;
+		else
+			return (i);
+	}
+	return (-1);
+}
+
+int last_line_of_the_map(char **file, int first_line)
+{
+	int i;
+
+	i = first_line;
+	while (file[i + 1] && ft_is_identifier(file[i + 1]) == 0 && ft_is_line_empty(file[i + 1]) == FALSE)
+		i++;
+	return (i);
+}
+
+int map_is_at_the_end(char **file)
+{
+	int i;
+	int j;
+
+	i = first_line_of_the_map(file);
+	if (i == -1)
+		return (FALSE);
+	j = last_line_of_the_map(file, i);
+	// printf("start of the map : %d\nend of the map : %d\n", i, j);
+	return (FALSE);
+}
+
 int structure_file_is_valid(t_game *game)
 {
 	int i;
 	int id_counter;
 	char id[6];
-	// int id_type;
 	int id_index;
 
 	i = 0;
@@ -156,7 +200,6 @@ int structure_file_is_valid(t_game *game)
 	id_index = 0;
 	while (game->file[i])
 	{
-		// id_type = ft_is_identifier(game->file[i]);
 		if (ft_is_identifier(game->file[i]) > 0)
 		{
 			id[id_index++] = game->file[i][0];
@@ -179,7 +222,11 @@ int structure_file_is_valid(t_game *game)
 		ft_putstr_fd("Error: invalids number of identifier\n", 2);
 		return (FALSE);
 	}
-	// return (printf("numbers of id : %d\n", id_counter), exit_game(game, "Error: all identifers not found at the beginning of the file\n\n\n"), FALSE);
+	if (map_is_at_the_end(game->file) == FALSE)
+	{
+		ft_putstr_fd("Error: map isnt at the end of the file\n", 2);
+		return (FALSE);
+	}
 	return (TRUE);
 }
 
