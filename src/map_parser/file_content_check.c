@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/08 17:02:38 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/08 23:19:32 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int is_char_accepted_in_map(char c)
 	return (FALSE);
 }
 
-int first_line_of_the_map(char **file)
+int ft_start_index_of_the_map(char **file)
 {
 	int i;
 
@@ -165,7 +165,7 @@ int first_line_of_the_map(char **file)
 	return (-1);
 }
 
-int last_line_of_the_map(char **file, int first_line)
+int ft_end_index_of_the_map(char **file, int first_line)
 {
 	int i;
 
@@ -175,16 +175,35 @@ int last_line_of_the_map(char **file, int first_line)
 	return (i);
 }
 
-int map_is_at_the_end(char **file)
+int ft_find_last_index(int index, char **file)
 {
 	int i;
-	int j;
 
-	i = first_line_of_the_map(file);
-	if (i == -1)
+	i = index;
+	while (file[i])
+		i++;
+	return (i);
+}
+
+int map_is_at_the_end(char **file)
+{
+	int start_of_the_map;
+	int end_of_the_map;
+	int end_of_file;
+	int i;
+
+	start_of_the_map = ft_start_index_of_the_map(file);
+	if (start_of_the_map == -1)
 		return (FALSE);
-	j = last_line_of_the_map(file, i);
-	// printf("start of the map : %d\nend of the map : %d\n", i, j);
+	end_of_the_map = ft_end_index_of_the_map(file, start_of_the_map);
+	end_of_file = ft_find_last_index(end_of_the_map, file);
+	if (end_of_file == end_of_the_map)
+		return (TRUE);
+	i = end_of_the_map + 1;
+	while (file[i] && ft_is_line_empty(file[i]) == TRUE)
+		i++;
+	if (i == end_of_file)
+		return (TRUE);
 	return (FALSE);
 }
 
