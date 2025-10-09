@@ -10,6 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libs/libft/libft.h"
-#define TRUE 0
-#define FALSE 1
+#ifndef UTILS_H
+# define UTILS_H
+
+# include <math.h>
+# include "cub3d.h"
+
+void	init_ray(t_ray *ray, t_game *game, int x);
+void	init_dda_params(t_ray *ray, t_game *game);
+
+#endif
+

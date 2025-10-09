@@ -2,7 +2,7 @@
 
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -DUNITY_INCLUDE_DOUBLE
 
 # Directories
 ROOT_DIR = ..
@@ -15,7 +15,8 @@ LIBFT_DIR = $(LIBS_DIR)/libft
 
 # Source files
 SRC_FILES = $(SRC_DIR)/map_parser/file_check.c \
-						$(SRC_DIR)/map_parser/map_is_closed.c
+						$(SRC_DIR)/map_parser/map_is_closed.c \
+						$(SRC_DIR)/raycasting/raycasting_init.c
 # Add more source files as needed
 
 # Test files
