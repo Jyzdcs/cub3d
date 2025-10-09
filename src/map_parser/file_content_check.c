@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/09 19:52:12 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/09 20:00:10 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int ft_is_identifier(char *id)
 		i++;
 	if (id[i] == '\0')
 		return (0);
-	printf("%s\n", &id[i]);
 	if (ft_comp(&id[i], "NO") == TRUE || ft_comp(&id[i], "SO") == TRUE || ft_comp(&id[i], "WE") == TRUE || ft_comp(&id[i], "EA") == TRUE)
 		return (1);
 	else if (ft_comp(&id[i], "F") == TRUE || ft_comp(&id[i], "C") == TRUE)
