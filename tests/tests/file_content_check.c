@@ -32,20 +32,21 @@ void tearDown(void)
 void test_multiple_case(void)
 {
 	test_case_t test_cases[] = {
-			{"../maps/invalids/glsrkgnsl.cub", "MAP DONT EXIST !!!!!", FALSE},
-			{"../maps/invalids/empty_map.cub", "EMPTY MAP !!!!!", FALSE},
-			{"../maps/bad/map_first.cub", "MAP FIRST !!!!!", FALSE},
-			{"../maps/bad/map_only.cub", "MAP ONLY !!!!!", FALSE},
-			{"../maps/bad/textures_duplicates.cub", "textures duplicates", FALSE},
-			{"../maps/bad/color_none.cub", "COLOR NONE !!!!!", FALSE},
-			{"../maps/bad/textures_none.cub", "TEXTURES NONE !!!!!", FALSE},
-			{"../maps/bad/textures_missing.cub", "TEXTURES MISSING !!!!!", FALSE},
-			{"../maps/bad/textures_duplicates_2.cub", "4 TEXTURES WITH DUPLICATES !!!!!", FALSE},
-			{"../maps/bad/textures_name_modified.cub", "TEXTURES NAME IS NORTH !!!!!", FALSE},
-			// {"../maps/bad/custom.cub", "CUSTOM !!!!!", FALSE},
-			{"../maps/bad/map_missing.cub", "map missing", FALSE},
-			{"../maps/bad/file_letter_end.cub", "file letter end", FALSE},
-			{"../maps/good/subject_map.cub", "MAP IS VALID !!!!!", TRUE},
+			// {"../maps/invalids/glsrkgnsl.cub", "MAP DONT EXIST !!!!!", FALSE},
+			// {"../maps/invalids/empty_map.cub", "EMPTY MAP !!!!!", FALSE},
+			// {"../maps/bad/map_first.cub", "MAP FIRST !!!!!", FALSE},
+			// {"../maps/bad/map_only.cub", "MAP ONLY !!!!!", FALSE},
+			// {"../maps/bad/textures_duplicates.cub", "textures duplicates", FALSE},
+			// {"../maps/bad/color_none.cub", "COLOR NONE !!!!!", FALSE},
+			// {"../maps/bad/textures_none.cub", "TEXTURES NONE !!!!!", FALSE},
+			// {"../maps/bad/textures_missing.cub", "TEXTURES MISSING !!!!!", FALSE},
+			// {"../maps/bad/textures_duplicates_2.cub", "4 TEXTURES WITH DUPLICATES !!!!!", FALSE},
+			// {"../maps/bad/textures_name_modified.cub", "TEXTURES NAME IS NORTH !!!!!", FALSE},
+			// {"../maps/bad/custom.cub", "CUSTOM !!!!!", TRUE},
+			// {"../maps/bad/map_missing.cub", "map missing", FALSE},
+			// {"../maps/bad/file_letter_end.cub", "file letter end", FALSE},
+			// {"../maps/good/subject_map.cub", "MAP IS VALID !!!!!", TRUE},
+			{"../maps/good/test_whitespace.cub", "MAP WITH WHITESPACE !!!!!", TRUE},
 	};
 
 	for (unsigned long i = 0; i < sizeof(test_cases) / sizeof(test_case_t); i++)

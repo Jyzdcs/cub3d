@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/08 23:19:32 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/09 19:52:12 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,17 @@ int identifiers_register_check(char id[6])
 
 int ft_is_identifier(char *id)
 {
-	if (ft_comp(id, "NO") == TRUE || ft_comp(id, "SO") == TRUE || ft_comp(id, "WE") == TRUE || ft_comp(id, "EA") == TRUE)
+	int i;
+
+	i = 0;
+	while (id[i] != '\0' && id[i] == ' ')
+		i++;
+	if (id[i] == '\0')
+		return (0);
+	printf("%s\n", &id[i]);
+	if (ft_comp(&id[i], "NO") == TRUE || ft_comp(&id[i], "SO") == TRUE || ft_comp(&id[i], "WE") == TRUE || ft_comp(&id[i], "EA") == TRUE)
 		return (1);
-	else if (ft_comp(id, "F") == TRUE || ft_comp(id, "C") == TRUE)
+	else if (ft_comp(&id[i], "F") == TRUE || ft_comp(&id[i], "C") == TRUE)
 		return (2);
 	return (0);
 }
@@ -213,23 +221,32 @@ int structure_file_is_valid(t_game *game)
 	int id_counter;
 	char id[6];
 	int id_index;
+	int j;
 
 	i = 0;
 	id_counter = 0;
 	id_index = 0;
 	while (game->file[i])
 	{
-		if (ft_is_identifier(game->file[i]) > 0)
+		j = 0;
+		if (game->file[i] && ft_is_line_empty(game->file[i]) == TRUE)
+			i++;
+		else
 		{
-			id[id_index++] = game->file[i][0];
-			id_counter++;
+			if (ft_is_identifier(game->file[i]) > 0)
+			{
+				while (game->file[i][j] && ft_isspace(game->file[i][j]) == TRUE)
+					j++;
+				id[id_index++] = game->file[i][j];
+				id_counter++;
+			}
+			else if (id_counter != 6 && ft_is_identifier(game->file[i]) == 0 && ft_is_line_empty(game->file[i]) == FALSE)
+			{
+				ft_putstr_fd("Error: invalid line before identifiers\n", 2);
+				return (FALSE);
+			}
+			i++;
 		}
-		else if (id_counter != 6 && ft_is_identifier(game->file[i]) == 0 && ft_is_line_empty(game->file[i]) == FALSE)
-		{
-			ft_putstr_fd("Error: invalid line before identifiers\n", 2);
-			return (FALSE);
-		}
-		i++;
 	}
 	if (identifiers_register_check(id) == FALSE)
 	{
