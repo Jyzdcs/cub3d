@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/10 13:03:44 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/10 16:39:13 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,16 @@ int	export_file(t_game *game, int fd, char *path)
 
 int	structure_file_is_valid(t_game *game)
 {
-	int		i;
-	int		id_counter;
-	char	id[6];
-	int		id_index;
-	int		j;
+	int	i;
+	int	id_counter;
+	int	id_index;
+	int	j;
 
+	char id[7]; // Increased size to ensure space for null terminator
 	i = 0;
 	id_counter = 0;
 	id_index = 0;
+	ft_memset(id, 0, sizeof(id)); // Initialize array with zeros
 	while (game->file[i])
 	{
 		j = 0;
