@@ -3,6 +3,7 @@
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -DUNITY_INCLUDE_DOUBLE
+LDFLAGS = -lm
 
 # Directories
 ROOT_DIR = ..
@@ -16,7 +17,8 @@ LIBFT_DIR = $(LIBS_DIR)/libft
 # Source files
 SRC_FILES = $(SRC_DIR)/map_parser/file_check.c \
 						$(SRC_DIR)/map_parser/map_is_closed.c \
-						$(SRC_DIR)/raycasting/raycasting_init.c
+						$(SRC_DIR)/raycasting/raycasting_init.c \
+						$(SRC_DIR)/raycasting/ray_casting.c
 # Add more source files as needed
 
 # Test files
@@ -48,7 +50,7 @@ $(TESTS_DIR)/tests/%.o: $(TESTS_DIR)/tests/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 %: tests/%.o $(UNITY_FILES:.c=.o) $(SRC_FILES:.c=.o) $(LIBFT)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 # Compile Unity source
 $(UNITY_DIR)/%.o: $(UNITY_DIR)/%.c
