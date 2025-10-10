@@ -49,7 +49,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int	ft_memcmp(const void *s1, const void *s2, size_t n);
-size_t	ft_strlen(const char *str);
+int	ft_strlen(const char *str);
 int	ft_atoi(const char *str);
 int	ft_isalnum(int c);
 int	ft_isalpha(int c);
