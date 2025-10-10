@@ -15,7 +15,7 @@ void	flood_fill(t_map *map, char **map_copy, int x, int y)
 		map->is_closed = FALSE;
 		return ;
 	}
-	if (x >= (int)ft_strlen(map_copy[y]))
+	if (x >= ft_strlen(map_copy[y]))
 	{
 		map->is_closed = FALSE;
 		return ;
@@ -37,7 +37,7 @@ void	flood_fill(t_map *map, char **map_copy, int x, int y)
 int	map_is_closed(char **map_copy, t_map *map, t_player *player)
 {
 	if (player->x < 0 || player->y < 0 || player->y >= map->height
-		|| player->x >= (int)ft_strlen(map_copy[player->y]))
+		|| player->x >= ft_strlen(map_copy[player->y]))
 	{
 		map->is_closed = FALSE;
 		return (FALSE);
