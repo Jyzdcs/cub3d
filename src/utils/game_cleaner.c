@@ -19,6 +19,7 @@ void free_all(char **str)
 
 	while (str[i])
 		free(str[i++]);
+	free(str);
 }
 
 void exit_game(t_game *game, char *message)
@@ -26,6 +27,7 @@ void exit_game(t_game *game, char *message)
 	if (game->file)
 		free_all(game->file);
 	ft_putstr_fd(message, 2);
+	free(game);
 #ifdef TESTING
 	// Don't exit in test mode
 	return;

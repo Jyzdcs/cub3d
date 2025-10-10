@@ -19,8 +19,16 @@ int	main(int argc, char **argv)
 	if (!game)
 		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
 	if (argc != 2)
+	{
+		free(game);
 		return (ft_putstr_fd("Error: wrong number of arguments\n", 2), 1);
+	}
 	if (file_handler(argv[1], game) == FALSE)
+	{
+		free(game);
 		return (1);
+	}
+	free_all(game->file);
+	free(game);
 	return (0);
 }

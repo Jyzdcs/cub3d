@@ -62,7 +62,7 @@ int	export_file(t_game *game, int fd, char *path)
 	i = 0;
 	file_size = count_file_line(path);
 	if (file_size == 0)
-		return (exit_game(game, "Error: File is empty\n"), FALSE);
+		return (FALSE);
 	game->file = malloc(sizeof(char *) * file_size);
 	if (!game->file)
 		return (exit_game(game, "Error allocation memory on file\n"), FALSE);
@@ -146,9 +146,14 @@ int	file_handler(char *path, t_game *game)
 		return (FALSE);
 	}
 	if (export_file(game, fd, path) == FALSE)
+	{
+		close(fd);
 		return (FALSE);
+	}
 	if (structure_file_is_valid(game) == FALSE)
 	{
+		free_all(game->file);
+		close(fd);
 		return (FALSE);
 	}
 	ft_putstr_fd("Succes: map is valid\n", 1);
