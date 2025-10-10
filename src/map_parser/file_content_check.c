@@ -6,52 +6,17 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/09 20:00:10 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/10 13:03:44 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../include/map_parser.h"
 
-int ft_isspace(char c)
+int	ft_identifiers_register_check(char id[6])
 {
-	if ((c >= 9 && c <= 13) || c == ' ')
-		return (TRUE);
-	return (FALSE);
-}
-
-int ft_comp(char *s1, char *s2)
-{
-	int i;
-
-	i = 0;
-	if (!s1 || !s2)
-		return (FALSE);
-	while (s1[i] == s2[i] && (s1[i] && s2[i]))
-		i++;
-	if (!s2[i] && s1[i] == ' ')
-		return (TRUE);
-	return (FALSE);
-}
-
-int ft_is_line_empty(char *line)
-{
-	int i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (ft_isspace(line[i]) != TRUE)
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
-}
-
-int identifiers_register_check(char id[6])
-{
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (id[i])
@@ -67,43 +32,11 @@ int identifiers_register_check(char id[6])
 	return (TRUE);
 }
 
-int ft_is_identifier(char *id)
+int	count_file_line(char *path)
 {
-	int i;
-
-	i = 0;
-	while (id[i] != '\0' && id[i] == ' ')
-		i++;
-	if (id[i] == '\0')
-		return (0);
-	if (ft_comp(&id[i], "NO") == TRUE || ft_comp(&id[i], "SO") == TRUE || ft_comp(&id[i], "WE") == TRUE || ft_comp(&id[i], "EA") == TRUE)
-		return (1);
-	else if (ft_comp(&id[i], "F") == TRUE || ft_comp(&id[i], "C") == TRUE)
-		return (2);
-	return (0);
-}
-
-void print_2d_array(char **arr)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (arr[i])
-	{
-		j = 0;
-		while (arr[i][j])
-			printf("%c", arr[i][j++]);
-		printf("\n");
-		i++;
-	}
-}
-
-int count_file_line(char *path)
-{
-	int i;
-	int fd;
-	char *str;
+	int		i;
+	int		fd;
+	char	*str;
 
 	i = 0;
 	fd = open(path, O_RDONLY);
@@ -112,7 +45,7 @@ int count_file_line(char *path)
 		str = get_next_line(fd);
 		i++;
 		if (!str)
-			break;
+			break ;
 		free(str);
 	}
 	close(fd);
@@ -121,10 +54,10 @@ int count_file_line(char *path)
 	return (i);
 }
 
-int export_file(t_game *game, int fd, char *path)
+int	export_file(t_game *game, int fd, char *path)
 {
-	int i;
-	int file_size;
+	int	i;
+	int	file_size;
 
 	i = 0;
 	file_size = count_file_line(path);
@@ -150,77 +83,13 @@ int export_file(t_game *game, int fd, char *path)
 	return (TRUE);
 }
 
-int is_char_accepted_in_map(char c)
+int	structure_file_is_valid(t_game *game)
 {
-	if (c == '0' || c == '1' || c == 'N' || c == 'W' || c == 'E' || c == 'S')
-		return (TRUE);
-	return (FALSE);
-}
-
-int ft_start_index_of_the_map(char **file)
-{
-	int i;
-
-	i = 0;
-	while (file[i])
-	{
-		if (ft_is_identifier(file[i]) > 0 || ft_is_line_empty(file[i]) == TRUE)
-			i++;
-		else
-			return (i);
-	}
-	return (-1);
-}
-
-int ft_end_index_of_the_map(char **file, int first_line)
-{
-	int i;
-
-	i = first_line;
-	while (file[i + 1] && ft_is_identifier(file[i + 1]) == 0 && ft_is_line_empty(file[i + 1]) == FALSE)
-		i++;
-	return (i);
-}
-
-int ft_find_last_index(int index, char **file)
-{
-	int i;
-
-	i = index;
-	while (file[i])
-		i++;
-	return (i);
-}
-
-int map_is_at_the_end(char **file)
-{
-	int start_of_the_map;
-	int end_of_the_map;
-	int end_of_file;
-	int i;
-
-	start_of_the_map = ft_start_index_of_the_map(file);
-	if (start_of_the_map == -1)
-		return (FALSE);
-	end_of_the_map = ft_end_index_of_the_map(file, start_of_the_map);
-	end_of_file = ft_find_last_index(end_of_the_map, file);
-	if (end_of_file == end_of_the_map)
-		return (TRUE);
-	i = end_of_the_map + 1;
-	while (file[i] && ft_is_line_empty(file[i]) == TRUE)
-		i++;
-	if (i == end_of_file)
-		return (TRUE);
-	return (FALSE);
-}
-
-int structure_file_is_valid(t_game *game)
-{
-	int i;
-	int id_counter;
-	char id[6];
-	int id_index;
-	int j;
+	int		i;
+	int		id_counter;
+	char	id[6];
+	int		id_index;
+	int		j;
 
 	i = 0;
 	id_counter = 0;
@@ -239,7 +108,8 @@ int structure_file_is_valid(t_game *game)
 				id[id_index++] = game->file[i][j];
 				id_counter++;
 			}
-			else if (id_counter != 6 && ft_is_identifier(game->file[i]) == 0 && ft_is_line_empty(game->file[i]) == FALSE)
+			else if (id_counter != 6 && ft_is_identifier(game->file[i]) == 0
+				&& ft_is_line_empty(game->file[i]) == FALSE)
 			{
 				ft_putstr_fd("Error: invalid line before identifiers\n", 2);
 				return (FALSE);
@@ -247,7 +117,7 @@ int structure_file_is_valid(t_game *game)
 			i++;
 		}
 	}
-	if (identifiers_register_check(id) == FALSE)
+	if (ft_identifiers_register_check(id) == FALSE)
 	{
 		ft_putstr_fd("Error: identifier duplicate\n", 2);
 		return (FALSE);
@@ -257,7 +127,7 @@ int structure_file_is_valid(t_game *game)
 		ft_putstr_fd("Error: invalids number of identifier\n", 2);
 		return (FALSE);
 	}
-	if (map_is_at_the_end(game->file) == FALSE)
+	if (ft_map_is_at_the_end(game->file) == FALSE)
 	{
 		ft_putstr_fd("Error: map isnt at the end of the file\n", 2);
 		return (FALSE);
@@ -266,7 +136,7 @@ int structure_file_is_valid(t_game *game)
 }
 
 // Return true si le content est bon
-int file_handler(char *path, t_game *game)
+int	file_handler(char *path, t_game *game)
 {
 	int fd = open(path, O_RDONLY);
 	if (fd < 0)

@@ -17,6 +17,8 @@ LIBFT_DIR = $(LIBS_DIR)/libft
 SRC_FILES = $(SRC_DIR)/map_parser/file_check.c \
 						$(SRC_DIR)/map_parser/map_is_closed.c \
 						$(SRC_DIR)/map_parser/file_content_check.c \
+						$(SRC_DIR)/map_parser/file_content_utils.c \
+						$(SRC_DIR)/map_parser/file_content_map_at_the_end.c \
 						$(SRC_DIR)/utils/game_cleaner.c \
 # Add more source files as needed
 
