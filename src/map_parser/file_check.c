@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:55:04 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/02 18:21:03 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/10 18:45:40 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_extension(char *file_path)
 {
-	size_t	len;
+	int		len;
 	char	*dot;
 
 	if (!file_path)

@@ -20,5 +20,6 @@ typedef struct s_player t_player;
 
 int	check_extension(char *path);
 int	map_is_closed(char **map_copy, t_map *map, t_player *player);
+int	map_have_one_player(char **map);
 
 #endif
