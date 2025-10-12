@@ -6,26 +6,28 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:01:21 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/02 18:26:26 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/12 12:53:57 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
-#include "../libs/libft/libft.h"
+# include "../include/map_parser.h"
+# include "../libs/libft/libft.h"
 
-#define TRUE 0
-#define FALSE 1
+# define TRUE 0
+# define FALSE 1
 
 typedef struct s_keys
 {
-	int		w_pressed;
-	int		a_pressed;
-	int		s_pressed;
-	int		d_pressed;
-	int		left_pressed;
-	int		right_pressed;
-	int		escape_pressed;
+	int			w_pressed;
+	int			a_pressed;
+	int			s_pressed;
+	int			d_pressed;
+	int			left_pressed;
+	int			right_pressed;
+	int			escape_pressed;
 }				t_keys;
 
 typedef struct s_texture

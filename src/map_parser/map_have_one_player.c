@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_have_one_player.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/12 12:52:33 by kclaudan          #+#    #+#             */
+/*   Updated: 2025/10/12 12:52:33 by kclaudan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/map_parser.h"
 
 int	map_have_one_player(char **map)
@@ -6,7 +18,7 @@ int	map_have_one_player(char **map)
 	int	i;
 	int	j;
 
-	player_count= 0;
+	player_count = 0;
 	i = 0;
 	while (map[i] != NULL)
 	{
