@@ -16,6 +16,7 @@ LIBFT_DIR = $(LIBS_DIR)/libft
 # Source files
 SRC_FILES = $(SRC_DIR)/map_parser/file_check.c \
 						$(SRC_DIR)/map_parser/map_is_closed.c \
+						$(SRC_DIR)/controls_handler/keys_input.c
 						$(SRC_DIR)/map_parser/map_have_one_player.c
 # Add more source files as needed
 
@@ -29,7 +30,7 @@ UNITY_FILES = $(UNITY_DIR)/unity.c
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # Include directories
-INCLUDES = -I$(INCLUDE_DIR) -I$(UNITY_DIR) -I$(LIBFT_DIR)
+INCLUDES = -I$(INCLUDE_DIR) -I$(UNITY_DIR) -I$(LIBFT_DIR) -I/opt/X11/include -I/usr/X11/include -I/usr/local/include
 
 # Object files
 TEST_OBJECTS = $(TEST_FILES:.c=.o)
@@ -48,7 +49,7 @@ $(TESTS_DIR)/tests/%.o: $(TESTS_DIR)/tests/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 %: tests/%.o $(UNITY_FILES:.c=.o) $(SRC_FILES:.c=.o) $(LIBFT)
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -L/opt/X11/lib -lX11 -o $@
 
 # Compile Unity source
 $(UNITY_DIR)/%.o: $(UNITY_DIR)/%.c

@@ -6,7 +6,7 @@
 #    By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/02 12:00:00 by kclaudan          #+#    #+#              #
-#    Updated: 2025/10/02 17:48:19 by kclaudan         ###   ########.fr        #
+#    Updated: 2025/10/11 15:50:36 by kclaudan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIBFT_DIR = libs/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # Include paths
-INCLUDES = -I ./include -I $(LIBFT_DIR)
+INCLUDES = -I ./include -I $(LIBFT_DIR) -I/opt/X11/include -I/usr/X11/include -I/usr/local/include
 
 # Default target
 all: $(NAME)
@@ -47,7 +47,7 @@ $(LIBFT):
 
 # Build the executable
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -L/opt/X11/lib -lX11 -o $(NAME)
 
 # Clean object files
 clean:
