@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/10 13:11:56 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/13 14:52:15 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	main(int argc, char **argv)
 {
-	t_game *game;
+	t_game	*game;
+
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);

@@ -6,14 +6,14 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:56:31 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/13 14:33:32 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/13 15:00:29 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_PARSER_H
 # define MAP_PARSER_H
 
-# include "utils.h"
+# include "cub3d.h"
 
 typedef struct s_map	t_map;
 typedef struct s_player	t_player;

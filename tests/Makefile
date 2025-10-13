@@ -2,7 +2,8 @@
 
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -DTESTING
+CFLAGS = -Wall -Wextra -Werror -DUNITY_INCLUDE_DOUBLE -DTESTING
+LDFLAGS = -lm -L/opt/X11/lib -lX11
 
 # Directories
 ROOT_DIR = ..
@@ -21,7 +22,9 @@ SRC_FILES = $(SRC_DIR)/map_parser/file_check.c \
 						$(SRC_DIR)/map_parser/file_content_map_at_the_end.c \
 						$(SRC_DIR)/utils/game_cleaner.c \
 						$(SRC_DIR)/controls_handler/keys_input.c \
-						$(SRC_DIR)/map_parser/map_have_one_player.c
+						$(SRC_DIR)/map_parser/map_have_one_player.c \
+						$(SRC_DIR)/raycasting/raycasting_init.c \
+						$(SRC_DIR)/raycasting/ray_casting.c
 # Add more source files as needed
 
 # Test files
@@ -53,7 +56,7 @@ $(TESTS_DIR)/tests/%.o: $(TESTS_DIR)/tests/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 %: tests/%.o $(UNITY_FILES:.c=.o) $(SRC_FILES:.c=.o) $(LIBFT)
-	$(CC) $(CFLAGS) $^ -L/opt/X11/lib -lX11 -o $@
+	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 # Compile Unity source
 $(UNITY_DIR)/%.o: $(UNITY_DIR)/%.c
