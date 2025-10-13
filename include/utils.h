@@ -10,12 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef UTILS_H
+# define UTILS_H
+
 #include "../libs/libft/libft.h"
 #include <fcntl.h>
-
-#define TRUE 0
-#define FALSE 1
 
 typedef struct s_game t_game;
 
 void exit_game(t_game *game, char *message);
+
+#endif

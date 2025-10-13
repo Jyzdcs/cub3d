@@ -13,7 +13,7 @@
 #ifndef MAP_PARSER_H
 # define MAP_PARSER_H
 
-# include "utils.h"
+#include "cub3d.h"
 
 typedef struct s_map	t_map;
 typedef struct s_player	t_player;

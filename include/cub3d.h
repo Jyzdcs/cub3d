@@ -6,14 +6,29 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:01:21 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/06 12:21:28 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/12 12:53:57 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "controls.h"
-#include "graphics.h"
-#include "map_parser.h"
-#include "utils.h"
+#ifndef CUB3D_H
+# define CUB3D_H
+
+# include "../include/map_parser.h"
+# include "../libs/libft/libft.h"
+
+# define TRUE 0
+# define FALSE 1
+
+typedef struct s_keys
+{
+	int			w_pressed;
+	int			a_pressed;
+	int			s_pressed;
+	int			d_pressed;
+	int			left_pressed;
+	int			right_pressed;
+	int			escape_pressed;
+}				t_keys;
 
 typedef struct s_texture
 {
@@ -57,6 +72,9 @@ typedef struct s_game
 	t_map map;
 	t_player player;
 	char **file;
+	t_keys		keys;
 } t_game;
 
 void free_all(char **str);
+
+#endif
