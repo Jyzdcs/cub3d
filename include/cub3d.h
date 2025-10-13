@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:01:21 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/12 12:53:57 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/13 14:32:20 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include "../include/map_parser.h"
 # include "../libs/libft/libft.h"
-
-# define TRUE 0
-# define FALSE 1
 
 typedef struct s_keys
 {
@@ -32,49 +29,49 @@ typedef struct s_keys
 
 typedef struct s_texture
 {
-	void *img;
-	char *addr;
-	int bits_per_pixel;
-	int line_length;
-	int endian;
-} t_texture;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}				t_texture;
 
 typedef struct s_player
 {
-	int x;
-	int y;
-	int old_x;
-	int old_y;
-	int width;
-	int height;
-	int movements;
-	t_texture img;
-} t_player;
+	int			x;
+	int			y;
+	int			old_x;
+	int			old_y;
+	int			width;
+	int			height;
+	int			movements;
+	t_texture	img;
+}				t_player;
 
 typedef struct s_map
 {
-	void *mlx;
-	void *mlx_win;
-	char **map;
-	int width;
-	int height;
-	int is_closed;
-	t_texture no_wall;
-	t_texture so_wall;
-	t_texture we_wall;
-	t_texture ea_wall;
-	t_texture floor;
-	t_texture ceiling;
-} t_map;
+	void		*mlx;
+	void		*mlx_win;
+	char		**map;
+	int			width;
+	int			height;
+	int			is_closed;
+	t_texture	no_wall;
+	t_texture	so_wall;
+	t_texture	we_wall;
+	t_texture	ea_wall;
+	t_texture	floor;
+	t_texture	ceiling;
+}				t_map;
 
 typedef struct s_game
 {
-	t_map map;
-	t_player player;
-	char **file;
+	t_map		map;
+	t_player	player;
+	char		**file;
 	t_keys		keys;
-} t_game;
+}				t_game;
 
-void free_all(char **str);
+void			free_all(char **str);
 
 #endif
