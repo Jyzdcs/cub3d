@@ -2,7 +2,7 @@
 
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -DTESTING
 
 # Directories
 ROOT_DIR = ..
@@ -16,6 +16,10 @@ LIBFT_DIR = $(LIBS_DIR)/libft
 # Source files
 SRC_FILES = $(SRC_DIR)/map_parser/file_check.c \
 						$(SRC_DIR)/map_parser/map_is_closed.c \
+						$(SRC_DIR)/map_parser/file_content_check.c \
+						$(SRC_DIR)/map_parser/file_content_utils.c \
+						$(SRC_DIR)/map_parser/file_content_map_at_the_end.c \
+						$(SRC_DIR)/utils/game_cleaner.c \
 						$(SRC_DIR)/controls_handler/keys_input.c \
 						$(SRC_DIR)/map_parser/map_have_one_player.c
 # Add more source files as needed

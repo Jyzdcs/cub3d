@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   game_cleaner.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/02 17:41:44 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/06 14:48:01 by kclaudan         ###   ########.fr       */
+/*   Created: 2025/10/04 17:16:43 by kclaudan          #+#    #+#             */
+/*   Updated: 2025/10/06 15:07:37 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "utils.h"
+#include "../include/cub3d.h"
 
-#include "../libs/libft/libft.h"
-#include <fcntl.h>
+void free_all(char **str)
+{
+	int i = 0;
 
-typedef struct s_game t_game;
+	while (str[i])
+		free(str[i++]);
+	free(str);
+}
 
-void exit_game(t_game *game, char *message);
-
+void exit_game(t_game *game, char *message)
+{
+	if (game->file)
+		free_all(game->file);
+	ft_putstr_fd(message, 2);
+	free(game);
+#ifdef TESTING
+	// Don't exit in test mode
+	return;
+#else
+	exit(1);
 #endif
+}
