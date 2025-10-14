@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:56:31 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/14 12:34:33 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/14 13:18:56 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int						ft_isspace(char c);
 int						ft_comp(char *s1, char *s2);
 int						ft_is_identifier(char *id);
 int						ft_is_line_empty(char *line);
+int						export_file(t_game *game, int fd, char *path);
 
 /* FILE CONTENT MAP AT THE END */
 int						ft_is_char_accepted_in_map(char c);
@@ -45,5 +46,10 @@ int						ft_start_index_of_the_map(char **file);
 int						ft_end_index_of_the_map(char **file, int first_line);
 int						ft_find_last_index(int index, char **file);
 int						ft_map_is_at_the_end(char **file);
+
+/* TEXTURES EXTENSION CHECKER */
+int						ft_find_path_to_textures(char *line);
+int						ft_is_valid_path(char *path);
+int						ft_init_textures_extension_checker(t_game *game);
 
 #endif

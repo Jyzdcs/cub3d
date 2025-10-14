@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/10 16:39:13 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/14 13:24:03 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,9 @@ int	structure_file_is_valid(t_game *game)
 // Return true si le content est bon
 int	file_handler(char *path, t_game *game)
 {
-	int fd = open(path, O_RDONLY);
+	int	fd;
+
+	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
 		ft_putstr_fd("Error: file doesnt exist\n", 2);
