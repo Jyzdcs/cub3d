@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:56:31 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/13 15:00:29 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/14 12:34:33 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int						map_is_closed(char **map_copy, t_map *map,
 							t_player *player);
 
 /* FILE CHECK */
-int						check_extension(char *path);
+int						check_extension(char *file_path, char *extension,
+							int extension_len);
 int						map_is_closed(char **map_copy, t_map *map,
 							t_player *player);
 int						file_handler(char *path, t_game *game);
