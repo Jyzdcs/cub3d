@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 11:47:30 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/14 13:44:28 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/15 12:25:46 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ int	ft_is_valid_path(char *path)
 
 int	ft_init_textures_extension_checker(t_game *game)
 {
-	int i;
-	int path_index;
-	int invalid_path_counter;
-	int valid_path_counter;
+	int	i;
+	int	path_index;
+	int	invalid_path_counter;
+	int	valid_path_counter;
 
 	invalid_path_counter = 0;
 	valid_path_counter = 0;

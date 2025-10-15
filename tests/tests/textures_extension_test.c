@@ -97,6 +97,51 @@ void	test_init_textures_extension_checker_edge_case(void)
 	TEST_ASSERT_EQUAL_INT(TRUE, result);
 }
 
+void	test_init_textures_extension_bad_extension(void)
+{
+	int		result;
+	t_game	*game;
+
+	game = malloc(sizeof(t_game));
+	if (!game)
+		return ;
+	game->file = malloc(sizeof(char *) * 2);
+	if (!game->file)
+		return ;
+	game->file[0] = ft_strdup("NO /texture.jpg");
+	game->file[1] = NULL;
+	/* Example function we might be testing */
+	result = ft_init_textures_extension_checker(game);
+	free_all(game->file);
+	free(game);
+	/* Assertions - different types you might use */
+	TEST_ASSERT_EQUAL_INT(FALSE, result);
+}
+
+void	test_init_textures_extension_multiple_bad_extension(void)
+{
+	int		result;
+	t_game	*game;
+
+	game = malloc(sizeof(t_game));
+	if (!game)
+		return ;
+	game->file = malloc(sizeof(char *) * 2);
+	if (!game->file)
+		return ;
+	game->file[0] = ft_strdup("NO /texture.xpm");
+	game->file[1] = ft_strdup("SO /texture.jpg");
+	game->file[2] = ft_strdup("WE /texture.xpm");
+	game->file[3] = ft_strdup("EA /texture.jpg");
+	game->file[4] = NULL;
+	/* Example function we might be testing */
+	result = ft_init_textures_extension_checker(game);
+	free_all(game->file);
+	free(game);
+	/* Assertions - different types you might use */
+	TEST_ASSERT_EQUAL_INT(FALSE, result);
+}
+
 void	test_init_textures_extension_checker_whitespace(void)
 {
 	int		result;
@@ -139,6 +184,8 @@ int	main(void)
 	RUN_TEST(test_find_path_to_textures_edge_case);
 	RUN_TEST(test_init_textures_extension_checker_edge_case);
 	RUN_TEST(test_init_textures_extension_checker_whitespace);
+	RUN_TEST(test_init_textures_extension_bad_extension);
+	RUN_TEST(test_init_textures_extension_multiple_bad_extension);
 	/* Return failure count from Unity */
 	return (UNITY_END());
 }
