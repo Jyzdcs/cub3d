@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/controls.h"
-#include "../../include/cub3d.h"
+#include "../../include/controls_handler.h"
 
 // This function updates the key state when a key is pressed.
 // ESC key returns FALSE to exit the program.

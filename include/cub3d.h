@@ -13,7 +13,6 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../include/map_parser.h"
 # include "../libs/libft/libft.h"
 # include <fcntl.h>
 
@@ -32,6 +31,7 @@ typedef struct s_keys
 # define FALSE 1
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
+# define HITBOX_SIZE 0.2
 
 typedef struct s_texture
 {
@@ -46,8 +46,6 @@ typedef struct s_player
 {
 	double		x;
 	double		y;
-	double		old_x;
-	double		old_y;
 	double		dir_x;
 	double		dir_y;
 	double		speed;

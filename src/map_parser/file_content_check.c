@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
 #include "../../include/map_parser.h"
 
 int	ft_identifiers_register_check(char id[6])

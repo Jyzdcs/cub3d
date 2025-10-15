@@ -1,4 +1,5 @@
 #include "../../include/cub3d.h"
+#include "../../include/map_parser.h"
 #include "../Unity/src/unity.h"
 #include <stdio.h>
 #include <stdlib.h>

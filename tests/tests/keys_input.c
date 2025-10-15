@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/controls.h"
+#include "../../include/controls_handler.h"
 #include "../Unity/src/unity.h"
 #include <stdio.h>
 #include <stdlib.h>
