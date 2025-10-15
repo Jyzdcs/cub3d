@@ -105,16 +105,17 @@ void	test_init_textures_extension_checker_whitespace(void)
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return ;
-	game->file = malloc(sizeof(char *) * 7);
+	game->file = malloc(sizeof(char *) * 8);
 	if (!game->file)
 		return ;
-	game->file[0] = ft_strdup("NO           /texture.xpm");
-	game->file[1] = ft_strdup("         SO /texture.xpm");
-	game->file[2] = ft_strdup("  WE     /texture.xpm");
-	game->file[3] = ft_strdup("								");
-	game->file[4] = ft_strdup("");
-	game->file[5] = ft_strdup("EA /texture.xpm");
-	game->file[6] = NULL;
+	game->file[0] = ft_strdup("											");
+	game->file[1] = ft_strdup("NO           /texture.xpm");
+	game->file[2] = ft_strdup("         SO /texture.xpm");
+	game->file[3] = ft_strdup("  WE     /texture.xpm");
+	game->file[4] = ft_strdup("								");
+	game->file[5] = ft_strdup("");
+	game->file[6] = ft_strdup("EA /texture.xpm");
+	game->file[7] = NULL;
 	/* Example function we might be testing */
 	result = ft_init_textures_extension_checker(game);
 	free_all(game->file);
