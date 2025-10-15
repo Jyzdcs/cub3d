@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:56:31 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/15 13:14:54 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/15 14:19:51 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,10 @@ int						ft_map_is_at_the_end(char **file);
 int						ft_find_path_to_textures(char *line);
 int						ft_is_valid_path(char *path);
 int						ft_textures_checker(t_game *game);
+
+/* RGB CHECKER */
+int						ft_is_valid_rgb(char *rgb);
+int						ft_index_of_first_rgb(char *line);
+int						ft_rgb_checker(t_game *game);
 
 #endif

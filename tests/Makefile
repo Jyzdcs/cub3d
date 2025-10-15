@@ -25,7 +25,9 @@ SRC_FILES = $(SRC_DIR)/map_parser/check_extension.c \
 						$(SRC_DIR)/map_parser/map_have_one_player.c \
 						$(SRC_DIR)/raycasting/raycasting_init.c \
 						$(SRC_DIR)/raycasting/ray_casting.c \
-						$(SRC_DIR)/map_parser/textures_checker.c
+						$(SRC_DIR)/map_parser/textures_checker.c \
+						$(SRC_DIR)/map_parser/rgb_checker.c \
+						$(SRC_DIR)/utils/array_utils.c
 # Add more source files as needed
 
 # Test files

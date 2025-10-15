@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:01:21 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/13 15:06:40 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/15 14:19:09 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,4 +106,5 @@ typedef struct s_game
 
 void			free_all(char **str);
 void			exit_game(t_game *game, char *message);
+int				ft_array_size(char **array);
 #endif
