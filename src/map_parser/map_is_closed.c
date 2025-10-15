@@ -1,4 +1,3 @@
-#include "../../include/cub3d.h"
 #include "../../include/map_parser.h"
 
 // Transmettre les x et y du player pour que le flood fill commence de là
