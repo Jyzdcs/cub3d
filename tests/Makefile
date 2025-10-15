@@ -23,6 +23,7 @@ SRC_FILES = $(SRC_DIR)/map_parser/file_check.c \
 						$(SRC_DIR)/utils/game_cleaner.c \
 						$(SRC_DIR)/controls_handler/keys_input.c \
 						$(SRC_DIR)/controls_handler/keys_movement.c \
+						$(SRC_DIR)/controls_handler/keys_camera_rotation.c \
 						$(SRC_DIR)/map_parser/map_have_one_player.c \
 						$(SRC_DIR)/raycasting/raycasting_init.c \
 						$(SRC_DIR)/raycasting/ray_casting.c
