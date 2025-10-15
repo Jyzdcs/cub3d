@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/14 13:24:03 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/15 13:03:34 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,5 @@ int	file_handler(char *path, t_game *game)
 		close(fd);
 		return (FALSE);
 	}
-	ft_putstr_fd("Succes: map is valid\n", 1);
 	return (TRUE);
 }

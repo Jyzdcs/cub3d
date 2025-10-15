@@ -6,13 +6,13 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:55:04 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/14 12:34:05 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/15 13:02:47 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/map_parser.h"
 
-int	check_extension(char *file_path, char *extension, int extension_len)
+int	ft_check_extension(char *file_path, char *extension, int extension_len)
 {
 	int		len;
 	char	*dot;

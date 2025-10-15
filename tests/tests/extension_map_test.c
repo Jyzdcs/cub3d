@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:25:01 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/14 12:40:23 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/15 13:02:53 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	test_bad_extension_name(void)
 {
 	int	result;
 
-	result = check_extension("map.txt", ".cub", 4);
+	result = ft_check_extension("map.txt", ".cub", 4);
 	TEST_ASSERT_EQUAL_INT(FALSE, result);
 }
 
@@ -43,7 +43,7 @@ void	test_multilple_bad_extension(void)
 {
 	int	result;
 
-	result = check_extension("map.cub.txt", ".cub", 4);
+	result = ft_check_extension("map.cub.txt", ".cub", 4);
 	TEST_ASSERT_EQUAL_INT(FALSE, result);
 }
 
@@ -51,7 +51,7 @@ void	test_with_bad_extension_and_good_extension(void)
 {
 	int	result;
 
-	result = check_extension("map.txt.cub", ".cub", 4);
+	result = ft_check_extension("map.txt.cub", ".cub", 4);
 	TEST_ASSERT_EQUAL_INT(TRUE, result);
 }
 
@@ -59,7 +59,7 @@ void	test_with_null_param(void)
 {
 	int	result;
 
-	result = check_extension(NULL, ".cub", 4);
+	result = ft_check_extension(NULL, ".cub", 4);
 	TEST_ASSERT_EQUAL_INT(FALSE, result);
 }
 
@@ -67,7 +67,7 @@ void	test_with_right_extension(void)
 {
 	int	result;
 
-	result = check_extension("map.cub", ".cub", 4);
+	result = ft_check_extension("map.cub", ".cub", 4);
 	TEST_ASSERT_EQUAL_INT(TRUE, result);
 }
 
@@ -75,7 +75,7 @@ void	test_with_multiple_extensions(void)
 {
 	int	result;
 
-	result = check_extension("map.cub.cub", ".cub", 4);
+	result = ft_check_extension("map.cub.cub", ".cub", 4);
 	TEST_ASSERT_EQUAL_INT(TRUE, result);
 }
 
@@ -83,7 +83,7 @@ void	test_with_minimum_file_name(void)
 {
 	int	result;
 
-	result = check_extension("a.cub", ".cub", 4);
+	result = ft_check_extension("a.cub", ".cub", 4);
 	TEST_ASSERT_EQUAL_INT(TRUE, result);
 }
 
@@ -91,7 +91,7 @@ void	test_with_only_extension(void)
 {
 	int	result;
 
-	result = check_extension(".cub", ".cub", 4);
+	result = ft_check_extension(".cub", ".cub", 4);
 	TEST_ASSERT_EQUAL_INT(FALSE, result);
 }
 /*

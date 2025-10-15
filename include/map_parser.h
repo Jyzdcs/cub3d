@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:56:31 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/14 13:18:56 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/15 13:02:37 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int						map_is_closed(char **map_copy, t_map *map,
 							t_player *player);
 
 /* FILE CHECK */
-int						check_extension(char *file_path, char *extension,
+int						ft_check_extension(char *file_path, char *extension,
 							int extension_len);
 int						map_is_closed(char **map_copy, t_map *map,
 							t_player *player);

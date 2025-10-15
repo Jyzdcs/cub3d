@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 11:47:30 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/15 12:25:46 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/15 13:02:57 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_is_valid_path(char *path)
 	// 	return (FALSE);
 	// }
 	// close(fd);
-	if (check_extension(path, ".xpm", 4) == FALSE)
+	if (ft_check_extension(path, ".xpm", 4) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
