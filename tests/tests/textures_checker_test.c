@@ -73,7 +73,7 @@ void	test_find_path_to_textures_edge_case(void)
 	TEST_ASSERT_EQUAL_INT(3, result);
 }
 
-void	test_init_textures_extension_checker_edge_case(void)
+void	test_textures_checker_edge_cases(void)
 {
 	int		result;
 	t_game	*game;
@@ -90,14 +90,14 @@ void	test_init_textures_extension_checker_edge_case(void)
 	game->file[3] = ft_strdup("EA /texture.xpm");
 	game->file[4] = NULL;
 	/* Example function we might be testing */
-	result = ft_init_textures_extension_checker(game);
+	result = ft_textures_checker(game);
 	free_all(game->file);
 	free(game);
 	/* Assertions - different types you might use */
 	TEST_ASSERT_EQUAL_INT(TRUE, result);
 }
 
-void	test_init_textures_extension_bad_extension(void)
+void	test_textures_checker_bad_extension(void)
 {
 	int		result;
 	t_game	*game;
@@ -111,14 +111,14 @@ void	test_init_textures_extension_bad_extension(void)
 	game->file[0] = ft_strdup("NO /texture.jpg");
 	game->file[1] = NULL;
 	/* Example function we might be testing */
-	result = ft_init_textures_extension_checker(game);
+	result = ft_textures_checker(game);
 	free_all(game->file);
 	free(game);
 	/* Assertions - different types you might use */
 	TEST_ASSERT_EQUAL_INT(FALSE, result);
 }
 
-void	test_init_textures_extension_multiple_bad_extension(void)
+void	test_textures_checker_multiple_bad_extension(void)
 {
 	int		result;
 	t_game	*game;
@@ -135,14 +135,14 @@ void	test_init_textures_extension_multiple_bad_extension(void)
 	game->file[3] = ft_strdup("EA /texture.jpg");
 	game->file[4] = NULL;
 	/* Example function we might be testing */
-	result = ft_init_textures_extension_checker(game);
+	result = ft_textures_checker(game);
 	free_all(game->file);
 	free(game);
 	/* Assertions - different types you might use */
 	TEST_ASSERT_EQUAL_INT(FALSE, result);
 }
 
-void	test_init_textures_extension_checker_whitespace(void)
+void	test_textures_checker_whitespace(void)
 {
 	int		result;
 	t_game	*game;
@@ -162,7 +162,7 @@ void	test_init_textures_extension_checker_whitespace(void)
 	game->file[6] = ft_strdup("EA /texture.xpm");
 	game->file[7] = NULL;
 	/* Example function we might be testing */
-	result = ft_init_textures_extension_checker(game);
+	result = ft_textures_checker(game);
 	free_all(game->file);
 	free(game);
 	/* Assertions - different types you might use */
@@ -182,10 +182,10 @@ int	main(void)
 	RUN_TEST(test_find_path_to_textures_with_whitespace_and_identifier);
 	RUN_TEST(test_find_path_to_textures_with_whitespace_and_identifier_and_no_path);
 	RUN_TEST(test_find_path_to_textures_edge_case);
-	RUN_TEST(test_init_textures_extension_checker_edge_case);
-	RUN_TEST(test_init_textures_extension_checker_whitespace);
-	RUN_TEST(test_init_textures_extension_bad_extension);
-	RUN_TEST(test_init_textures_extension_multiple_bad_extension);
+	RUN_TEST(test_textures_checker_edge_cases);
+	RUN_TEST(test_textures_checker_whitespace);
+	RUN_TEST(test_textures_checker_bad_extension);
+	RUN_TEST(test_textures_checker_multiple_bad_extension);
 	/* Return failure count from Unity */
 	return (UNITY_END());
 }

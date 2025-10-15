@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/15 13:03:53 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/15 13:15:01 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 		free(game);
 		return (1);
 	}
-	if (ft_init_textures_extension_checker(game) == FALSE)
+	if (ft_textures_checker(game) == FALSE)
 	{
 		free_all(game->file);
 		free(game);

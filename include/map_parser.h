@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:56:31 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/15 13:02:37 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/15 13:14:54 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ int						ft_map_is_at_the_end(char **file);
 /* TEXTURES EXTENSION CHECKER */
 int						ft_find_path_to_textures(char *line);
 int						ft_is_valid_path(char *path);
-int						ft_init_textures_extension_checker(t_game *game);
+int						ft_textures_checker(t_game *game);
 
 #endif

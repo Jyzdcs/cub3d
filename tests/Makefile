@@ -15,7 +15,7 @@ LIBS_DIR = $(ROOT_DIR)/libs
 LIBFT_DIR = $(LIBS_DIR)/libft
 
 # Source files
-SRC_FILES = $(SRC_DIR)/map_parser/file_check.c \
+SRC_FILES = $(SRC_DIR)/map_parser/check_extension.c \
 						$(SRC_DIR)/map_parser/map_is_closed.c \
 						$(SRC_DIR)/map_parser/file_content_check.c \
 						$(SRC_DIR)/map_parser/file_content_utils.c \
@@ -25,7 +25,7 @@ SRC_FILES = $(SRC_DIR)/map_parser/file_check.c \
 						$(SRC_DIR)/map_parser/map_have_one_player.c \
 						$(SRC_DIR)/raycasting/raycasting_init.c \
 						$(SRC_DIR)/raycasting/ray_casting.c \
-						$(SRC_DIR)/map_parser/textures_extension_checker.c
+						$(SRC_DIR)/map_parser/textures_checker.c
 # Add more source files as needed
 
 # Test files

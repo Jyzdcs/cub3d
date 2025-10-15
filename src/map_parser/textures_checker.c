@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures_extension_checker.c                       :+:      :+:    :+:   */
+/*   textures_checker.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 11:47:30 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/15 13:02:57 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/15 13:37:31 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,28 @@ int	ft_find_path_to_textures(char *line)
 	return (i);
 }
 
-int	ft_is_valid_path(char *path)
+int	ft_is_valid_extension(char *path)
 {
-	// int	fd;
-	// fd = open(path, O_RDONLY);
-	// if (fd < 0)
-	// {
-	// 	printf("Error: textures path doesnt exist or cant be read\n");
-	// 	return (FALSE);
-	// }
-	// close(fd);
 	if (ft_check_extension(path, ".xpm", 4) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
 
-int	ft_init_textures_extension_checker(t_game *game)
+int	ft_is_valid_path(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	// if (fd < 0)
+	// {
+	// 	printf("Error: textures path doesnt exist or cant be read\n");
+	// 	return (FALSE);
+	// }
+	close(fd);
+	return (TRUE);
+}
+
+int	ft_textures_checker(t_game *game)
 {
 	int	i;
 	int	path_index;
@@ -62,7 +68,8 @@ int	ft_init_textures_extension_checker(t_game *game)
 			path_index = ft_find_path_to_textures(game->file[i]);
 			if (path_index == -1)
 				i++;
-			else if (ft_is_valid_path(&game->file[i][path_index]) == FALSE)
+			else if (ft_is_valid_path(&game->file[i][path_index]) == FALSE
+				|| ft_is_valid_extension(&game->file[i][path_index]) == FALSE)
 				invalid_path_counter++;
 			else
 				valid_path_counter++;
