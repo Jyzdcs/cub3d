@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 11:47:30 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/15 13:37:31 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/18 18:14:29 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_find_path_to_textures(char *line)
 	i = 0;
 	while (line[i] && ft_isspace(line[i]) == TRUE)
 		i++;
-	while (line[i] && ft_is_identifier(&line[i]) > 0)
+	if (line[i] && ft_is_identifier(&line[i]) > 0)
 		i += 2;
 	while (line[i] && ft_isspace(line[i]) == TRUE)
 		i++;
@@ -59,26 +59,26 @@ int	ft_textures_checker(t_game *game)
 	invalid_path_counter = 0;
 	valid_path_counter = 0;
 	i = 0;
-	while (1)
+	while (game->file[i])
 	{
-		while (game->file[i] && ft_is_line_empty(game->file[i]) == TRUE)
-			i++;
-		while (game->file[i])
+		if (ft_is_line_empty(game->file[i]) == FALSE
+			&& ft_find_path_to_textures(game->file[i]) > 0)
 		{
 			path_index = ft_find_path_to_textures(game->file[i]);
-			if (path_index == -1)
-				i++;
-			else if (ft_is_valid_path(&game->file[i][path_index]) == FALSE
+			if (ft_is_valid_path(&game->file[i][path_index]) == FALSE
 				|| ft_is_valid_extension(&game->file[i][path_index]) == FALSE)
 				invalid_path_counter++;
 			else
 				valid_path_counter++;
-			i++;
 		}
 		if (invalid_path_counter > 0)
+		{
+			ft_putstr_fd("Error: invalid path or extension\n", 2);
 			return (FALSE);
+		}
 		else if (valid_path_counter == 4)
-			break ;
+			return (TRUE);
+		i++;
 	}
-	return (TRUE);
+	return (FALSE);
 }
