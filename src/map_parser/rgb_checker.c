@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:51:45 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/15 16:06:09 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/18 18:29:45 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,20 @@ int	ft_rgb_checker(t_game *game)
 
 	i = 0;
 	valid_rgb_counter = 0;
-	while (1)
-	{
-		while (game->file[i] && ft_is_line_empty(game->file[i]) == TRUE)
-			i++;
-		j = ft_index_of_first_rgb(game->file[i]);
-		if (ft_is_valid_rgb(&game->file[i][j]) == FALSE)
-			return (FALSE);
-		valid_rgb_counter++;
+	while (ft_is_identifier(game->file[i]) == 1)
 		i++;
+	while (game->file[i])
+	{
+		if (ft_is_line_empty(game->file[i]) == FALSE)
+		{
+			j = ft_index_of_first_rgb(game->file[i]);
+			if (ft_is_valid_rgb(&game->file[i][j]) == FALSE)
+				return (FALSE);
+			valid_rgb_counter++;
+		}
 		if (valid_rgb_counter == 2)
-			break ;
+			return (TRUE);
+		i++;
 	}
-	return (TRUE);
+	return (FALSE);
 }
