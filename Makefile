@@ -6,7 +6,7 @@
 #    By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/02 12:00:00 by kclaudan          #+#    #+#              #
-#    Updated: 2025/10/15 14:19:25 by kclaudan         ###   ########.fr        #
+#    Updated: 2025/10/20 19:19:41 by kclaudan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,20 @@ CFLAGS = -Wall -Wextra -Werror -g3
 # Source directories and files
 SRC_DIR = src
 SRC_FILES = main.c \
-			map_parser/check_extension.c map_parser/file_content_check.c utils/game_cleaner.c map_parser/file_content_utils.c map_parser/file_content_map_at_the_end.c map_parser/textures_checker.c map_parser/rgb_checker.c utils/array_utils.c	
+			map_parser/check_extension.c \
+			map_parser/map_is_closed.c \
+			map_parser/file_content_check.c \
+			map_parser/file_content_utils.c \
+			map_parser/file_content_map_at_the_end.c \
+			utils/game_cleaner.c \
+			controls_handler/keys_input.c \
+			map_parser/map_have_one_player.c \
+			map_parser/map_checker.c \
+			raycasting/raycasting_init.c \
+			raycasting/ray_casting.c \
+			map_parser/textures_checker.c \
+			map_parser/rgb_checker.c \
+			utils/array_utils.c \
 
 # Create full paths for source files
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))

@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 11:47:30 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/18 18:29:55 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/20 18:54:04 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	ft_textures_checker(t_game *game)
 	invalid_path_counter = 0;
 	valid_path_counter = 0;
 	i = 0;
-	while (ft_is_identifier(game->file[i]) == 2)
+	while (ft_is_identifier(game->file[i]) == 2
+		|| ft_is_line_empty(game->file[i]) == TRUE)
 		i++;
 	while (game->file[i])
 	{

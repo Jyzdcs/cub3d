@@ -33,7 +33,7 @@ void	test_main_edge_case(void)
 	if (!game)
 		return ;
 	argc = 2;
-	argv = malloc(sizeof(char *) * 2);
+	argv = malloc(sizeof(char *) * 3);
 	if (!argv)
 		return ;
 	argv[0] = "./cub3d";

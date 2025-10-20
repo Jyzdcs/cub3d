@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 14:20:29 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/20 18:32:34 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/20 19:01:31 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	export_map(t_game *game)
 
 	i = ft_start_index_of_the_map(game->file);
 	end = ft_end_index_of_the_map(game->file, i);
-	game->map.map = malloc(sizeof(char *) * (end - i + 1));
+	game->map.map = malloc(sizeof(char *) * (end - i + 2));
 	if (i == -1)
 		return (FALSE);
 	j = 0;

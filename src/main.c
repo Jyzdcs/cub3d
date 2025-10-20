@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/18 19:05:24 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/20 19:30:32 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	parsing(t_game *game, int argc, char **argv)
 {
-	(void)game;
 	if (argc != 2)
 	{
 		free(game);
@@ -27,6 +26,8 @@ int	parsing(t_game *game, int argc, char **argv)
 		return (ft_putstr_fd("Error: extension or file handler failed\n", 2),
 			FALSE);
 	}
+	if (map_is_valid(game) == FALSE)
+		return (ft_putstr_fd("Error: map is not valid\n", 2), FALSE);
 	if (ft_textures_checker(game) == FALSE || ft_rgb_checker(game) == FALSE)
 	{
 		free_all(game->file);
@@ -39,14 +40,14 @@ int	parsing(t_game *game, int argc, char **argv)
 	return (TRUE);
 }
 
-// int	main(int argc, char **argv)
-// {
-// 	t_game	*game;
+int	main(int argc, char **argv)
+{
+	t_game	*game;
 
-// 	game = malloc(sizeof(t_game));
-// 	if (!game)
-// 		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
-// 	if (parsing(game, argc, argv) == FALSE)
-// 		return (1);
-// 	return (0);
-// }
+	game = malloc(sizeof(t_game));
+	if (!game)
+		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
+	if (parsing(game, argc, argv) == FALSE)
+		return (1);
+	return (0);
+}
