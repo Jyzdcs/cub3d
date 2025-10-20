@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:01:21 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/15 14:19:09 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/17 15:39:37 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ typedef struct s_game
 	t_keys		keys;
 	t_camera	camera;
 }				t_game;
+
+int				parsing(t_game *game, int argc, char **argv);
 
 void			free_all(char **str);
 void			exit_game(t_game *game, char *message);
