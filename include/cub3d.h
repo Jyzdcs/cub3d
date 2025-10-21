@@ -13,8 +13,9 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../include/map_parser.h"
 # include "../libs/libft/libft.h"
+# include "../minilibx/mlx/mlx.h"
+# include <errno.h>
 # include <fcntl.h>
 
 typedef struct s_keys
@@ -40,6 +41,8 @@ typedef struct s_texture
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			width;
+	int			height;
 }				t_texture;
 
 typedef struct s_player
@@ -67,10 +70,10 @@ typedef struct s_map
 	int			width;
 	int			height;
 	int			is_closed;
-	t_texture	no_wall;
-	t_texture	so_wall;
-	t_texture	we_wall;
-	t_texture	ea_wall;
+	char		*no_wall;
+	char		*so_wall;
+	char		*we_wall;
+	char		*ea_wall;
 	int			floor_color;
 	int			ceiling_color;
 }				t_map;
@@ -97,11 +100,21 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*mlx_win;
+	void		*render_img;
+	char		*render_addr;
+	int			render_bits_per_pixel;
+	int			render_line_length;
+	int			render_endian;
 	t_map		map;
 	t_player	player;
-	char		**file;
 	t_keys		keys;
 	t_camera	camera;
+	t_ray		ray;
+	char		**file;
+	t_texture	no_texture;
+	t_texture	so_texture;
+	t_texture	we_texture;
+	t_texture	ea_texture;
 }				t_game;
 
 int				parsing(t_game *game, int argc, char **argv);
