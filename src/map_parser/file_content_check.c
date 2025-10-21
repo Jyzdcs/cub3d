@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/20 16:14:20 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/21 21:51:07 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	export_file(t_game *game, int fd, char *path)
 	i = 0;
 	file_size = count_file_line(path);
 	if (file_size == 0)
-		return (FALSE);
+		return (ft_putstr_fd("Error: file size is 0\n", 2), FALSE);
 	game->file = malloc(sizeof(char *) * file_size);
 	if (!game->file)
 		return (exit_game(game, "Error allocation memory on file\n"), FALSE);

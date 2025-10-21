@@ -6,15 +6,17 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:01:21 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/17 15:39:37 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/21 21:24:56 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "../include/map_parser.h"
 # include "../libs/libft/libft.h"
-# include "../minilibx/mlx/mlx.h"
+# include "../libs/minilibx_opengl_20191021/mlx.h"
+// # include "../minilibx/mlx/mlx.h"
 # include <errno.h>
 # include <fcntl.h>
 

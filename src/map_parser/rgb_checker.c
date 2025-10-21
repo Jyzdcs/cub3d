@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:51:45 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/20 18:54:12 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/21 21:51:56 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ int	ft_rgb_checker(t_game *game)
 
 	i = 0;
 	valid_rgb_counter = 0;
+	if (game->file == NULL)
+		return (ft_putstr_fd("Error: game->file is NULL\n", 2), FALSE);
+	// printf("DEBUG: game->file[%d] = %s\n", i, game->file[i]);
 	while (ft_is_identifier(game->file[i]) == 1
 		|| ft_is_line_empty(game->file[i]) == TRUE)
 		i++;

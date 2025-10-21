@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 20:16:47 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/10 20:16:47 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/21 21:35:13 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	handle_key_press(int keycode, t_game *game)
 		game->keys.escape_pressed = 1;
 		return (FALSE);
 	}
-	if (keycode == XK_W)
+	if (keycode == XK_w)
 		game->keys.w_pressed = 1;
-	if (keycode == XK_A)
+	if (keycode == XK_a)
 		game->keys.a_pressed = 1;
-	if (keycode == XK_S)
+	if (keycode == XK_s)
 		game->keys.s_pressed = 1;
-	if (keycode == XK_D)
+	if (keycode == XK_d)
 		game->keys.d_pressed = 1;
 	if (keycode == XK_Left)
 		game->keys.left_pressed = 1;
@@ -41,13 +41,13 @@ int	handle_key_press(int keycode, t_game *game)
 // This function updates the key state when a key is released.
 int	handle_key_release(int keycode, t_game *game)
 {
-	if (keycode == XK_W)
+	if (keycode == XK_w)
 		game->keys.w_pressed = 0;
-	if (keycode == XK_A)
+	if (keycode == XK_a)
 		game->keys.a_pressed = 0;
-	if (keycode == XK_S)
+	if (keycode == XK_s)
 		game->keys.s_pressed = 0;
-	if (keycode == XK_D)
+	if (keycode == XK_d)
 		game->keys.d_pressed = 0;
 	if (keycode == XK_Left)
 		game->keys.left_pressed = 0;

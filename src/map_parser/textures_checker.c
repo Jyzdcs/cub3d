@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 11:47:30 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/20 18:54:04 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/21 21:51:49 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,13 @@ int	ft_textures_checker(t_game *game)
 	invalid_path_counter = 0;
 	valid_path_counter = 0;
 	i = 0;
+	// printf("DEBUG: game->file[i] = %s\n", game->file[i]);
+	// for (int j = 0; game->file[j] != NULL; j++)
+	// {
+	if (game->file == NULL)
+		return (ft_putstr_fd("Error: game->file is NULL\n", 2), FALSE);
+	// printf("DEBUG: game->file[%d] = %s\n", i, game->file[i]);
+	// }
 	while (ft_is_identifier(game->file[i]) == 2
 		|| ft_is_line_empty(game->file[i]) == TRUE)
 		i++;

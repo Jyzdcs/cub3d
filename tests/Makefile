@@ -3,7 +3,10 @@
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -DUNITY_INCLUDE_DOUBLE -DTESTING
-LDFLAGS = -lm -L/opt/X11/lib -lX11
+MLX_FLAGS = -framework OpenGL -framework AppKit
+XQUARTZ_LIB = /opt/X11/lib
+XQUARTZ_INCLUDE = /opt/X11/include
+LDFLAGS = -lm -L$(MLX_DIR) -lmlx -L$(XQUARTZ_LIB) -lXext -lX11 $(MLX_FLAGS)
 
 # Directories
 ROOT_DIR = ..
@@ -13,6 +16,7 @@ TESTS_DIR = .
 UNITY_DIR = $(TESTS_DIR)/Unity/src
 LIBS_DIR = $(ROOT_DIR)/libs
 LIBFT_DIR = $(LIBS_DIR)/libft
+MLX_DIR = $(LIBS_DIR)/minilibx_opengl_20191021
 
 # Source files
 SRC_FILES = $(SRC_DIR)/map_parser/check_extension.c \
@@ -40,9 +44,10 @@ UNITY_FILES = $(UNITY_DIR)/unity.c
 
 # Libraries
 LIBFT = $(LIBFT_DIR)/libft.a
+MLX = $(MLX_DIR)/libmlx.a
 
 # Include directories
-INCLUDES = -I$(INCLUDE_DIR) -I$(UNITY_DIR) -I$(LIBFT_DIR) -I/opt/X11/include -I/usr/X11/include -I/usr/local/include
+INCLUDES = -I$(INCLUDE_DIR) -I$(UNITY_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -I$(XQUARTZ_INCLUDE)
 
 # Object files
 TEST_OBJECTS = $(TEST_FILES:.c=.o)
@@ -60,8 +65,8 @@ all: $(TEST_EXECUTABLES)
 $(TESTS_DIR)/tests/%.o: $(TESTS_DIR)/tests/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-%: tests/%.o $(UNITY_FILES:.c=.o) $(SRC_FILES:.c=.o) $(LIBFT)
-	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
+%: tests/%.o $(UNITY_FILES:.c=.o) $(SRC_FILES:.c=.o) $(LIBFT) $(MLX)
+	$(CC) $(CFLAGS) $< $(UNITY_FILES:.c=.o) $(SRC_FILES:.c=.o) $(LIBFT) $(MLX) -o $@ $(LDFLAGS)
 
 # Compile Unity source
 $(UNITY_DIR)/%.o: $(UNITY_DIR)/%.c
@@ -74,6 +79,10 @@ $(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 # Build libft if needed
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
+
+# Build MiniLibX if needed
+$(MLX):
+	$(MAKE) -C $(MLX_DIR)
 
 # Run all tests
 run: all
@@ -105,6 +114,7 @@ run_single: all
 clean:
 	$(RM) $(TEST_OBJECTS) $(UNITY_FILES:.c=.o) $(SRC_FILES:.c=.o)
 	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(MLX_DIR) clean
 
 # Clean all generated files
 fclean: clean
