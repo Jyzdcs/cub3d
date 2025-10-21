@@ -124,11 +124,11 @@ int	main(int argc, char **argv)
 	if (!game->mlx_win)
 		return (ft_putstr_fd("Error: creation of the window\n", 2), 1);
 
-
-	game->map.no_wall = "../maps/xpm/north.xpm";
-	game->map.so_wall = "../maps/xpm/south.xpm";
-	game->map.we_wall = "../maps/xpm/west.xpm";
-	game->map.ea_wall = "../maps/xpm/east.xpm";
+	// Dans init_xpm_data(), remplacer par:
+	game->map.no_wall = "/home/kaa/Desktop/cub3d/maps/xpm/north.xpm";
+	game->map.so_wall = "/home/kaa/Desktop/cub3d/maps/xpm/south.xpm";
+	game->map.we_wall = "/home/kaa/Desktop/cub3d/maps/xpm/west.xpm";
+	game->map.ea_wall = "/home/kaa/Desktop/cub3d/maps/xpm/east.xpm";
 
 	init_xpm_data(game);
 
