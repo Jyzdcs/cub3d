@@ -44,42 +44,6 @@ void	test_calculator_add_positive_numbers(void)
 	TEST_ASSERT_EQUAL_INT(5, result);
 }
 
-void	test_calculator_add_negative_numbers(void)
-{
-	int	result;
-
-	result = add(-2, -3);
-	TEST_ASSERT_EQUAL_INT(-5, result);
-}
-
-void	test_string_functions(void)
-{
-	char	str[10] = "Hello";
-	int		array1[] = {1, 2, 3, 4};
-	int		array2[] = {1, 2, 3, 4};
-
-	/* Example string assertion */
-	TEST_ASSERT_EQUAL_STRING("Hello", str);
-	/* Example memory/array assertions */
-	TEST_ASSERT_EQUAL_INT_ARRAY(array1, array2, 4);
-}
-
-void	test_null_checks(void)
-{
-	void	*ptr;
-
-	ptr = NULL;
-	/* Check for NULL */
-	TEST_ASSERT_NULL(ptr);
-	/* Example of checking that something is NOT null */
-	ptr = malloc(5);
-	if (ptr)
-	{
-		TEST_ASSERT_NOT_NULL(ptr);
-		free(ptr);
-	}
-}
-
 /*
 ** Main function to run all tests
 */
@@ -89,9 +53,6 @@ int	main(void)
 	UNITY_BEGIN();
 	/* Run tests - add each test here */
 	RUN_TEST(test_calculator_add_positive_numbers);
-	RUN_TEST(test_calculator_add_negative_numbers);
-	RUN_TEST(test_string_functions);
-	RUN_TEST(test_null_checks);
 	/* Return failure count from Unity */
 	return (UNITY_END());
 }
