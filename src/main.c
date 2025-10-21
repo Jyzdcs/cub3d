@@ -39,12 +39,8 @@
 
 void	init_xpm_data(t_game *game)
 {
-	// Hardcode temporaire pour test MLX
-	game->map.no_wall = "../maps/xpm/north.xpm";
-	game->map.so_wall = "../maps/xpm/south.xpm";
-	game->map.we_wall = "../maps/xpm/west.xpm";
-	game->map.ea_wall = "../maps/xpm/east.xpm";
-
+	printf("DEBUG: no_wall = %p\n", game->map.no_wall);
+	printf("DEBUG: no_wall content = %s\n", game->map.no_wall ? game->map.no_wall : "NULL");
 	game->no_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.no_wall, &game->no_texture.width, &game->no_texture.height);
 	game->no_texture.addr = mlx_get_data_addr(game->no_texture.img, &game->no_texture.bits_per_pixel, &game->no_texture.line_length, &game->no_texture.endian);
 	game->so_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.so_wall, &game->so_texture.width, &game->so_texture.height);
@@ -89,6 +85,11 @@ int	main(int argc, char **argv)
 	if (!game->mlx_win)
 		return (ft_putstr_fd("Error: creation of the window\n", 2), 1);
 
+
+	game->map.no_wall = "../maps/xpm/north.xpm";
+	game->map.so_wall = "../maps/xpm/south.xpm";
+	game->map.we_wall = "../maps/xpm/west.xpm";
+	game->map.ea_wall = "../maps/xpm/east.xpm";
 
 	init_xpm_data(game);
 
