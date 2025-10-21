@@ -39,6 +39,12 @@
 
 void	init_xpm_data(t_game *game)
 {
+	// Hardcode temporaire pour test MLX
+	game->map.no_wall = "../maps/xpm/north.xpm";
+	game->map.so_wall = "../maps/xpm/south.xpm";
+	game->map.we_wall = "../maps/xpm/west.xpm";
+	game->map.ea_wall = "../maps/xpm/east.xpm";
+
 	game->no_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.no_wall, &game->no_texture.width, &game->no_texture.height);
 	game->no_texture.addr = mlx_get_data_addr(game->no_texture.img, &game->no_texture.bits_per_pixel, &game->no_texture.line_length, &game->no_texture.endian);
 	game->so_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.so_wall, &game->so_texture.width, &game->so_texture.height);
@@ -47,6 +53,11 @@ void	init_xpm_data(t_game *game)
 	game->we_texture.addr = mlx_get_data_addr(game->we_texture.img, &game->we_texture.bits_per_pixel, &game->we_texture.line_length, &game->we_texture.endian);
 	game->ea_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.ea_wall, &game->ea_texture.width, &game->ea_texture.height);
 	game->ea_texture.addr = mlx_get_data_addr(game->ea_texture.img, &game->ea_texture.bits_per_pixel, &game->ea_texture.line_length, &game->ea_texture.endian);
+	if (!game->no_texture.img || !game->so_texture.img || !game->we_texture.img || !game->ea_texture.img)
+		return (ft_putstr_fd("Error: initialization of the textures\n", 2), 1);
+	if (!game->no_texture.addr || !game->so_texture.addr || !game->we_texture.addr || !game->ea_texture.addr)
+		return (ft_putstr_fd("Error: initialization of the textures\n", 2), 1);
+	return (0);
 }
 
 int	close_window(t_game *game)
