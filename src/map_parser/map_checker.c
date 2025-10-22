@@ -103,7 +103,7 @@ int	map_is_valid(t_game *game)
 		printf("Error: Map havent just one player\n");
 		return (FALSE);
 	}
-	if (map_is_closed(game->map.map, &game->map, &game->player) == FALSE)
+	if (map_is_closed(&game->map, &game->player) == FALSE)
 	{
 		printf("Error: Map isnt closed\n");
 		return (FALSE);

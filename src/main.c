@@ -185,19 +185,16 @@ int	parsing(t_game *game, int argc, char **argv)
 	return (TRUE);
 }
 
-// Dans rendering_frame(), remplacez par:
-void	rendering_frame_1(t_game *game)
+void print_map_debug(t_game *game)
 {
-    // Test avec gradient
-    for (int y = 0; y < SCREEN_HEIGHT; y++)
+    printf("DEBUG: Map content:\n");
+    printf("Map dimensions: %dx%d\n", game->map.width, game->map.height);
+    for (int y = 0; y < game->map.height; y++)
     {
-        for (int x = 0; x < SCREEN_WIDTH; x++)
-        {
-            int color = (x * 255 / SCREEN_WIDTH) | ((y * 255 / SCREEN_HEIGHT) << 8);
-            draw_pixel(game, x, y, color);
-        }
+        printf("map[%d]: '%s'\n", y, game->map.map[y] ? game->map.map[y] : "NULL");
     }
 }
+
 
 int	main(int argc, char **argv)
 {
@@ -206,6 +203,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_putstr_fd("Error: wrong number of arguments\n", 2), 1);
 	game = malloc(sizeof(t_game));
+	game->map.is_closed = TRUE;
 	if (!game)
 		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
 	if (parsing(game, argc, argv) == FALSE)
@@ -213,8 +211,17 @@ int	main(int argc, char **argv)
 		free(game);
 		return (1);
 	}
+	// Dans main(), après parsing() et avant init_game_data():
+	printf("DEBUG: game->map.map = %p\n", game->map.map);
+	if (game->map.map)
+	{
+		for (int i = 0; i < game->map.height && i < 5; i++)
+		{
+			printf("DEBUG: map[%d] = %p ('%s')\n", i, game->map.map[i],
+				game->map.map[i] ? game->map.map[i] : "NULL");
+		}
+	}
 	init_game_data(game);
-	init_all_structures(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
@@ -229,14 +236,13 @@ int	main(int argc, char **argv)
 			"Cub3D");
 	if (!game->mlx_win)
 		return (ft_putstr_fd("Error: creation of the window\n", 2), 1);
-	// Dans init_xpm_data(), remplacer par:
 	init_render_image(game);
 	game->map.no_wall = "/home/kaa/Desktop/cub3d/maps/xpm/north.xpm";
 	game->map.so_wall = "/home/kaa/Desktop/cub3d/maps/xpm/south.xpm";
 	game->map.we_wall = "/home/kaa/Desktop/cub3d/maps/xpm/west.xpm";
 	game->map.ea_wall = "/home/kaa/Desktop/cub3d/maps/xpm/east.xpm";
 	init_xpm_data(game);
-	rendering_frame_1(game);
+	rendering_frame(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
 	mlx_key_hook(game->mlx_win, handle_key_press, game);
 	mlx_hook(game->mlx_win, 17, 0, close_window, game);

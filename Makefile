@@ -42,6 +42,7 @@ SRC_FILES = main.c \
 			map_parser/textures_checker.c \
 			map_parser/rgb_checker.c \
 			utils/array_utils.c \
+			utils/map_copy.c \
 			map_parser/file_content_check.c \
 			map_parser/file_content_utils.c \
 			map_parser/file_content_map_at_the_end.c \
@@ -52,7 +53,7 @@ SRC_FILES = main.c \
 			rendering/render_floor_and_ceiling.c \
 			controls_handler/keys_input.c \
 			raycasting/ray_casting.c \
-			raycasting/raycasting_init.c
+			raycasting/raycasting_init.c \
 
 # Create full paths for source files
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))

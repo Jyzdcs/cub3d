@@ -23,14 +23,13 @@ typedef struct s_game	t_game;
 int						map_have_one_player(char **map);
 
 /* MAP IS CLOSED */
-int						map_is_closed(char **map_copy, t_map *map,
-							t_player *player);
+int						map_is_closed(t_map *map, t_player *player);
+char					**create_map_copy(t_map *map);
+void					free_map_copy(char **map_copy, int height);
 
 /* FILE CHECK */
 int						ft_check_extension(char *file_path, char *extension,
 							int extension_len);
-int						map_is_closed(char **map_copy, t_map *map,
-							t_player *player);
 int						file_handler(char *path, t_game *game);
 
 /* FILE CONTENT UTILS */

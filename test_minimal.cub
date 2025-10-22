@@ -1,0 +1,14 @@
+NO /home/kaa/Desktop/cub3d/maps/xpm/north.xpm
+SO /home/kaa/Desktop/cub3d/maps/xpm/south.xpm
+WE /home/kaa/Desktop/cub3d/maps/xpm/west.xpm
+EA /home/kaa/Desktop/cub3d/maps/xpm/east.xpm
+
+F 220,100,0
+C 225,30,0
+
+1111111
+1000001
+1000001
+1000001
+1111N11
+1111111
