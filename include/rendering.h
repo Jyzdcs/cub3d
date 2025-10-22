@@ -10,5 +10,6 @@ void	rendering_frame(t_game *game);
 void	render_floor_and_ceiling(t_game *game);
 int		get_texture_pixel(t_texture *texture, int tex_x, int tex_y);
 void	init_texture(t_game *game, t_texture **texture, int *tex_x);
+void 	clear_screen(t_game *game);
 
 #endif

@@ -20,10 +20,10 @@ void rotate_player(t_game *game, double angle)
 
 void rotate_left(t_game *game)
 {
-	rotate_player(game, game->player.rotation_speed);
+	rotate_player(game, -game->player.rotation_speed);
 }
 
 void rotate_right(t_game *game)
 {
-	rotate_player(game, -game->player.rotation_speed);
+	rotate_player(game, game->player.rotation_speed);
 }

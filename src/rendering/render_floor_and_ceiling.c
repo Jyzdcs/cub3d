@@ -19,5 +19,6 @@ void	render_floor_and_ceiling(t_game *game)
 				draw_pixel(game, x, y, game->map.floor_color);
 			x++;
 		}
+		y++;
 	}
 }

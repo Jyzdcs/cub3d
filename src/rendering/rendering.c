@@ -42,22 +42,24 @@ void	draw_wall_column(t_game *game, int x, int draw_start, int draw_end)
 
 void clear_screen(t_game *game)
 {
-    // Effacer l'image avec memset (plus rapide)
-    ft_memset(game->render_addr, 0, SCREEN_HEIGHT * game->render_line_length);
+	ft_memset(game->render_addr, 0, SCREEN_HEIGHT * game->render_line_length);
 }
 
 void	rendering_frame(t_game *game)
 {
-	clear_screen(game);
 	t_ray	ray;
 	int x;
 
 	x = 0;
+	clear_screen(game);
+	render_floor_and_ceiling(game);
 
 	while (x < SCREEN_WIDTH)
 	{
 		init_ray(&ray, game, x);
 		cast_ray(&ray, game);
+
+		game->ray = ray;
 
 		int line_height = (int)(SCREEN_HEIGHT / ray.perp_wall_dist);
 		int draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
