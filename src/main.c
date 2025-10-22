@@ -37,16 +37,53 @@
 // 	return (0);
 // }
 
+// Dans main(), avant parsing():
+void	init_all_structures(t_game *game)
+{
+	// Initialiser t_player
+	game->player.x = 1.5;
+	game->player.y = 1.5;
+	game->player.dir_x = 1.0;
+	game->player.dir_y = 0.0;
+	// ... autres champs
+
+	// Initialiser t_camera
+	game->camera.plane_x = 0.0;
+	game->camera.plane_y = 0.66;
+
+	// Initialiser t_keys
+	game->keys.w_pressed = 0;
+	// ... autres clés
+
+	// Initialiser les textures à NULL
+	game->no_texture.img = NULL;
+	game->so_texture.img = NULL;
+	game->we_texture.img = NULL;
+	game->ea_texture.img = NULL;
+}
+
+void	init_render_image(t_game *game)
+{
+	game->render_img = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+	if (!game->render_img)
+	{
+		ft_putstr_fd("Error: Failed to create render image\n", 2);
+		return;
+	}
+	game->render_addr = mlx_get_data_addr(game->render_img,
+		&game->render_bits_per_pixel, &game->render_line_length, &game->render_endian);
+}
+
 void	init_xpm_data(t_game *game)
 {
 	printf("DEBUG: no_wall = %p\n", game->map.no_wall);
 	printf("DEBUG: no_wall content = %s\n",
 		game->map.no_wall ? game->map.no_wall : "NULL");
 	// Hardcode temporaire pour test MLX
-	game->map.no_wall = "../maps/xpm/north.xpm";
-	game->map.so_wall = "../maps/xpm/south.xpm";
-	game->map.we_wall = "../maps/xpm/west.xpm";
-	game->map.ea_wall = "../maps/xpm/east.xpm";
+	game->map.no_wall = "/home/kaa/Desktop/cub3d/maps/xpm/north.xpm";
+	game->map.so_wall = "/home/kaa/Desktop/cub3d/maps/xpm/south.xpm";
+	game->map.we_wall = "/home/kaa/Desktop/cub3d/maps/xpm/west.xpm";
+	game->map.ea_wall = "/home/kaa/Desktop/cub3d/maps/xpm/east.xpm";
 	printf("DEBUG: After hardcode - no_wall = %s\n", game->map.no_wall);
 	game->no_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.no_wall,
 			&game->no_texture.width, &game->no_texture.height);
@@ -134,6 +171,7 @@ int	main(int argc, char **argv)
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
+	init_all_structures(game);
 	if (parsing(game, argc, argv) == FALSE)
 	{
 		free(game);
@@ -154,6 +192,7 @@ int	main(int argc, char **argv)
 	if (!game->mlx_win)
 		return (ft_putstr_fd("Error: creation of the window\n", 2), 1);
 	// Dans init_xpm_data(), remplacer par:
+	init_render_image(game);
 	game->map.no_wall = "/home/kaa/Desktop/cub3d/maps/xpm/north.xpm";
 	game->map.so_wall = "/home/kaa/Desktop/cub3d/maps/xpm/south.xpm";
 	game->map.we_wall = "/home/kaa/Desktop/cub3d/maps/xpm/west.xpm";
