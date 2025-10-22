@@ -35,6 +35,7 @@ typedef struct s_keys
 # define FALSE 1
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
+# define HITBOX_SIZE 0.2
 
 typedef struct s_texture
 {

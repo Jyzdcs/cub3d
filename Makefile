@@ -52,6 +52,8 @@ SRC_FILES = main.c \
 			rendering/rendering_utils.c \
 			rendering/render_floor_and_ceiling.c \
 			controls_handler/keys_input.c \
+			controls_handler/keys_camera_rotation.c \
+			controls_handler/keys_movement.c \
 			raycasting/ray_casting.c \
 			raycasting/raycasting_init.c \
 

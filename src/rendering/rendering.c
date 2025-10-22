@@ -40,8 +40,15 @@ void	draw_wall_column(t_game *game, int x, int draw_start, int draw_end)
 	}
 }
 
+void clear_screen(t_game *game)
+{
+    // Effacer l'image avec memset (plus rapide)
+    ft_memset(game->render_addr, 0, SCREEN_HEIGHT * game->render_line_length);
+}
+
 void	rendering_frame(t_game *game)
 {
+	clear_screen(game);
 	t_ray	ray;
 	int x;
 

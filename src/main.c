@@ -185,16 +185,137 @@ int	parsing(t_game *game, int argc, char **argv)
 	return (TRUE);
 }
 
-void print_map_debug(t_game *game)
+// int	main(int argc, char **argv)
+// {
+// 	t_game	*game;
+
+// 	if (argc != 2)
+// 		return (ft_putstr_fd("Error: wrong number of arguments\n", 2), 1);
+// 	game = malloc(sizeof(t_game));
+// 	game->map.is_closed = TRUE;
+// 	if (!game)
+// 		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
+// 	if (parsing(game, argc, argv) == FALSE)
+// 	{
+// 		free(game);
+// 		return (1);
+// 	}
+// 	init_game_data(game);
+// 	game->mlx = mlx_init();
+// 	if (!game->mlx)
+// 	{
+// 		if (getenv("DOCKER") || getenv("WSL_DISTRO_NAME"))
+// 			ft_putstr_fd("Error: MLX requires X11 server. Run with '-e DISPLAY=$DISPLAY'\n",
+// 				2);
+// 		else
+// 			ft_putstr_fd("Error: MLX initialization failed\n", 2);
+// 		return (1);
+// 	}
+// 	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
+// 	if (!game->mlx_win)
+// 		return (ft_putstr_fd("Error: creation of the window\n", 2), 1);
+// 	init_render_image(game);
+// 	init_xpm_data(game);
+// 	rendering_frame(game);
+// 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
+// 	mlx_key_hook(game->mlx_win, handle_key_press, game);
+// 	mlx_hook(game->mlx_win, 17, 0, close_window, game);
+// 	mlx_loop(game->mlx);
+// 	return (0);
+// }
+
+// Ajoutez ces fonctions dans main.c avant main():
+int handle_key_press_simple(int keycode, t_game *game)
 {
-    printf("DEBUG: Map content:\n");
-    printf("Map dimensions: %dx%d\n", game->map.width, game->map.height);
-    for (int y = 0; y < game->map.height; y++)
+    printf("DEBUG: Key pressed: %d\n", keycode);
+
+    if (keycode == XK_Escape)
     {
-        printf("map[%d]: '%s'\n", y, game->map.map[y] ? game->map.map[y] : "NULL");
+        printf("DEBUG: ESC pressed, exiting\n");
+        mlx_destroy_window(game->mlx, game->mlx_win);
+        exit(0);
     }
+    else if (keycode == XK_w)
+    {
+        printf("DEBUG: W pressed - moving forward\n");
+        // Mouvement vers l'avant
+        game->player.x += game->player.dir_x * game->player.speed;
+        game->player.y += game->player.dir_y * game->player.speed;
+        printf("DEBUG: New position: x=%.2f, y=%.2f\n", game->player.x, game->player.y);
+    }
+    else if (keycode == XK_s)
+    {
+        printf("DEBUG: S pressed - moving backward\n");
+        // Mouvement vers l'arrière
+        game->player.x -= game->player.dir_x * game->player.speed;
+        game->player.y -= game->player.dir_y * game->player.speed;
+        printf("DEBUG: New position: x=%.2f, y=%.2f\n", game->player.x, game->player.y);
+    }
+    else if (keycode == XK_a)
+    {
+        printf("DEBUG: A pressed - moving left\n");
+        // Mouvement vers la gauche (perpendiculaire)
+        game->player.x -= game->player.dir_y * game->player.speed;
+        game->player.y += game->player.dir_x * game->player.speed;
+        printf("DEBUG: New position: x=%.2f, y=%.2f\n", game->player.x, game->player.y);
+    }
+    else if (keycode == XK_d)
+    {
+        printf("DEBUG: D pressed - moving right\n");
+        // Mouvement vers la droite (perpendiculaire)
+        game->player.x += game->player.dir_y * game->player.speed;
+        game->player.y -= game->player.dir_x * game->player.speed;
+        printf("DEBUG: New position: x=%.2f, y=%.2f\n", game->player.x, game->player.y);
+    }
+    else if (keycode == XK_Left)
+    {
+        printf("DEBUG: Left arrow pressed - rotating left\n");
+        // Rotation vers la gauche
+        double old_dir_x = game->player.dir_x;
+        game->player.dir_x = game->player.dir_x * cos(game->player.rotation_speed) - game->player.dir_y * sin(game->player.rotation_speed);
+        game->player.dir_y = old_dir_x * sin(game->player.rotation_speed) + game->player.dir_y * cos(game->player.rotation_speed);
+        printf("DEBUG: New direction: dir_x=%.2f, dir_y=%.2f\n", game->player.dir_x, game->player.dir_y);
+    }
+    else if (keycode == XK_Right)
+    {
+        printf("DEBUG: Right arrow pressed - rotating right\n");
+        // Rotation vers la droite
+        double old_dir_x = game->player.dir_x;
+        game->player.dir_x = game->player.dir_x * cos(-game->player.rotation_speed) - game->player.dir_y * sin(-game->player.rotation_speed);
+        game->player.dir_y = old_dir_x * sin(-game->player.rotation_speed) + game->player.dir_y * cos(-game->player.rotation_speed);
+        printf("DEBUG: New direction: dir_x=%.2f, dir_y=%.2f\n", game->player.dir_x, game->player.dir_y);
+    }
+
+    // Redessiner la frame après chaque mouvement
+    rendering_frame(game);
+    mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
+
+    return (0);
+}
+int handle_key_release_simple(int keycode, t_game *game)
+{
+    if (keycode == XK_w)
+        game->keys.w_pressed = 0;
+    else if (keycode == XK_s)
+        game->keys.s_pressed = 0;
+    else if (keycode == XK_a)
+        game->keys.a_pressed = 0;
+    else if (keycode == XK_d)
+        game->keys.d_pressed = 0;
+    else if (keycode == XK_Left)
+        game->keys.left_pressed = 0;
+    else if (keycode == XK_Right)
+        game->keys.right_pressed = 0;
+
+    return (0);
 }
 
+int close_window_simple(t_game *game)
+{
+    printf("DEBUG: Window close requested\n");
+    mlx_destroy_window(game->mlx, game->mlx_win);
+    exit(0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -202,50 +323,76 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (ft_putstr_fd("Error: wrong number of arguments\n", 2), 1);
+
+	printf("DEBUG: Starting program\n");
+
 	game = malloc(sizeof(t_game));
-	game->map.is_closed = TRUE;
 	if (!game)
 		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
+
+	printf("DEBUG: Game allocated\n");
+
+	game->map.is_closed = TRUE;
+
+	printf("DEBUG: Before parsing\n");
 	if (parsing(game, argc, argv) == FALSE)
 	{
+		printf("DEBUG: Parsing failed\n");
 		free(game);
 		return (1);
 	}
-	// Dans main(), après parsing() et avant init_game_data():
-	printf("DEBUG: game->map.map = %p\n", game->map.map);
-	if (game->map.map)
-	{
-		for (int i = 0; i < game->map.height && i < 5; i++)
-		{
-			printf("DEBUG: map[%d] = %p ('%s')\n", i, game->map.map[i],
-				game->map.map[i] ? game->map.map[i] : "NULL");
-		}
-	}
+	printf("DEBUG: Parsing succeeded\n");
+
 	init_game_data(game);
+	printf("DEBUG: Game data initialized\n");
+
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
-		if (getenv("DOCKER") || getenv("WSL_DISTRO_NAME"))
-			ft_putstr_fd("Error: MLX requires X11 server. Run with '-e DISPLAY=$DISPLAY'\n",
-				2);
-		else
-			ft_putstr_fd("Error: MLX initialization failed\n", 2);
+		printf("DEBUG: MLX initialization failed\n");
+		free(game);
 		return (1);
 	}
-	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT,
-			"Cub3D");
+	printf("DEBUG: MLX initialized\n");
+
+	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
 	if (!game->mlx_win)
-		return (ft_putstr_fd("Error: creation of the window\n", 2), 1);
+	{
+		printf("DEBUG: Window creation failed\n");
+		free(game);
+		return (1);
+	}
+	printf("DEBUG: Window created\n");
+
 	init_render_image(game);
+	printf("DEBUG: Render image initialized\n");
+
+	// Hardcode textures
 	game->map.no_wall = "/home/kaa/Desktop/cub3d/maps/xpm/north.xpm";
 	game->map.so_wall = "/home/kaa/Desktop/cub3d/maps/xpm/south.xpm";
 	game->map.we_wall = "/home/kaa/Desktop/cub3d/maps/xpm/west.xpm";
 	game->map.ea_wall = "/home/kaa/Desktop/cub3d/maps/xpm/east.xpm";
+
 	init_xpm_data(game);
+	printf("DEBUG: XPM data initialized\n");
+
 	rendering_frame(game);
+	printf("DEBUG: Rendering frame completed\n");
+
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
-	mlx_key_hook(game->mlx_win, handle_key_press, game);
-	mlx_hook(game->mlx_win, 17, 0, close_window, game);
+	printf("DEBUG: Image put to window\n");
+
+	mlx_key_hook(game->mlx_win, handle_key_press_simple, game);
+	printf("DEBUG: Key press hook set\n");
+
+	mlx_hook(game->mlx_win, 2, 1L << 0, handle_key_release_simple, game); // Key release
+	printf("DEBUG: Key release hook set\n");
+
+	mlx_hook(game->mlx_win, 17, 0, close_window_simple, game);
+	printf("DEBUG: Close hook set\n");
+
 	mlx_loop(game->mlx);
+	printf("DEBUG: MLX loop started (this should not print)\n");
+
 	return (0);
 }
