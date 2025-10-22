@@ -20,8 +20,7 @@ int	handle_key_press(int keycode, t_game *game)
 {
 	if (keycode == XK_Escape)
 	{
-		game->keys.escape_pressed = 1;
-		return (FALSE);
+		exit_game(game,"Endgame\n");
 	}
 	if (keycode == XK_w)
 		game->keys.w_pressed = 1;

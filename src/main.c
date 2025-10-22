@@ -15,28 +15,6 @@
 #include "../include/rendering.h"
 #include "../libs/minilibx_opengl_20191021/mlx.h"
 
-// int	main(int argc, char **argv)
-// {
-// 	t_game	*game;
-
-// 	game = malloc(sizeof(t_game));
-// 	if (!game)
-// 		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
-// 	if (argc != 2)
-// 	{
-// 		free(game);
-// 		return (ft_putstr_fd("Error: wrong number of arguments\n", 2), 1);
-// 	}
-// 	if (file_handler(argv[1], game) == FALSE)
-// 	{
-// 		free(game);
-// 		return (1);
-// 	}
-// 	free_all(game->file);
-// 	free(game);
-// 	return (0);
-// }
-
 // Dans main(), avant parsing():
 void	init_all_structures(t_game *game)
 {
@@ -60,6 +38,51 @@ void	init_all_structures(t_game *game)
 	game->so_texture.img = NULL;
 	game->we_texture.img = NULL;
 	game->ea_texture.img = NULL;
+}
+
+void	init_game_data(t_game *game)
+{
+    // Initialiser le joueur
+    game->player.x = 1.5;
+    game->player.y = 1.5;
+    game->player.old_x = 0.0;
+    game->player.old_y = 0.0;
+    game->player.dir_x = 1.0;
+    game->player.dir_y = 0.0;
+    game->player.speed = 0.1;
+    game->player.rotation_speed = 0.1;
+
+    // Initialiser la caméra
+    game->camera.plane_x = 0.0;
+    game->camera.plane_y = 0.66;
+
+    // Initialiser les clés
+    game->keys.w_pressed = 0;
+    game->keys.a_pressed = 0;
+    game->keys.s_pressed = 0;
+    game->keys.d_pressed = 0;
+    game->keys.left_pressed = 0;
+    game->keys.right_pressed = 0;
+    game->keys.escape_pressed = 0;
+
+    // Initialiser les couleurs
+    game->map.floor_color = 0x808080;
+    game->map.ceiling_color = 0x404040;
+
+    // Initialiser la map si elle n'existe pas
+    if (!game->map.map)
+    {
+        game->map.map = malloc(sizeof(char*) * 6);
+        game->map.map[0] = "111111";
+        game->map.map[1] = "100001";
+        game->map.map[2] = "100001";
+        game->map.map[3] = "100001";
+        game->map.map[4] = "100001";
+        game->map.map[5] = "111111";
+        game->map.map[6] = NULL;
+        game->map.width = 6;
+        game->map.height = 6;
+    }
 }
 
 void	init_render_image(t_game *game)
@@ -162,6 +185,20 @@ int	parsing(t_game *game, int argc, char **argv)
 	return (TRUE);
 }
 
+// Dans rendering_frame(), remplacez par:
+void	rendering_frame_1(t_game *game)
+{
+    // Test avec gradient
+    for (int y = 0; y < SCREEN_HEIGHT; y++)
+    {
+        for (int x = 0; x < SCREEN_WIDTH; x++)
+        {
+            int color = (x * 255 / SCREEN_WIDTH) | ((y * 255 / SCREEN_HEIGHT) << 8);
+            draw_pixel(game, x, y, color);
+        }
+    }
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -171,12 +208,13 @@ int	main(int argc, char **argv)
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
-	init_all_structures(game);
 	if (parsing(game, argc, argv) == FALSE)
 	{
 		free(game);
 		return (1);
 	}
+	init_game_data(game);
+	init_all_structures(game);
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
@@ -198,7 +236,8 @@ int	main(int argc, char **argv)
 	game->map.we_wall = "/home/kaa/Desktop/cub3d/maps/xpm/west.xpm";
 	game->map.ea_wall = "/home/kaa/Desktop/cub3d/maps/xpm/east.xpm";
 	init_xpm_data(game);
-	rendering_frame(game);
+	rendering_frame_1(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
 	mlx_key_hook(game->mlx_win, handle_key_press, game);
 	mlx_hook(game->mlx_win, 17, 0, close_window, game);
 	mlx_loop(game->mlx);
