@@ -54,3 +54,25 @@ int	handle_key_release(int keycode, t_game *game)
 		game->keys.right_pressed = 0;
 	return (TRUE);
 }
+
+// This function process the value of the kame->keys whether they are pressed to move in consequence.
+int process_keys(void *param)
+{
+	t_game *game = (t_game *)param;
+
+	if (game->keys.w_pressed)
+		move_forward(game);
+	if (game->keys.s_pressed)
+		move_backward(game);
+	if (game->keys.a_pressed)
+		strafe_left(game);
+	if (game->keys.d_pressed)
+		strafe_right(game);
+	if (game->keys.left_pressed)
+		rotate_left(game);
+	if (game->keys.right_pressed)
+		rotate_right(game);
+	rendering_frame(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
+	return (0);
+}
