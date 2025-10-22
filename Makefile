@@ -66,7 +66,8 @@ LIBFT_DIR = libs/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # MiniLibX library
-MLX_DIR = libs/minilibx_opengl_20191021
+# MLX_DIR = libs/minilibx_opengl_20191021
+MLX_DIR = minilibx/mlx
 MLX = $(MLX_DIR)/libmlx.a
 
 # XQuartz paths for macOS
@@ -77,7 +78,8 @@ XQUARTZ_LIB = /opt/X11/lib
 INCLUDES = -I ./include -I $(LIBFT_DIR) -I $(MLX_DIR) -I$(XQUARTZ_INCLUDE)
 
 # MLX linking flags (for macOS with XQuartz/X11)
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -L$(XQUARTZ_LIB) -lXext -lX11 -framework OpenGL -framework AppKit
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -L$(XQUARTZ_LIB) -lXext -lX11
+#  -framework OpenGL -framework AppKit
 
 # Default target
 all: $(NAME)
@@ -97,7 +99,7 @@ $(MLX):
 
 # Build the executable
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX) $(MLX_FLAGS) -lm -o $(NAME)
 
 # Clean object files
 clean:
