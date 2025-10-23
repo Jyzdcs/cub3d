@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 13:13:45 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/23 13:48:04 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/23 19:12:57 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void draw_wall_column(t_game *game, int x, int draw_start, int draw_end);
 void rendering_frame(t_game *game);
 void render_floor_and_ceiling(t_game *game);
 int get_texture_pixel(t_texture *texture, int tex_x, int tex_y);
-void init_texture(t_game *game, t_texture **texture, int *tex_x);
-int init_game_textures(t_game *game);
+int rgb_to_int(char *rgb);
 
+/* INITIALIZATION */
+int init_game_textures(t_game *game);
+int init_game_rgb(t_game *game);
 #endif

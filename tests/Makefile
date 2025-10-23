@@ -34,6 +34,7 @@ SRC_FILES = $(SRC_DIR)/map_parser/check_extension.c \
 						$(SRC_DIR)/map_parser/rgb_checker.c \
 						$(SRC_DIR)/utils/array_utils.c \
 						$(SRC_DIR)/rendering/init_game_textures.c \
+						$(SRC_DIR)/rendering/init_game_rgb.c \
 						$(SRC_DIR)/rendering/rendering.c \
 						$(SRC_DIR)/rendering/render_floor_and_ceiling.c \
 						$(SRC_DIR)/rendering/rendering_utils.c \
