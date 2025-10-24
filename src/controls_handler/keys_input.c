@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   keys_input.c									   :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: kclaudan <kclaudan@student.42.fr>		  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2025/10/10 20:16:47 by kclaudan		  #+#	#+#			 */
-/*   Updated: 2025/10/21 21:35:13 by kclaudan		 ###   ########.fr	   */
-/*																			*/
-/* ************************************************************************** */
-
 #include "../../include/controls.h"
 #include "../../include/rendering.h"
 #include "../../include/cub3d.h"
@@ -21,7 +9,7 @@ int	handle_key_press(int keycode, t_game *game)
 {
 	if (keycode == XK_Escape)
 	{
-		exit_game(game,"Endgame\n");
+		exit_game(game, "Endgame\n");
 	}
 	if (keycode == XK_w)
 		game->keys.w_pressed = 1;
@@ -56,11 +44,13 @@ int	handle_key_release(int keycode, t_game *game)
 	return (TRUE);
 }
 
-// This function process the value of the kame->keys whether they are pressed to move in consequence.
-int process_keys(void *param)
+// This function process the value of the
+// game->keys whether they are pressed to move in consequence.
+int	process_keys(void *param)
 {
-	t_game *game = (t_game *)param;
+	t_game	*game;
 
+	game = (t_game *)param;
 	if (game->keys.w_pressed)
 		move_forward(game);
 	if (game->keys.s_pressed)

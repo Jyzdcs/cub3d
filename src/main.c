@@ -253,7 +253,6 @@ int	main(int argc, char **argv)
 
 	mlx_hook(game->mlx_win, 2, 1L<<0, handle_key_press, game);    // KeyPress
 	mlx_hook(game->mlx_win, 3, 1L<<1, handle_key_release, game);  // KeyRelease
-	mlx_hook(game->mlx_win, 17, 0, close_window, game);           // Close
 	mlx_loop_hook(game->mlx, process_keys, game);
 
 	mlx_loop(game->mlx);
