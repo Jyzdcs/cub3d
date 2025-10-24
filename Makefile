@@ -6,7 +6,7 @@
 #    By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/02 12:00:00 by kclaudan          #+#    #+#              #
-#    Updated: 2025/10/21 21:35:13 by kclaudan         ###   ########.fr        #
+#    Updated: 2025/10/24 17:01:53 by kclaudan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,8 +81,8 @@ XQUARTZ_LIB = /opt/X11/lib
 INCLUDES = -I ./include -I $(LIBFT_DIR) -I $(MLX_DIR) -I$(XQUARTZ_INCLUDE)
 
 # MLX linking flags (for macOS with XQuartz/X11)
+# MLX_FLAGS = -L$(MLX_DIR) -lmlx -L$(XQUARTZ_LIB) -lXext -lX11 -framework OpenGL -framework AppKit
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -L$(XQUARTZ_LIB) -lXext -lX11
-#  -framework OpenGL -framework AppKit
 
 # Default target
 all: $(NAME)
