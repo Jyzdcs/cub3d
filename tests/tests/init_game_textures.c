@@ -60,7 +60,7 @@ void test_calculator_add_positive_numbers(void)
 	game->file = test_file;
 
 	/* Execute */
-	init_game_textures(game);
+	init_game_walls_paths(game);
 
 	/* Verify texture paths are set */
 	TEST_ASSERT_NOT_NULL(game->map.no_wall);
@@ -102,7 +102,7 @@ void test_init_game_textures_white_space(void)
 	game->file = test_file;
 
 	/* Execute */
-	init_game_textures(game);
+	init_game_walls_paths(game);
 
 	/* Verify texture paths are set */
 	TEST_ASSERT_NOT_NULL(game->map.no_wall);
