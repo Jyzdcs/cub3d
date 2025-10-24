@@ -24,10 +24,9 @@ void	free_all(char **str)
 
 void	exit_game(t_game *game, char *message)
 {
-	(void)game;
-	// if (game->file)
-	// 	free_all(game->file);
+	if (game->file)
+		free_all(game->file);
 	ft_putstr_fd(message, 2);
-	// free(game);
+	free(game);
 	exit(1);
 }

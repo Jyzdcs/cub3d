@@ -14,24 +14,21 @@
 // Sa longueur (ex: 0.66) définit le FOV (~60° pour 0.66).
 void	init_ray(t_ray *ray, t_game *game, int x)
 {
-	double camera_x;
+	double	camera_x;
 
 	camera_x = 2.0 * x / (double)SCREEN_WIDTH - 1.0;
 	ray->dir_x = game->player.dir_x + game->camera.plane_x * camera_x;
 	ray->dir_y = game->player.dir_y + game->camera.plane_y * camera_x;
 	ray->map_x = (int)game->player.x;
 	ray->map_y = (int)game->player.y;
-
 	if (ray->dir_x == 0)
 		ray->delta_dist_x = 1e30;
 	else
 		ray->delta_dist_x = fabs(1.0 / ray->dir_x);
-
 	if (ray->dir_y == 0)
 		ray->delta_dist_y = 1e30;
 	else
 		ray->delta_dist_y = fabs(1.0 / ray->dir_y);
-
 	init_dda_params(ray, game);
 	ray->perp_wall_dist = 0;
 	ray->side = 0;
@@ -68,9 +65,9 @@ void	init_dda_params(t_ray *ray, t_game *game)
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - game->player.x) * ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - game->player.x)
+			* ray->delta_dist_x;
 	}
-
 	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
@@ -79,6 +76,7 @@ void	init_dda_params(t_ray *ray, t_game *game)
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - game->player.y) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - game->player.y)
+			* ray->delta_dist_y;
 	}
 }

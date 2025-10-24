@@ -5,10 +5,9 @@
 // vers la ligne de grille la plus proche (verticale ou horizontale)
 void	dda_loop(t_ray *ray, t_game *game)
 {
-	int hit;
+	int	hit;
 
 	hit = 0;
-
 	while (hit == 0)
 	{
 		if (ray->side_dist_x < ray->side_dist_y)
@@ -23,9 +22,8 @@ void	dda_loop(t_ray *ray, t_game *game)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-
 		if (game->map.map[ray->map_y][ray->map_x] == '1')
-		hit = 1;
+			hit = 1;
 	}
 }
 
@@ -34,7 +32,6 @@ void	dda_loop(t_ray *ray, t_game *game)
 // Side 0 == vertical, Side 1 == horizontal
 void	determine_texture_id(t_ray *ray)
 {
-
 	if (ray->side == 0)
 	{
 		if (ray->step_x > 0)
@@ -58,16 +55,13 @@ void	cast_ray(t_ray *ray, t_game *game)
 {
 	dda_loop(ray, game);
 	determine_texture_id(ray);
-
 	if (ray->side == 0)
 		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
 	else
 		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
-
 	if (ray->side == 0)
 		ray->wall_x = game->player.y + ray->perp_wall_dist * ray->dir_y;
 	else
 		ray->wall_x = game->player.x + ray->perp_wall_dist * ray->dir_x;
-
 	ray->wall_x -= floor(ray->wall_x);
 }

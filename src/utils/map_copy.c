@@ -1,17 +1,17 @@
 #include "../include/map_parser.h"
 
 // Fonction utilitaire:
-char **create_map_copy(t_map *map)
+char	**create_map_copy(t_map *map)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	**map_copy;
 
 	i = 0;
 	j = 0;
-	char **map_copy = malloc(sizeof(char*) * map->height);
+	map_copy = malloc(sizeof(char *) * map->height);
 	if (!map_copy)
 		return (NULL);
-
 	while (i < map->height)
 	{
 		map_copy[i] = ft_strdup(map->map[i]);
@@ -28,7 +28,7 @@ char **create_map_copy(t_map *map)
 	return (map_copy);
 }
 
-void free_map_copy(char **map_copy, int height)
+void	free_map_copy(char **map_copy, int height)
 {
 	int	i;
 
