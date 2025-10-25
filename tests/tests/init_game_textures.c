@@ -117,6 +117,31 @@ void test_init_game_textures_white_space(void)
 	TEST_ASSERT_EQUAL_STRING("./maps/xpm/east.xpm", game->map.ea_wall);
 }
 
+void test_init_game_textures_invalid_path(void)
+{
+	t_game *game;
+
+	game = malloc(sizeof(t_game));
+	if (!game)
+		return (ft_putstr_fd("Error: allocation memory on game\n", 2));
+	ft_memset(game, 0, sizeof(t_game));
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		return (ft_putstr_fd("Error: mlx_init\n", 2));
+	game->map.no_wall = "../maps/xpm/north.xpm";
+	game->map.so_wall = "../maps/xpm/south.xpm";
+	game->map.we_wall = "../maps/xpm/west.xpm";
+	game->map.ea_wall = "../maps/xpm/east.xpm";
+
+	/* Execute */
+	init_game_textures(game);
+
+	/* Verify texture paths are set */
+	TEST_ASSERT_EQUAL_INT(FALSE, game->no_texture.addr);
+	TEST_ASSERT_EQUAL_INT(FALSE, game->so_texture.addr);
+	TEST_ASSERT_EQUAL_INT(FALSE, game->we_texture.addr);
+	TEST_ASSERT_EQUAL_INT(FALSE, game->ea_texture.addr);
+}
 /*
 ** Main function to run all tests
 */
@@ -127,6 +152,7 @@ int main(void)
 	/* Run tests - add each test here */
 	RUN_TEST(test_calculator_add_positive_numbers);
 	RUN_TEST(test_init_game_textures_white_space);
+	RUN_TEST(test_init_game_textures_invalid_path);
 	/* Return failure count from Unity */
 	return (UNITY_END());
 }

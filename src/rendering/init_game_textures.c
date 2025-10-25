@@ -6,12 +6,21 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 18:15:38 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/24 15:18:58 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/25 14:22:37 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../include/rendering.h"
+
+void init_texture_clean(t_texture *texture)
+{
+	texture->img = NULL;
+	texture->addr = NULL;
+	texture->bits_per_pixel = 0;
+	texture->line_length = 0;
+	texture->endian = 0;
+}
 
 int init_game_walls_paths(t_game *game)
 {
@@ -43,5 +52,38 @@ int init_game_walls_paths(t_game *game)
 	}
 	if (game->map.no_wall == NULL || game->map.so_wall == NULL || game->map.we_wall == NULL || game->map.ea_wall == NULL)
 		return (printf("Error: Failed to load textures\n"), FALSE);
+	return (TRUE);
+}
+
+int load_texture(t_game *game, t_texture *texture, char *path, char *texture_name)
+{
+	init_texture_clean(texture);
+	// printf("texture->img init\n");
+	texture->img = mlx_xpm_file_to_image(game->mlx, path,
+																			 &texture->width, &texture->height);
+	if (!texture->img)
+		return (ft_putstr_fd(ft_strjoin("Error: Failed to load ", texture_name), 2), FALSE);
+	texture->addr = mlx_get_data_addr(texture->img,
+																		&texture->bits_per_pixel, &texture->line_length,
+																		&texture->endian);
+	return (TRUE);
+}
+
+int init_game_textures(t_game *game)
+{
+	// if (init_game_walls_paths(game) == FALSE)
+	// 	return (FALSE);
+	printf("game->map.no_wall: %s\n", game->map.no_wall);
+	printf("game->map.so_wall: %s\n", game->map.so_wall);
+	printf("game->map.we_wall: %s\n", game->map.we_wall);
+	printf("game->map.ea_wall: %s\n", game->map.ea_wall);
+	if (load_texture(game, &game->no_texture, game->map.no_wall, "NO texture") == FALSE)
+		return (FALSE);
+	if (load_texture(game, &game->so_texture, game->map.so_wall, "SO texture") == FALSE)
+		return (FALSE);
+	if (load_texture(game, &game->we_texture, game->map.we_wall, "WE texture") == FALSE)
+		return (FALSE);
+	if (load_texture(game, &game->ea_texture, game->map.ea_wall, "EA texture") == FALSE)
+		return (FALSE);
 	return (TRUE);
 }

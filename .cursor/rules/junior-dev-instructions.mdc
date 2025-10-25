@@ -1,4 +1,5 @@
 ---
+description: This rules define how you're supposed to act when you're modifying C files
 alwaysApply: false
 ---
 
