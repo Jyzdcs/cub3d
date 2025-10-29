@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/24 16:03:32 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/25 13:47:18 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,6 @@ void init_game_data(t_game *game)
 	game->keys.left_pressed = 0;
 	game->keys.right_pressed = 0;
 	game->keys.escape_pressed = 0;
-
-	// Initialiser les couleurs
-	game->map.floor_color = 0x808080;
-	game->map.ceiling_color = 0x404040;
 }
 
 void init_render_image(t_game *game)
@@ -81,51 +77,8 @@ void init_render_image(t_game *game)
 
 void init_xpm_data(t_game *game)
 {
-	// Hardcode temporaire pour test MLX
-	game->map.no_wall = "/home/kaa/Desktop/cub3d/maps/xpm/north.xpm";
-	game->map.so_wall = "/home/kaa/Desktop/cub3d/maps/xpm/south.xpm";
-	game->map.we_wall = "/home/kaa/Desktop/cub3d/maps/xpm/west.xpm";
-	game->map.ea_wall = "/home/kaa/Desktop/cub3d/maps/xpm/east.xpm";
-	game->no_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.no_wall,
-																							 &game->no_texture.width, &game->no_texture.height);
-	if (!game->no_texture.img)
-	{
-		ft_putstr_fd("Error: Failed to load NO texture\n", 2);
-		return;
-	}
-	game->no_texture.addr = mlx_get_data_addr(game->no_texture.img,
-																						&game->no_texture.bits_per_pixel, &game->no_texture.line_length,
-																						&game->no_texture.endian);
-	game->so_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.so_wall,
-																							 &game->so_texture.width, &game->so_texture.height);
-	if (!game->so_texture.img)
-	{
-		ft_putstr_fd("Error: Failed to load SO texture\n", 2);
-		return;
-	}
-	game->so_texture.addr = mlx_get_data_addr(game->so_texture.img,
-																						&game->so_texture.bits_per_pixel, &game->so_texture.line_length,
-																						&game->so_texture.endian);
-	game->we_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.we_wall,
-																							 &game->we_texture.width, &game->we_texture.height);
-	if (!game->we_texture.img)
-	{
-		ft_putstr_fd("Error: Failed to load WE texture\n", 2);
-		return;
-	}
-	game->we_texture.addr = mlx_get_data_addr(game->we_texture.img,
-																						&game->we_texture.bits_per_pixel, &game->we_texture.line_length,
-																						&game->we_texture.endian);
-	game->ea_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.ea_wall,
-																							 &game->ea_texture.width, &game->ea_texture.height);
-	if (!game->ea_texture.img)
-	{
-		ft_putstr_fd("Error: Failed to load EA texture\n", 2);
-		return;
-	}
-	game->ea_texture.addr = mlx_get_data_addr(game->ea_texture.img,
-																						&game->ea_texture.bits_per_pixel, &game->ea_texture.line_length,
-																						&game->ea_texture.endian);
+	if (init_game_textures(game) == FALSE)
+		exit_game(game, "Error: Failed to load textures\n");
 }
 
 int close_window(t_game *game)
@@ -162,49 +115,50 @@ int parsing(t_game *game, int argc, char **argv)
 	ft_putstr_fd("Succes: map is valid\n", 1);
 	return (TRUE);
 }
-int main(int argc, char **argv)
-{
-	t_game *game;
 
-	if (argc != 2)
-		return (ft_putstr_fd("Error: wrong number of arguments\n", 2), 1);
-	game = malloc(sizeof(t_game));
-	if (!game)
-		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
-	game->map.is_closed = TRUE;
-	if (parsing(game, argc, argv) == FALSE)
-	{
-		free(game);
-		return (1);
-	}
-	init_game_data(game);
-	game->mlx = mlx_init();
-	if (!game->mlx)
-	{
-		printf("MLX initialization failed\n");
-		free(game);
-		return (1);
-	}
-	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
-	if (!game->mlx_win)
-	{
-		printf("MLX window creation failed\n");
-		free(game);
-		return (1);
-	}
+// int main(int argc, char **argv)
+// {
+// 	t_game *game;
 
-	init_render_image(game);
-	init_xpm_data(game);
+// 	if (argc != 2)
+// 		return (ft_putstr_fd("Error: wrong number of arguments\n", 2), 1);
+// 	game = malloc(sizeof(t_game));
+// 	if (!game)
+// 		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
+// 	game->map.is_closed = TRUE;
+// 	if (parsing(game, argc, argv) == FALSE)
+// 	{
+// 		free(game);
+// 		return (1);
+// 	}
+// 	init_game_data(game);
+// 	game->mlx = mlx_init();
+// 	if (!game->mlx)
+// 	{
+// 		printf("MLX initialization failed\n");
+// 		free(game);
+// 		return (1);
+// 	}
+// 	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
+// 	if (!game->mlx_win)
+// 	{
+// 		printf("MLX window creation failed\n");
+// 		free(game);
+// 		return (1);
+// 	}
 
-	// rendering_frame(game);
-	// mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
+// 	init_render_image(game);
+// 	init_xpm_data(game);
 
-	mlx_hook(game->mlx_win, 2, 1L << 0, handle_key_press, game);	 // KeyPress
-	mlx_hook(game->mlx_win, 3, 1L << 1, handle_key_release, game); // KeyRelease
-	mlx_hook(game->mlx_win, 17, 0, close_window, game);						 // Close
-	mlx_loop_hook(game->mlx, process_keys, game);
+// 	// rendering_frame(game);
+// 	// mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
 
-	mlx_loop(game->mlx);
+// 	mlx_hook(game->mlx_win, 2, 1L << 0, handle_key_press, game);	 // KeyPress
+// 	mlx_hook(game->mlx_win, 3, 1L << 1, handle_key_release, game); // KeyRelease
+// 	mlx_hook(game->mlx_win, 17, 0, close_window, game);						 // Close
+// 	// mlx_loop_hook(game->mlx, process_keys, game);
 
-	return (0);
-}
+// 	mlx_loop(game->mlx);
+
+// 	return (0);
+// }
