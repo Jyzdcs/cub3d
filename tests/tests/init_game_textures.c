@@ -34,7 +34,7 @@ void tearDown(void)
 /*
 ** Test function naming convention: test_ModuleName_FunctionName_Scenario
 */
-void test_calculator_add_positive_numbers(void)
+void test_init_game_walls_paths_edge_cases(void)
 {
 	t_game *game;
 	char *test_file[] = {
@@ -75,7 +75,7 @@ void test_calculator_add_positive_numbers(void)
 	TEST_ASSERT_EQUAL_STRING("./maps/xpm/east.xpm", game->map.ea_wall);
 }
 
-void test_init_game_textures_white_space(void)
+void test_init_game_walls_paths_white_space(void)
 {
 	t_game *game;
 	char *test_file[] = {
@@ -117,7 +117,7 @@ void test_init_game_textures_white_space(void)
 	TEST_ASSERT_EQUAL_STRING("./maps/xpm/east.xpm", game->map.ea_wall);
 }
 
-void test_init_game_textures_invalid_path(void)
+void test_load_all_textures_edge_cases(void)
 {
 	t_game *game;
 
@@ -134,14 +134,145 @@ void test_init_game_textures_invalid_path(void)
 	game->map.ea_wall = "../maps/xpm/east.xpm";
 
 	/* Execute */
+	load_all_textures(game);
+
+	/* Verify texture addresses are not NULL */
+	TEST_ASSERT_NOT_NULL(game->no_texture.img);
+	TEST_ASSERT_NOT_NULL(game->so_texture.img);
+	TEST_ASSERT_NOT_NULL(game->we_texture.img);
+	TEST_ASSERT_NOT_NULL(game->ea_texture.img);
+	/* Verify texture addresses are not NULL */
+	TEST_ASSERT_NOT_NULL(game->no_texture.addr);
+	TEST_ASSERT_NOT_NULL(game->so_texture.addr);
+	TEST_ASSERT_NOT_NULL(game->we_texture.addr);
+	TEST_ASSERT_NOT_NULL(game->ea_texture.addr);
+	/* Verify texture paths are set */
+	TEST_ASSERT_NOT_EQUAL_INT(FALSE, game->no_texture.addr);
+	TEST_ASSERT_NOT_EQUAL_INT(FALSE, game->so_texture.addr);
+	TEST_ASSERT_NOT_EQUAL_INT(FALSE, game->we_texture.addr);
+	TEST_ASSERT_NOT_EQUAL_INT(FALSE, game->ea_texture.addr);
+}
+
+void test_load_all_textures_invalid_path(void)
+{
+	t_game *game;
+
+	game = malloc(sizeof(t_game));
+	if (!game)
+		return (ft_putstr_fd("Error: allocation memory on game\n", 2));
+	ft_memset(game, 0, sizeof(t_game));
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		return (ft_putstr_fd("Error: mlx_init\n", 2));
+	game->map.no_wall = "../maps/bad/textures_invalid.xpm";
+	game->map.so_wall = "../maps/bad/textures_invalid.xpm";
+	game->map.we_wall = "../maps/bad/textures_invalid.xpm";
+	game->map.ea_wall = "../maps/bad/textures_invalid.xpm";
+
+	/* Execute */
+	load_all_textures(game);
+
+	/* Verify texture addresses are NULL */
+	TEST_ASSERT_NULL(game->no_texture.img);
+	TEST_ASSERT_NULL(game->so_texture.img);
+	TEST_ASSERT_NULL(game->we_texture.img);
+	TEST_ASSERT_NULL(game->ea_texture.img);
+	/* Verify texture addresses are NULL */
+	TEST_ASSERT_NULL(game->no_texture.addr);
+	TEST_ASSERT_NULL(game->so_texture.addr);
+	TEST_ASSERT_NULL(game->we_texture.addr);
+	TEST_ASSERT_NULL(game->ea_texture.addr);
+}
+
+void test_load_all_textures_with_one_texture_invalid(void)
+{
+	t_game *game;
+
+	game = malloc(sizeof(t_game));
+	if (!game)
+		return (ft_putstr_fd("Error: allocation memory on game\n", 2));
+	ft_memset(game, 0, sizeof(t_game));
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		return (ft_putstr_fd("Error: mlx_init\n", 2));
+	game->map.no_wall = "../maps/xpm/north.xpm";
+	game->map.so_wall = "../maps/bad/textures_invalid.xpm";
+	game->map.we_wall = "../maps/xpm/west.xpm";
+	game->map.ea_wall = "../maps/xpm/east.xpm";
+
+	/* Execute */
+	load_all_textures(game);
+	/* Verify texture addresses are NULL */
+	TEST_ASSERT_NOT_NULL(game->no_texture.img);
+	TEST_ASSERT_NULL(game->so_texture.img);
+	TEST_ASSERT_NULL(game->we_texture.img);
+	TEST_ASSERT_NULL(game->ea_texture.img);
+	/* Verify texture addresses are NULL */
+	TEST_ASSERT_NOT_NULL(game->no_texture.addr);
+	TEST_ASSERT_NULL(game->so_texture.addr);
+	TEST_ASSERT_NULL(game->we_texture.addr);
+	TEST_ASSERT_NULL(game->ea_texture.addr);
+}
+
+void test_init_game_textures_edge_cases(void)
+{
+	t_game *game;
+
+	game = malloc(sizeof(t_game));
+	if (!game)
+		return (ft_putstr_fd("Error: allocation memory on game\n", 2));
+	ft_memset(game, 0, sizeof(t_game));
+	game->mlx = mlx_init();
+	if (!game->mlx)
+		return (ft_putstr_fd("Error: mlx_init\n", 2));
+	game->file = malloc(sizeof(char *) * 12);
+	if (!game->file)
+		return (ft_putstr_fd("Error: allocation memory on file\n", 2));
+	game->file[0] = ft_strdup("NO ../maps/xpm/north.xpm");
+	game->file[1] = ft_strdup("SO ../maps/xpm/south.xpm");
+	game->file[2] = ft_strdup("WE ../maps/xpm/west.xpm");
+	game->file[3] = ft_strdup("EA ../maps/xpm/east.xpm");
+	game->file[4] = ft_strdup("F 220,100,0");
+	game->file[5] = ft_strdup("C 225,30,0");
+	game->file[6] = ft_strdup("                     ");
+	game->file[7] = ft_strdup("1111111");
+	game->file[8] = ft_strdup("1000001");
+	game->file[9] = ft_strdup("1000N01");
+	game->file[10] = ft_strdup("1111111");
+	game->file[11] = NULL;
+
+	/* Execute */
 	init_game_textures(game);
 
 	/* Verify texture paths are set */
-	TEST_ASSERT_EQUAL_INT(FALSE, game->no_texture.addr);
-	TEST_ASSERT_EQUAL_INT(FALSE, game->so_texture.addr);
-	TEST_ASSERT_EQUAL_INT(FALSE, game->we_texture.addr);
-	TEST_ASSERT_EQUAL_INT(FALSE, game->ea_texture.addr);
+	TEST_ASSERT_NOT_NULL(game->map.no_wall);
+	TEST_ASSERT_NOT_NULL(game->map.so_wall);
+	TEST_ASSERT_NOT_NULL(game->map.we_wall);
+	TEST_ASSERT_NOT_NULL(game->map.ea_wall);
+
+	/* Verify specific paths if needed */
+	TEST_ASSERT_EQUAL_STRING("../maps/xpm/north.xpm", game->map.no_wall);
+	TEST_ASSERT_EQUAL_STRING("../maps/xpm/south.xpm", game->map.so_wall);
+	TEST_ASSERT_EQUAL_STRING("../maps/xpm/west.xpm", game->map.we_wall);
+	TEST_ASSERT_EQUAL_STRING("../maps/xpm/east.xpm", game->map.ea_wall);
+
+	/* Verify texture addresses are not NULL */
+	TEST_ASSERT_NOT_NULL(game->no_texture.img);
+	TEST_ASSERT_NOT_NULL(game->so_texture.img);
+	TEST_ASSERT_NOT_NULL(game->we_texture.img);
+	TEST_ASSERT_NOT_NULL(game->ea_texture.img);
+	/* Verify texture addresses are not NULL */
+	TEST_ASSERT_NOT_NULL(game->no_texture.addr);
+	TEST_ASSERT_NOT_NULL(game->so_texture.addr);
+	TEST_ASSERT_NOT_NULL(game->we_texture.addr);
+	TEST_ASSERT_NOT_NULL(game->ea_texture.addr);
+	/* Verify texture paths are set */
+	TEST_ASSERT_NOT_EQUAL_INT(FALSE, game->no_texture.addr);
+	TEST_ASSERT_NOT_EQUAL_INT(FALSE, game->so_texture.addr);
+	TEST_ASSERT_NOT_EQUAL_INT(FALSE, game->we_texture.addr);
+	TEST_ASSERT_NOT_EQUAL_INT(FALSE, game->ea_texture.addr);
 }
+
 /*
 ** Main function to run all tests
 */
@@ -150,9 +281,12 @@ int main(void)
 	/* Initialize Unity */
 	UNITY_BEGIN();
 	/* Run tests - add each test here */
-	RUN_TEST(test_calculator_add_positive_numbers);
-	RUN_TEST(test_init_game_textures_white_space);
-	RUN_TEST(test_init_game_textures_invalid_path);
+	RUN_TEST(test_init_game_walls_paths_edge_cases);
+	RUN_TEST(test_init_game_walls_paths_white_space);
+	RUN_TEST(test_load_all_textures_edge_cases);
+	RUN_TEST(test_load_all_textures_invalid_path);
+	RUN_TEST(test_load_all_textures_with_one_texture_invalid);
+	RUN_TEST(test_init_game_textures_edge_cases);
 	/* Return failure count from Unity */
 	return (UNITY_END());
 }
