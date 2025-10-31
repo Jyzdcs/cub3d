@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 13:25:01 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/03 18:17:13 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/30 13:51:45 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void test_map_is_closed_basic(void)
 
 	player.x = 29; // Position du 'N' dans la ligne 11
 	player.y = 11; // Ligne 11 (index 11)
-
-	int result = map_is_closed(map_copy, &map, &player);
+	map.map = (char **)map_copy;
+	int result = map_is_closed(&map, &player);
 	TEST_ASSERT_EQUAL_INT(0, result); // Map fermée = 0 (valide)
 }
 
@@ -90,8 +90,8 @@ void test_map_is_closed_angle_internal(void)
 
 	player.x = 29; // Position du 'N' dans la ligne 11
 	player.y = 11; // Ligne 11 (index 11)
-
-	int result = map_is_closed(map_copy, &map, &player);
+	map.map = (char **)map_copy;
+	int result = map_is_closed(&map, &player);
 	TEST_ASSERT_EQUAL_INT(0, result); // Map fermée = 0 (valide)
 }
 
@@ -123,8 +123,8 @@ void test_map_is_closed_angle_internal2(void)
 
 	player.x = 29; // Position du 'N' dans la ligne 11
 	player.y = 11; // Ligne 11 (index 11)
-
-	int result = map_is_closed(map_copy, &map, &player);
+	map.map = (char **)map_copy;
+	int result = map_is_closed(&map, &player);
 	TEST_ASSERT_EQUAL_INT(0, result); // Map fermée = 0 (valide)
 }
 
@@ -145,8 +145,8 @@ void test_map_is_closed_minimal_valid_map(void)
 
 	player.x = 2; // Position du joueur 'N' dans "10N1"
 	player.y = 1; // Ligne 1 (index 1)
-
-	int result = map_is_closed(map_copy, &map, &player);
+	map.map = (char **)map_copy;
+	int result = map_is_closed(&map, &player);
 	TEST_ASSERT_EQUAL_INT(0, result); // Map fermée = 0 (valide)
 }
 
@@ -178,8 +178,8 @@ void test_map_is_closed_player_outside_map(void)
 
 	player.x = 50; // Position en dehors de la map
 	player.y = 50;
-
-	int result = map_is_closed(map_copy, &map, &player);
+	map.map = (char **)map_copy;
+	int result = map_is_closed(&map, &player);
 	TEST_ASSERT_EQUAL_INT(1, result); // Map ouverte = 1 (invalide)
 }
 
@@ -211,8 +211,8 @@ void test_map_is_closed_truly_open_map(void)
 
 	player.x = 29; // Position du 'N' dans la ligne 11
 	player.y = 11; // Ligne 11 (index 11)
-
-	int result = map_is_closed(map_copy, &map, &player);
+	map.map = (char **)map_copy;
+	int result = map_is_closed(&map, &player);
 	TEST_ASSERT_EQUAL_INT(0, result); // Map fermée = 0 (valide) - joueur ne peut pas sortir
 }
 
@@ -230,8 +230,8 @@ void test_map_is_closed_empty_map(void)
 
 	player.x = 0;
 	player.y = 0;
-
-	int result = map_is_closed(map_copy, &map, &player);
+	map.map = (char **)map_copy;
+	int result = map_is_closed(&map, &player);
 	TEST_ASSERT_EQUAL_INT(1, result); // Map vide = 1 (invalide)
 }
 
@@ -239,7 +239,6 @@ void test_map_is_closed_single_wall(void)
 {
 	static char line0[] = "1111";
 	static char *map_copy[] = {line0, NULL};
-
 	t_map map;
 	t_player player;
 
@@ -250,8 +249,8 @@ void test_map_is_closed_single_wall(void)
 
 	player.x = 1; // Position dans le mur
 	player.y = 0;
-
-	int result = map_is_closed(map_copy, &map, &player);
+	map.map = (char **)map_copy;
+	int result = map_is_closed(&map, &player);
 	TEST_ASSERT_EQUAL_INT(0, result); // Map fermée = 0 (valide) - pas de sortie possible
 }
 
@@ -270,8 +269,8 @@ void test_map_with_single_line_and_player_placed(void)
 
 	player.x = 2; // Position dans le mur
 	player.y = 0;
-
-	int result = map_is_closed(map_copy, &map, &player);
+	map.map = (char **)map_copy;
+	int result = map_is_closed(&map, &player);
 	TEST_ASSERT_EQUAL_INT(FALSE, result); // Map fermée = 0 (valide) - pas de sortie possible
 }
 

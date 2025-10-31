@@ -6,7 +6,7 @@
 #    By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/02 12:00:00 by kclaudan          #+#    #+#              #
-#    Updated: 2025/10/29 13:12:30 by kclaudan         ###   ########.fr        #
+#    Updated: 2025/10/30 17:00:38 by kclaudan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,22 +22,23 @@ SRC_FILES = main.c \
 			map_parser/map_checker.c \
 			map_parser/textures_checker.c \
 			map_parser/rgb_checker.c \
-			utils/array_utils.c \
-			utils/map_copy.c \
 			map_parser/file_content_check.c \
 			map_parser/file_content_utils.c \
 			map_parser/file_content_map_at_the_end.c \
 			map_parser/map_have_one_player.c \
+			utils/array_utils.c \
+			utils/map_copy.c \
 			utils/game_cleaner.c \
 			rendering/rendering.c \
 			rendering/rendering_utils.c \
 			rendering/render_floor_and_ceiling.c \
+			rendering/init_game_textures.c \
+			rendering/init_game_rgb.c \
 			controls_handler/keys_input.c \
 			controls_handler/keys_camera_rotation.c \
 			controls_handler/keys_movement.c \
 			raycasting/ray_casting.c \
 			raycasting/raycasting_init.c \
-
 # Create full paths for source files
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 

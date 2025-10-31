@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/21 21:47:07 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/30 17:57:38 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "../libs/minilibx_opengl_20191021/mlx.h"
 
 // Dans main(), avant parsing():
-void	init_all_structures(t_game *game)
+void init_all_structures(t_game *game)
 {
 	// Initialiser t_player
 	game->player.x = 1.5;
@@ -32,60 +32,33 @@ void	init_all_structures(t_game *game)
 	// Initialiser t_keys
 	game->keys.w_pressed = 0;
 	// ... autres clés
-
-	// Initialiser les textures à NULL
-	game->no_texture.img = NULL;
-	game->so_texture.img = NULL;
-	game->we_texture.img = NULL;
-	game->ea_texture.img = NULL;
 }
 
-void	init_game_data(t_game *game)
+void init_game_data(t_game *game)
 {
-    // Initialiser le joueur
-    game->player.x = 1.5;
-    game->player.y = 1.5;
-    game->player.old_x = 0.0;
-    game->player.old_y = 0.0;
-    game->player.dir_x = 1.0;
-    game->player.dir_y = 0.0;
-    game->player.speed = 0.1;
-    game->player.rotation_speed = 0.1;
+	// Initialiser le joueur
+	game->player.old_x = 0.0;
+	game->player.old_y = 0.0;
+	game->player.dir_x = 1.0;
+	game->player.dir_y = 0.0;
+	game->player.speed = 0.1;
+	game->player.rotation_speed = 0.1;
 
-    // Initialiser la caméra
-    game->camera.plane_x = 0.0;
-    game->camera.plane_y = 0.66;
+	// Initialiser la caméra
+	game->camera.plane_x = 0.0;
+	game->camera.plane_y = 0.66;
 
-    // Initialiser les clés
-    game->keys.w_pressed = 0;
-    game->keys.a_pressed = 0;
-    game->keys.s_pressed = 0;
-    game->keys.d_pressed = 0;
-    game->keys.left_pressed = 0;
-    game->keys.right_pressed = 0;
-    game->keys.escape_pressed = 0;
-
-    // Initialiser les couleurs
-    game->map.floor_color = 0x808080;
-    game->map.ceiling_color = 0x404040;
-
-    // Initialiser la map si elle n'existe pas
-    if (!game->map.map)
-    {
-        game->map.map = malloc(sizeof(char*) * 6);
-        game->map.map[0] = "111111";
-        game->map.map[1] = "100001";
-        game->map.map[2] = "100001";
-        game->map.map[3] = "100001";
-        game->map.map[4] = "100001";
-        game->map.map[5] = "111111";
-        game->map.map[6] = NULL;
-        game->map.width = 6;
-        game->map.height = 6;
-    }
+	// Initialiser les clés
+	game->keys.w_pressed = 0;
+	game->keys.a_pressed = 0;
+	game->keys.s_pressed = 0;
+	game->keys.d_pressed = 0;
+	game->keys.left_pressed = 0;
+	game->keys.right_pressed = 0;
+	game->keys.escape_pressed = 0;
 }
 
-void	init_render_image(t_game *game)
+void init_render_image(t_game *game)
 {
 	game->render_img = mlx_new_image(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (!game->render_img)
@@ -94,59 +67,10 @@ void	init_render_image(t_game *game)
 		return;
 	}
 	game->render_addr = mlx_get_data_addr(game->render_img,
-		&game->render_bits_per_pixel, &game->render_line_length, &game->render_endian);
+																				&game->render_bits_per_pixel, &game->render_line_length, &game->render_endian);
 }
 
-void	init_xpm_data(t_game *game)
-{
-	// Hardcode temporaire pour test MLX
-	game->map.no_wall = "/home/kaa/Desktop/cub3d/maps/xpm/north.xpm";
-	game->map.so_wall = "/home/kaa/Desktop/cub3d/maps/xpm/south.xpm";
-	game->map.we_wall = "/home/kaa/Desktop/cub3d/maps/xpm/west.xpm";
-	game->map.ea_wall = "/home/kaa/Desktop/cub3d/maps/xpm/east.xpm";
-	game->no_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.no_wall,
-			&game->no_texture.width, &game->no_texture.height);
-	if (!game->no_texture.img)
-	{
-		ft_putstr_fd("Error: Failed to load NO texture\n", 2);
-		return ;
-	}
-	game->no_texture.addr = mlx_get_data_addr(game->no_texture.img,
-			&game->no_texture.bits_per_pixel, &game->no_texture.line_length,
-			&game->no_texture.endian);
-	game->so_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.so_wall,
-			&game->so_texture.width, &game->so_texture.height);
-	if (!game->so_texture.img)
-	{
-		ft_putstr_fd("Error: Failed to load SO texture\n", 2);
-		return ;
-	}
-	game->so_texture.addr = mlx_get_data_addr(game->so_texture.img,
-			&game->so_texture.bits_per_pixel, &game->so_texture.line_length,
-			&game->so_texture.endian);
-	game->we_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.we_wall,
-			&game->we_texture.width, &game->we_texture.height);
-	if (!game->we_texture.img)
-	{
-		ft_putstr_fd("Error: Failed to load WE texture\n", 2);
-		return ;
-	}
-	game->we_texture.addr = mlx_get_data_addr(game->we_texture.img,
-			&game->we_texture.bits_per_pixel, &game->we_texture.line_length,
-			&game->we_texture.endian);
-	game->ea_texture.img = mlx_xpm_file_to_image(game->mlx, game->map.ea_wall,
-			&game->ea_texture.width, &game->ea_texture.height);
-	if (!game->ea_texture.img)
-	{
-		ft_putstr_fd("Error: Failed to load EA texture\n", 2);
-		return ;
-	}
-	game->ea_texture.addr = mlx_get_data_addr(game->ea_texture.img,
-			&game->ea_texture.bits_per_pixel, &game->ea_texture.line_length,
-			&game->ea_texture.endian);
-}
-
-int	parsing(t_game *game, int argc, char **argv)
+int parsing(t_game *game, int argc, char **argv)
 {
 	if (argc != 2)
 	{
@@ -154,11 +78,11 @@ int	parsing(t_game *game, int argc, char **argv)
 		return (ft_putstr_fd("Error: wrong number of arguments\n", 2), FALSE);
 	}
 	if (ft_check_extension(argv[1], ".cub", 4) == FALSE || file_handler(argv[1],
-			game) == FALSE)
+																																			game) == FALSE)
 	{
 		free(game);
 		return (ft_putstr_fd("Error: extension or file handler failed\n", 2),
-			FALSE);
+						FALSE);
 	}
 	if (game->file == NULL)
 		return (ft_putstr_fd("Error: game->file is NULL\n", 2), FALSE);
@@ -170,7 +94,6 @@ int	parsing(t_game *game, int argc, char **argv)
 		free(game);
 		return (ft_putstr_fd("Error: textures checker failed\n", 2), FALSE);
 	}
-	free_all(game->file);
 	ft_putstr_fd("Succes: map is valid\n", 1);
 	return (TRUE);
 }
@@ -214,9 +137,9 @@ int	parsing(t_game *game, int argc, char **argv)
 // 	return (0);
 // }
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_game	*game;
+	t_game *game;
 
 	if (argc != 2)
 		return (ft_putstr_fd("Error: wrong number of arguments\n", 2), 1);
@@ -246,13 +169,17 @@ int	main(int argc, char **argv)
 	}
 
 	init_render_image(game);
-	init_xpm_data(game);
+	if (init_game_textures(game) == FALSE)
+	{
+		free(game);
+		return (1);
+	}
 
 	// rendering_frame(game);
 	// mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
 
-	mlx_hook(game->mlx_win, 2, 1L<<0, handle_key_press, game);    // KeyPress
-	mlx_hook(game->mlx_win, 3, 1L<<1, handle_key_release, game);  // KeyRelease
+	mlx_hook(game->mlx_win, 2, 1L << 0, handle_key_press, game);	 // KeyPress
+	mlx_hook(game->mlx_win, 3, 1L << 1, handle_key_release, game); // KeyRelease
 	mlx_loop_hook(game->mlx, process_keys, game);
 
 	mlx_loop(game->mlx);

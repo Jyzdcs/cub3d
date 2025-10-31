@@ -1,4 +1,5 @@
 ---
+globs: src/*.c
 alwaysApply: false
 ---
 

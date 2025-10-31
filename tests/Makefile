@@ -25,7 +25,10 @@ SRC_FILES = $(SRC_DIR)/map_parser/check_extension.c \
 						$(SRC_DIR)/map_parser/file_content_utils.c \
 						$(SRC_DIR)/map_parser/file_content_map_at_the_end.c \
 						$(SRC_DIR)/utils/game_cleaner.c \
+						$(SRC_DIR)/utils/map_copy.c \
 						$(SRC_DIR)/controls_handler/keys_input.c \
+						$(SRC_DIR)/controls_handler/keys_movement.c \
+						$(SRC_DIR)/controls_handler/keys_camera_rotation.c \
 						$(SRC_DIR)/map_parser/map_have_one_player.c \
 						$(SRC_DIR)/map_parser/map_checker.c \
 						$(SRC_DIR)/raycasting/raycasting_init.c \
@@ -33,7 +36,13 @@ SRC_FILES = $(SRC_DIR)/map_parser/check_extension.c \
 						$(SRC_DIR)/map_parser/textures_checker.c \
 						$(SRC_DIR)/map_parser/rgb_checker.c \
 						$(SRC_DIR)/utils/array_utils.c \
+						$(SRC_DIR)/rendering/init_game_textures.c \
+						$(SRC_DIR)/rendering/init_game_rgb.c \
+						$(SRC_DIR)/rendering/rendering.c \
+						$(SRC_DIR)/rendering/render_floor_and_ceiling.c \
+						$(SRC_DIR)/rendering/rendering_utils.c \
 						$(SRC_DIR)/main.c
+# Note: main.c is excluded because test files define their own main function
 # Add more source files as needed
 
 # Test files
