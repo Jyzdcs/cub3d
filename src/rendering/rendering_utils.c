@@ -41,7 +41,7 @@ int rgb_to_int(char *rgb)
 
 	rgb_values = ft_split(rgb, ',');
 	if (!rgb_values)
-		return (FALSE);
+		return (-1);
 
 	return (ft_atoi(rgb_values[0]) << 16 | ft_atoi(rgb_values[1]) << 8 | ft_atoi(rgb_values[2]));
 }

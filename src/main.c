@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/31 14:29:00 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:46:04 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,45 +77,6 @@ int parsing(t_game *game, int argc, char **argv)
 	ft_putstr_fd("Succes: map is valid\n", 1);
 	return (TRUE);
 }
-
-// int	main(int argc, char **argv)
-// {
-// 	t_game	*game;
-
-// 	if (argc != 2)
-// 		return (ft_putstr_fd("Error: wrong number of arguments\n", 2), 1);
-// 	game = malloc(sizeof(t_game));
-// 	game->map.is_closed = TRUE;
-// 	if (!game)
-// 		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
-// 	if (parsing(game, argc, argv) == FALSE)
-// 	{
-// 		free(game);
-// 		return (1);
-// 	}
-// 	init_game_data(game);
-// 	game->mlx = mlx_init();
-// 	if (!game->mlx)
-// 	{
-// 		if (getenv("DOCKER") || getenv("WSL_DISTRO_NAME"))
-// 			ft_putstr_fd("Error: MLX requires X11 server. Run with '-e DISPLAY=$DISPLAY'\n",
-// 				2);
-// 		else
-// 			ft_putstr_fd("Error: MLX initialization failed\n", 2);
-// 		return (1);
-// 	}
-// 	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
-// 	if (!game->mlx_win)
-// 		return (ft_putstr_fd("Error: creation of the window\n", 2), 1);
-// 	init_render_image(game);
-// 	init_xpm_data(game);
-// 	rendering_frame(game);
-// 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
-// 	mlx_key_hook(game->mlx_win, handle_key_press, game);
-// 	mlx_hook(game->mlx_win, 17, 0, close_window, game);
-// 	mlx_loop(game->mlx);
-// 	return (0);
-// }
 
 // int main(int argc, char **argv)
 // {

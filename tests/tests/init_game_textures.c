@@ -60,7 +60,7 @@ void test_init_game_walls_paths_edge_cases(void)
 	game->file = test_file;
 
 	/* Execute */
-	init_game_walls_paths(game);
+	init_game_walls_paths_and_colors(game);
 
 	/* Verify texture paths are set */
 	TEST_ASSERT_NOT_NULL(game->map.no_wall);
@@ -73,6 +73,8 @@ void test_init_game_walls_paths_edge_cases(void)
 	TEST_ASSERT_EQUAL_STRING("./maps/xpm/south.xpm", game->map.so_wall);
 	TEST_ASSERT_EQUAL_STRING("./maps/xpm/west.xpm", game->map.we_wall);
 	TEST_ASSERT_EQUAL_STRING("./maps/xpm/east.xpm", game->map.ea_wall);
+	TEST_ASSERT_EQUAL_INT(220 << 16 | 100 << 8 | 0, game->map.floor_color);
+	TEST_ASSERT_EQUAL_INT(225 << 16 | 30 << 8 | 0, game->map.ceiling_color);
 }
 
 void test_init_game_walls_paths_white_space(void)
@@ -102,7 +104,7 @@ void test_init_game_walls_paths_white_space(void)
 	game->file = test_file;
 
 	/* Execute */
-	init_game_walls_paths(game);
+	init_game_walls_paths_and_colors(game);
 
 	/* Verify texture paths are set */
 	TEST_ASSERT_NOT_NULL(game->map.no_wall);
@@ -115,6 +117,54 @@ void test_init_game_walls_paths_white_space(void)
 	TEST_ASSERT_EQUAL_STRING("./maps/xpm/south.xpm", game->map.so_wall);
 	TEST_ASSERT_EQUAL_STRING("./maps/xpm/west.xpm", game->map.we_wall);
 	TEST_ASSERT_EQUAL_STRING("./maps/xpm/east.xpm", game->map.ea_wall);
+	TEST_ASSERT_EQUAL_INT(220 << 16 | 100 << 8 | 0, game->map.floor_color);
+	TEST_ASSERT_EQUAL_INT(225 << 16 | 30 << 8 | 0, game->map.ceiling_color);
+}
+
+void test_init_game_walls_paths_floor_and_ceiling_color(void)
+{
+	t_game *game;
+	char *test_file[] = {
+			"			  NO 		./maps/xpm/north.xpm",
+			"			F    220,100,0",
+			"						",
+			"SO ./maps/xpm/south.xpm",
+			"						",
+			"WE ./maps/xpm/west.xpm",
+			"						",
+			"EA ./maps/xpm/east.xpm",
+			"						",
+			"						",
+			"C 225,30,0",
+			"						",
+			"1111111",
+			"1000001",
+			"1000N01",
+			"1111111",
+			NULL};
+
+	game = malloc(sizeof(t_game));
+	if (!game)
+		return (ft_putstr_fd("Error: allocation memory on game\n", 2));
+	ft_memset(game, 0, sizeof(t_game));
+	game->file = test_file;
+
+	/* Execute */
+	init_game_walls_paths_and_colors(game);
+
+	/* Verify texture paths are set */
+	TEST_ASSERT_NOT_NULL(game->map.no_wall);
+	TEST_ASSERT_NOT_NULL(game->map.so_wall);
+	TEST_ASSERT_NOT_NULL(game->map.we_wall);
+	TEST_ASSERT_NOT_NULL(game->map.ea_wall);
+
+	/* Verify specific paths if needed */
+	TEST_ASSERT_EQUAL_STRING("./maps/xpm/north.xpm", game->map.no_wall);
+	TEST_ASSERT_EQUAL_STRING("./maps/xpm/south.xpm", game->map.so_wall);
+	TEST_ASSERT_EQUAL_STRING("./maps/xpm/west.xpm", game->map.we_wall);
+	TEST_ASSERT_EQUAL_STRING("./maps/xpm/east.xpm", game->map.ea_wall);
+	TEST_ASSERT_EQUAL_INT(220 << 16 | 100 << 8 | 0, game->map.floor_color);
+	TEST_ASSERT_EQUAL_INT(225 << 16 | 30 << 8 | 0, game->map.ceiling_color);
 }
 
 void test_load_all_textures_edge_cases(void)
@@ -283,6 +333,7 @@ int main(void)
 	/* Run tests - add each test here */
 	RUN_TEST(test_init_game_walls_paths_edge_cases);
 	RUN_TEST(test_init_game_walls_paths_white_space);
+	RUN_TEST(test_init_game_walls_paths_floor_and_ceiling_color);
 	RUN_TEST(test_load_all_textures_edge_cases);
 	RUN_TEST(test_load_all_textures_invalid_path);
 	RUN_TEST(test_load_all_textures_with_one_texture_invalid);

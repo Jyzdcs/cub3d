@@ -6,7 +6,7 @@
 #    By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/02 12:00:00 by kclaudan          #+#    #+#              #
-#    Updated: 2025/10/31 12:47:00 by kclaudan         ###   ########.fr        #
+#    Updated: 2025/10/31 17:01:56 by kclaudan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,10 +30,9 @@ SRC_FILES = main.c \
 			utils/map_copy.c \
 			utils/game_cleaner.c \
 			rendering/rendering.c \
-			rendering/rendering_utils.c \
 			rendering/render_floor_and_ceiling.c \
-			rendering/init_game_textures.c \
-			rendering/init_game_rgb.c \
+			rendering/rendering_utils.c \
+			rendering/init_game_textures_and_colors.c \
 			rendering/init_player_data.c \
 			controls_handler/keys_input.c \
 			controls_handler/keys_camera_rotation.c \
