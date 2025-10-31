@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/31 13:58:41 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/31 14:29:00 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,52 +117,52 @@ int parsing(t_game *game, int argc, char **argv)
 // 	return (0);
 // }
 
-int main(int argc, char **argv)
-{
-	t_game *game;
+// int main(int argc, char **argv)
+// {
+// 	t_game *game;
 
-	if (argc != 2)
-		return (ft_putstr_fd("Error: wrong number of arguments\n", 2), 1);
-	game = malloc(sizeof(t_game));
-	if (!game)
-		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
-	game->map.is_closed = TRUE;
-	if (parsing(game, argc, argv) == FALSE)
-	{
-		free(game);
-		return (1);
-	}
-	init_game_data(game);
-	game->mlx = mlx_init();
-	if (!game->mlx)
-	{
-		printf("MLX initialization failed\n");
-		free(game);
-		return (1);
-	}
-	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
-	if (!game->mlx_win)
-	{
-		printf("MLX window creation failed\n");
-		free(game);
-		return (1);
-	}
+// 	if (argc != 2)
+// 		return (ft_putstr_fd("Error: wrong number of arguments\n", 2), 1);
+// 	game = malloc(sizeof(t_game));
+// 	if (!game)
+// 		return (ft_putstr_fd("Error: allocation memory on game\n", 2), 1);
+// 	game->map.is_closed = TRUE;
+// 	if (parsing(game, argc, argv) == FALSE)
+// 	{
+// 		free(game);
+// 		return (1);
+// 	}
+// 	init_game_data(game);
+// 	game->mlx = mlx_init();
+// 	if (!game->mlx)
+// 	{
+// 		printf("MLX initialization failed\n");
+// 		free(game);
+// 		return (1);
+// 	}
+// 	game->mlx_win = mlx_new_window(game->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
+// 	if (!game->mlx_win)
+// 	{
+// 		printf("MLX window creation failed\n");
+// 		free(game);
+// 		return (1);
+// 	}
 
-	init_render_image(game);
-	if (init_game_textures(game) == FALSE)
-	{
-		free(game);
-		return (1);
-	}
+// 	init_render_image(game);
+// 	if (init_game_textures(game) == FALSE)
+// 	{
+// 		free(game);
+// 		return (1);
+// 	}
 
-	// rendering_frame(game);
-	// mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
+// 	// rendering_frame(game);
+// 	// mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
 
-	mlx_hook(game->mlx_win, 2, 1L << 0, handle_key_press, game);	 // KeyPress
-	mlx_hook(game->mlx_win, 3, 1L << 1, handle_key_release, game); // KeyRelease
-	mlx_loop_hook(game->mlx, process_keys, game);
+// 	mlx_hook(game->mlx_win, 2, 1L << 0, handle_key_press, game);	 // KeyPress
+// 	mlx_hook(game->mlx_win, 3, 1L << 1, handle_key_release, game); // KeyRelease
+// 	mlx_loop_hook(game->mlx, process_keys, game);
 
-	mlx_loop(game->mlx);
+// 	mlx_loop(game->mlx);
 
-	return (0);
-}
+// 	return (0);
+// }
