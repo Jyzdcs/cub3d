@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/31 11:35:55 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/31 13:58:41 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,40 +15,20 @@
 #include "../include/rendering.h"
 #include "../libs/minilibx_opengl_20191021/mlx.h"
 
-// Dans main(), avant parsing():
 void init_all_structures(t_game *game)
 {
-	// Initialiser t_player
 	game->player.x = 1.5;
 	game->player.y = 1.5;
 	game->player.dir_x = 1.0;
 	game->player.dir_y = 0.0;
-	// ... autres champs
-
-	// Initialiser t_camera
 	game->camera.plane_x = 0.0;
 	game->camera.plane_y = 0.66;
-
-	// Initialiser t_keys
 	game->keys.w_pressed = 0;
-	// ... autres clés
 }
 
 void init_game_data(t_game *game)
 {
-	// Initialiser le joueur
-	game->player.old_x = 0.0;
-	game->player.old_y = 0.0;
-	game->player.dir_x = 1.0;
-	game->player.dir_y = 0.0;
-	game->player.speed = 0.07;
-	game->player.rotation_speed = 0.05;
-
-	// Initialiser la caméra
-	game->camera.plane_x = 0.0;
-	game->camera.plane_y = 0.66;
-
-	// Initialiser les clés
+	init_player_data(game);
 	game->keys.w_pressed = 0;
 	game->keys.a_pressed = 0;
 	game->keys.s_pressed = 0;

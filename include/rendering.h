@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 13:13:45 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/30 13:14:46 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/31 12:46:55 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ int init_game_textures(t_game *game);
 int init_game_rgb(t_game *game);
 int load_texture(t_game *game, t_texture *texture, char *path, char *texture_name);
 int load_all_textures(t_game *game);
+void init_player_data(t_game *game);
 #endif

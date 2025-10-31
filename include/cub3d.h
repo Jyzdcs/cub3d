@@ -23,8 +23,8 @@
 
 #define TRUE 0
 #define FALSE 1
-#define SCREEN_WIDTH 1920
-#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH 920
+#define SCREEN_HEIGHT 520
 #define HITBOX_SIZE 0.2
 
 typedef struct s_keys
@@ -78,6 +78,7 @@ typedef struct s_player
 	double dir_y;
 	double speed;
 	double rotation_speed;
+	char id;
 } t_player;
 
 // FOV
