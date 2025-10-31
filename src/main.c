@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/30 17:57:38 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/10/31 11:35:55 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void init_game_data(t_game *game)
 	game->player.old_y = 0.0;
 	game->player.dir_x = 1.0;
 	game->player.dir_y = 0.0;
-	game->player.speed = 0.1;
-	game->player.rotation_speed = 0.1;
+	game->player.speed = 0.07;
+	game->player.rotation_speed = 0.05;
 
 	// Initialiser la caméra
 	game->camera.plane_x = 0.0;
