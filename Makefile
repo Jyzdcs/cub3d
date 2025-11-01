@@ -6,7 +6,7 @@
 #    By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/02 12:00:00 by kclaudan          #+#    #+#              #
-#    Updated: 2025/10/31 17:01:56 by kclaudan         ###   ########.fr        #
+#    Updated: 2025/11/01 14:23:17 by kclaudan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC_FILES = main.c \
 			map_parser/check_extension.c \
 			map_parser/map_is_closed.c \
 			map_parser/map_checker.c \
+			map_parser/rgb_and_textures_checker.c \
 			map_parser/textures_checker.c \
 			map_parser/rgb_checker.c \
 			map_parser/file_content_check.c \

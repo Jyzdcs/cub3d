@@ -6,15 +6,15 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 11:47:30 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/21 21:51:49 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/01 14:20:14 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/map_parser.h"
 
-int	ft_find_path_to_textures(char *line)
+int ft_find_path_to_textures(char *line)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (line[i] && ft_isspace(line[i]) == TRUE)
@@ -28,16 +28,16 @@ int	ft_find_path_to_textures(char *line)
 	return (i);
 }
 
-int	ft_is_valid_extension(char *path)
+int ft_is_valid_extension(char *path)
 {
 	if (ft_check_extension(path, ".xpm", 4) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
 
-int	ft_is_valid_path(char *path)
+int ft_is_valid_path(char *path)
 {
-	int	fd;
+	int fd;
 
 	fd = open(path, O_RDONLY);
 	// if (fd < 0)
@@ -49,46 +49,13 @@ int	ft_is_valid_path(char *path)
 	return (TRUE);
 }
 
-int	ft_textures_checker(t_game *game)
+int ft_textures_checker(char *line, int *valid_path_counter)
 {
-	int	i;
-	int	path_index;
-	int	invalid_path_counter;
-	int	valid_path_counter;
+	int path_index;
 
-	invalid_path_counter = 0;
-	valid_path_counter = 0;
-	i = 0;
-	// printf("DEBUG: game->file[i] = %s\n", game->file[i]);
-	// for (int j = 0; game->file[j] != NULL; j++)
-	// {
-	if (game->file == NULL)
-		return (ft_putstr_fd("Error: game->file is NULL\n", 2), FALSE);
-	// printf("DEBUG: game->file[%d] = %s\n", i, game->file[i]);
-	// }
-	while (ft_is_identifier(game->file[i]) == 2
-		|| ft_is_line_empty(game->file[i]) == TRUE)
-		i++;
-	while (game->file[i])
-	{
-		if (ft_is_line_empty(game->file[i]) == FALSE
-			&& ft_find_path_to_textures(game->file[i]) > 0)
-		{
-			path_index = ft_find_path_to_textures(game->file[i]);
-			if (ft_is_valid_path(&game->file[i][path_index]) == FALSE
-				|| ft_is_valid_extension(&game->file[i][path_index]) == FALSE)
-				invalid_path_counter++;
-			else
-				valid_path_counter++;
-		}
-		if (invalid_path_counter > 0)
-		{
-			ft_putstr_fd("Error: invalid path or extension\n", 2);
-			return (FALSE);
-		}
-		else if (valid_path_counter == 4)
-			return (TRUE);
-		i++;
-	}
-	return (FALSE);
+	path_index = ft_find_path_to_textures(line);
+	if (ft_is_valid_path(&line[path_index]) == FALSE || ft_is_valid_extension(&line[path_index]) == FALSE)
+		return (FALSE);
+	(*valid_path_counter)++;
+	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/31 14:46:04 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/01 13:49:50 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ int parsing(t_game *game, int argc, char **argv)
 		return (ft_putstr_fd("Error: game->file is NULL\n", 2), FALSE);
 	if (map_is_valid(game) == FALSE)
 		return (ft_putstr_fd("Error: map is not valid\n", 2), FALSE);
-	if (ft_textures_checker(game) == FALSE || ft_rgb_checker(game) == FALSE)
+	if (ft_rgb_and_textures_checker(game) == FALSE)
 	{
 		free_all(game->file);
 		free(game);
-		return (ft_putstr_fd("Error: textures checker failed\n", 2), FALSE);
+		return (ft_putstr_fd("Error: rgb and textures checker failed\n", 2), FALSE);
 	}
 	ft_putstr_fd("Succes: map is valid\n", 1);
 	return (TRUE);
