@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/02 18:56:47 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:08:59 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ int	file_handler(char *path, t_game *game)
 	}
 	if (structure_file_is_valid(game) == FALSE)
 	{
-		free_all(game->file);
 		close(fd);
 		return (FALSE);
 	}
