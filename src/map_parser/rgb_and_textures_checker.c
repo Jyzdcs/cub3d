@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/01 14:20:16 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/02 19:21:50 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/02 23:40:48 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	ft_rgb_and_textures_checker(t_game *game)
 	}
 	if (valid_path_counter == 4 && valid_rgb_counter == 2)
 		return (TRUE);
-	printf("Error: invalid number of textures : %d or rgb: %d\n",
-		valid_path_counter, valid_rgb_counter);
-	return (FALSE);
+	return (printf("Error: invalid number of textures : %d and rgb: %d\n",
+			valid_path_counter, valid_rgb_counter), FALSE);
 }
