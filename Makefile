@@ -6,7 +6,7 @@
 #    By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/02 12:00:00 by kclaudan          #+#    #+#              #
-#    Updated: 2025/11/01 14:23:17 by kclaudan         ###   ########.fr        #
+#    Updated: 2025/11/02 15:43:32 by kclaudan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,20 +52,24 @@ LIBFT_DIR = libs/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # MiniLibX library
-MLX_DIR = libs/minilibx_opengl_20191021
-# MLX_DIR = minilibx/mlx
+# For Linux: Install Linux MiniLibX in minilibx/mlx directory
+MLX_DIR = minilibx/mlx
+# For macOS (uncomment if needed - uses Objective-C .m files):
+# MLX_DIR = libs/minilibx_opengl_20191021
 MLX = $(MLX_DIR)/libmlx.a
 
-# XQuartz paths for macOS
-XQUARTZ_INCLUDE = /opt/X11/include
-XQUARTZ_LIB = /opt/X11/lib
+# XQuartz paths for macOS (comment out for Linux)
+# XQUARTZ_INCLUDE = /opt/X11/include
+# XQUARTZ_LIB = /opt/X11/lib
 
 # Include paths
-INCLUDES = -I ./include -I $(LIBFT_DIR) -I $(MLX_DIR) -I$(XQUARTZ_INCLUDE)
+INCLUDES = -I ./include -I $(LIBFT_DIR) -I $(MLX_DIR)
 
-# MLX linking flags (for macOS with XQuartz/X11)
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -L$(XQUARTZ_LIB) -lXext -lX11 -framework OpenGL -framework AppKit
-# MLX_FLAGS = -L$(MLX_DIR) -lmlx -L$(XQUARTZ_LIB) -lXext -lX11
+# MLX linking flags
+# For macOS with XQuartz/X11 (uncomment if needed):
+# MLX_FLAGS = -L$(MLX_DIR) -lmlx -L$(XQUARTZ_LIB) -lXext -lX11 -framework OpenGL -framework AppKit
+# For Linux (X11 libs in standard system paths):
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11
 
 # Default target
 all: $(NAME)

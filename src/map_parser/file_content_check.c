@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/21 21:51:07 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/02 16:41:59 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,19 @@ int	export_file(t_game *game, int fd, char *path)
 	i = 0;
 	file_size = count_file_line(path);
 	if (file_size == 0)
-		return (ft_putstr_fd("Error: file size is 0\n", 2), FALSE);
+		return (ft_putstr_fd("Error: file is empty\n", 2), FALSE);
 	game->file = malloc(sizeof(char *) * file_size);
 	if (!game->file)
-		return (exit_game(game, "Error allocation memory on file\n"), FALSE);
+		return (ft_putstr_fd("Error: allocation memory on file\n", 2), FALSE);
 	while (i < file_size - 1)
 	{
 		game->file[i] = get_next_line(fd);
 		if (!game->file[i])
-		{
-			free_all(game->file);
-			close(fd);
-			exit_game(game, "Error allocation memory on export file\n");
-			return (FALSE);
-		}
+			return (ft_putstr_fd("Error: allocation memory on export file\n",
+					2), FALSE);
 		i++;
 	}
 	game->file[i] = NULL;
-	close(fd);
 	return (TRUE);
 }
 
@@ -144,13 +139,13 @@ int	file_handler(char *path, t_game *game)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("Error: file doesnt exist\n", 2);
+		ft_putstr_fd("Error: file doesnt exist or permission denied\n", 2);
 		return (FALSE);
 	}
 	if (export_file(game, fd, path) == FALSE)
 	{
 		close(fd);
-		return (FALSE);
+		exit_game(game, "Error: export file failed\n");
 	}
 	if (structure_file_is_valid(game) == FALSE)
 	{
