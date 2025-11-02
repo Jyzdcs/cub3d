@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/02 19:37:30 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/02 23:56:09 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,19 +109,14 @@ int	file_handler(char *path, t_game *game)
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-	{
-		ft_putstr_fd("Error: file doesnt exist or permission denied\n", 2);
-		return (FALSE);
-	}
+		return (ft_putstr_fd("Error: file doesnt exist or permission denied\n",
+				2), FALSE);
 	if (export_file(game, fd, path) == FALSE)
-	{
-		close(fd);
-		exit_game(game, "Error: export file failed\n");
-	}
+		return (close(fd), ft_putstr_fd("Error: export file failed\n", 2),
+			FALSE);
 	if (structure_file_is_valid(game) == FALSE)
-	{
-		close(fd);
-		return (FALSE);
-	}
+		return (close(fd), ft_putstr_fd("Error: structure file is not valid\n",
+				2), FALSE);
+	close(fd);
 	return (TRUE);
 }

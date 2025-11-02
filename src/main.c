@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/02 16:57:58 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/02 23:57:34 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	parsing(t_game *game, int argc, char **argv)
 // 	game->map.is_closed = TRUE;
 // 	if (parsing(game, argc, argv) == FALSE)
 // 		exit_game(game, "Error: parsing failed\n");
-// 	return (TRUE);
+// 	init_game_data(game);
+// 	exit_game(game, "Parsing: success\nInit: success\n");
 // }
 
 // int	main(int argc, char **argv)
