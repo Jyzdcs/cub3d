@@ -5,7 +5,7 @@
 // This function updates the key state when a key is pressed.
 // ESC key returns FALSE to exit the program.
 // Other keys update the corresponding state in game->keys.
-int	handle_key_press(int keycode, t_game *game)
+int handle_key_press(int keycode, t_game *game)
 {
 	if (keycode == XK_Escape)
 	{
@@ -27,7 +27,7 @@ int	handle_key_press(int keycode, t_game *game)
 }
 
 // This function updates the key state when a key is released.
-int	handle_key_release(int keycode, t_game *game)
+int handle_key_release(int keycode, t_game *game)
 {
 	if (keycode == XK_w)
 		game->keys.w_pressed = 0;
@@ -46,9 +46,9 @@ int	handle_key_release(int keycode, t_game *game)
 
 // This function process the value of the
 // game->keys whether they are pressed to move in consequence.
-int	process_keys(void *param)
+int process_keys(void *param)
 {
-	t_game	*game;
+	t_game *game;
 
 	game = (t_game *)param;
 	if (game->keys.w_pressed)
@@ -67,3 +67,73 @@ int	process_keys(void *param)
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
 	return (0);
 }
+
+// #include "../../include/controls.h"
+// #include "../../include/rendering.h"
+// #include "../../include/cub3d.h"
+
+// // This function updates the key state when a key is pressed.
+// // ESC key returns FALSE to exit the program.
+// // Other keys update the corresponding state in game->keys.
+// int handle_key_press(int keycode, t_game *game)
+// {
+// 	if (keycode == KEY_ESC)
+// 	{
+// 		exit_game(game, "Endgame\n");
+// 	}
+// 	if (keycode == KEY_W)
+// 		game->keys.w_pressed = 1;
+// 	if (keycode == KEY_A)
+// 		game->keys.a_pressed = 1;
+// 	if (keycode == KEY_S)
+// 		game->keys.s_pressed = 1;
+// 	if (keycode == KEY_D)
+// 		game->keys.d_pressed = 1;
+// 	if (keycode == KEY_LEFT)
+// 		game->keys.left_pressed = 1;
+// 	if (keycode == KEY_RIGHT)
+// 		game->keys.right_pressed = 1;
+// 	return (TRUE);
+// }
+
+// // This function updates the key state when a key is released.
+// int handle_key_release(int keycode, t_game *game)
+// {
+// 	if (keycode == KEY_W)
+// 		game->keys.w_pressed = 0;
+// 	if (keycode == KEY_A)
+// 		game->keys.a_pressed = 0;
+// 	if (keycode == KEY_S)
+// 		game->keys.s_pressed = 0;
+// 	if (keycode == KEY_D)
+// 		game->keys.d_pressed = 0;
+// 	if (keycode == KEY_LEFT)
+// 		game->keys.left_pressed = 0;
+// 	if (keycode == KEY_RIGHT)
+// 		game->keys.right_pressed = 0;
+// 	return (TRUE);
+// }
+
+// // This function process the value of the
+// // game->keys whether they are pressed to move in consequence.
+// int process_keys(void *param)
+// {
+// 	t_game *game;
+
+// 	game = (t_game *)param;
+// 	if (game->keys.w_pressed)
+// 		move_forward(game);
+// 	if (game->keys.s_pressed)
+// 		move_backward(game);
+// 	if (game->keys.a_pressed)
+// 		strafe_left(game);
+// 	if (game->keys.d_pressed)
+// 		strafe_right(game);
+// 	if (game->keys.left_pressed)
+// 		rotate_left(game);
+// 	if (game->keys.right_pressed)
+// 		rotate_right(game);
+// 	rendering_frame(game);
+// 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
+// 	return (0);
+// }
