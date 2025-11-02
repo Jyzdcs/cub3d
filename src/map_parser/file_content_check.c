@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/02 19:08:59 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:37:30 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ int	count_file_line(char *path)
 
 	i = 0;
 	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (close(fd),
+			ft_putstr_fd("Error: file doesnt exist or permission denied\n", 2),
+			FALSE);
 	while (1)
 	{
 		str = get_next_line(fd);

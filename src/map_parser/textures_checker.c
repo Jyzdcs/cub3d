@@ -6,15 +6,15 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 11:47:30 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/01 14:20:14 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:38:03 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/map_parser.h"
 
-int ft_find_path_to_textures(char *line)
+int	ft_find_path_to_textures(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] && ft_isspace(line[i]) == TRUE)
@@ -28,33 +28,32 @@ int ft_find_path_to_textures(char *line)
 	return (i);
 }
 
-int ft_is_valid_extension(char *path)
+int	ft_is_valid_extension(char *path)
 {
 	if (ft_check_extension(path, ".xpm", 4) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
 
-int ft_is_valid_path(char *path)
+int	ft_is_valid_path(char *path)
 {
-	int fd;
+	int	fd;
 
 	fd = open(path, O_RDONLY);
-	// if (fd < 0)
-	// {
-	// 	printf("Error: textures path doesnt exist or cant be read\n");
-	// 	return (FALSE);
-	// }
+	if (fd < 0)
+		return (printf("Error: textures path doesnt exist or cant be read\n"),
+			FALSE);
 	close(fd);
 	return (TRUE);
 }
 
-int ft_textures_checker(char *line, int *valid_path_counter)
+int	ft_textures_checker(char *line, int *valid_path_counter)
 {
-	int path_index;
+	int	path_index;
 
 	path_index = ft_find_path_to_textures(line);
-	if (ft_is_valid_path(&line[path_index]) == FALSE || ft_is_valid_extension(&line[path_index]) == FALSE)
+	if (ft_is_valid_path(&line[path_index]) == FALSE
+		|| ft_is_valid_extension(&line[path_index]) == FALSE)
 		return (FALSE);
 	(*valid_path_counter)++;
 	return (TRUE);

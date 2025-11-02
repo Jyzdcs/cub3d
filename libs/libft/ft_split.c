@@ -2,9 +2,12 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+
+	+:+     */
+/*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+
+	+#+        */
+/*                                                +#+#+#+#+#+
+	+#+           */
 /*   Created: 2024/10/27 16:25:19 by kclaudan          #+#    #+#             */
 /*   Updated: 2024/10/27 16:25:19 by kclaudan         ###   ########.fr       */
 /*                                                                            */
@@ -14,8 +17,8 @@
 
 int	count_words(char const *s, char sep)
 {
-	int	i;
-	int	counter;
+	int i;
+	int counter;
 
 	counter = 0;
 	if (s[0] != sep)
@@ -32,14 +35,14 @@ int	count_words(char const *s, char sep)
 
 char	*alloc_word_memory(char const *s, char sep)
 {
-	int		i;
-	int		len;
-	char	*tab;
+	int i;
+	int len;
+	char *tab;
 
 	len = 0;
 	while (s[len] != sep && s[len])
 		len++;
-	tab = malloc(sizeof(char) * len + 1);
+	tab = malloc(sizeof(char) * (len + 1));
 	if (tab == NULL)
 		return (NULL);
 	i = -1;
@@ -51,8 +54,10 @@ char	*alloc_word_memory(char const *s, char sep)
 
 char	**free_all_ptr(char **tab)
 {
-	int	i;
+	int i;
 
+	if (!tab)
+		return (NULL);
 	i = 0;
 	while (tab[i])
 		free(tab[i++]);
@@ -62,12 +67,12 @@ char	**free_all_ptr(char **tab)
 
 char	**ft_split(char const *s, char c)
 {
-	int			i;
-	int			k;
-	int const	nbr_of_words = count_words(s, c);
-	char		**tab;
+	int i;
+	int k;
+	int const nbr_of_words = count_words(s, c);
+	char **tab;
 
-	tab = malloc(sizeof(char *) * nbr_of_words + 1);
+	tab = malloc(sizeof(char *) * (nbr_of_words + 1));
 	if (tab == NULL)
 		return (NULL);
 	i = 0;
@@ -89,9 +94,12 @@ char	**ft_split(char const *s, char c)
 	return (tab);
 }
 /*
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
+
+
+
 
 int	main(int ac, char **av)
 {

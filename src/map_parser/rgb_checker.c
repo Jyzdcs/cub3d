@@ -6,23 +6,23 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:51:45 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/01 17:20:38 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:27:36 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/map_parser.h"
 
-int ft_is_valid_rgb(char *rgb)
+int	ft_is_valid_rgb(char *rgb)
 {
-	char **rgb_values;
-	int i;
-	int k;
+	char	**rgb_values;
+	int		i;
+	int		k;
 
 	rgb_values = ft_split(rgb, ',');
 	if (!rgb_values)
 		return (FALSE);
 	if (ft_array_size(rgb_values) != 3)
-		return (FALSE);
+		return (free_all(rgb_values), FALSE);
 	i = 0;
 	while (rgb_values[i])
 	{
@@ -30,21 +30,17 @@ int ft_is_valid_rgb(char *rgb)
 		while (rgb_values[i][k] && ft_isspace(rgb_values[i][k]) == TRUE)
 			k++;
 		if (rgb_values[i][k] == '\0')
-			return (FALSE);
+			return (free_all(rgb_values), FALSE);
 		if (ft_atoi(&rgb_values[i][k]) < 0 || ft_atoi(&rgb_values[i][k]) > 255)
-		{
-			free_all(rgb_values);
-			return (FALSE);
-		}
+			return (free_all(rgb_values), FALSE);
 		i++;
 	}
-	free_all(rgb_values);
-	return (TRUE);
+	return (free_all(rgb_values), TRUE);
 }
 
-int ft_index_of_first_rgb(char *line)
+int	ft_index_of_first_rgb(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] && ft_isspace(line[i]) == TRUE)
@@ -58,16 +54,13 @@ int ft_index_of_first_rgb(char *line)
 	return (i);
 }
 
-int ft_rgb_checker(char *line, int *valid_rgb_counter)
+int	ft_rgb_checker(char *line, int *valid_rgb_counter)
 {
 	int j;
 
 	j = ft_index_of_first_rgb(line);
 	if (ft_is_valid_rgb(&line[j]) == FALSE)
-	{
-		printf("Error: invalid rgb: %s\n", &line[j]);
-		return (FALSE);
-	}
+		return (printf("Error: invalid rgb: %s\n", &line[j]), FALSE);
 	printf("Valid rgb: %s\n", &line[j]);
 	(*valid_rgb_counter)++;
 	return (TRUE);
