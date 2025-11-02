@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/02 16:41:59 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/02 18:56:47 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,57 +77,24 @@ int	export_file(t_game *game, int fd, char *path)
 	game->file[i] = NULL;
 	return (TRUE);
 }
-
 int	structure_file_is_valid(t_game *game)
 {
-	int	i;
-	int	id_counter;
-	int	id_index;
-	int	j;
+	char	id[7];
+	int		id_counter;
 
-	char id[7]; // Increased size to ensure space for null terminator
-	i = 0;
 	id_counter = 0;
-	id_index = 0;
-	ft_memset(id, 0, sizeof(id)); // Initialize array with zeros
-	while (game->file[i])
-	{
-		j = 0;
-		if (game->file[i] && ft_is_line_empty(game->file[i]) == TRUE)
-			i++;
-		else
-		{
-			if (ft_is_identifier(game->file[i]) > 0)
-			{
-				while (game->file[i][j] && ft_isspace(game->file[i][j]) == TRUE)
-					j++;
-				id[id_index++] = game->file[i][j];
-				id_counter++;
-			}
-			else if (id_counter != 6 && ft_is_identifier(game->file[i]) == 0
-				&& ft_is_line_empty(game->file[i]) == FALSE)
-			{
-				ft_putstr_fd("Error: invalid line before identifiers\n", 2);
-				return (FALSE);
-			}
-			i++;
-		}
-	}
+	ft_memset(id, 0, sizeof(id));
+	if (collect_identifiers(game->file, id, &id_counter) == FALSE)
+		return (ft_putstr_fd("Error: invalid line before identifiers\n", 2),
+			FALSE);
 	if (ft_identifiers_register_check(id) == FALSE)
-	{
-		ft_putstr_fd("Error: identifier duplicate\n", 2);
-		return (FALSE);
-	}
+		return (ft_putstr_fd("Error: identifier duplicate\n", 2), FALSE);
 	if (id_counter != 6)
-	{
-		ft_putstr_fd("Error: invalids number of identifier\n", 2);
-		return (FALSE);
-	}
+		return (ft_putstr_fd("Error: invalids number of identifier\n", 2),
+			FALSE);
 	if (ft_map_is_at_the_end(game->file) == FALSE)
-	{
-		ft_putstr_fd("Error: map isnt at the end of the file\n", 2);
-		return (FALSE);
-	}
+		return (ft_putstr_fd("Error: map isnt at the end of the file\n", 2),
+			FALSE);
 	return (TRUE);
 }
 

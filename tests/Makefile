@@ -24,6 +24,7 @@ SRC_FILES = $(SRC_DIR)/map_parser/check_extension.c \
 						$(SRC_DIR)/map_parser/file_content_check.c \
 						$(SRC_DIR)/map_parser/file_content_utils.c \
 						$(SRC_DIR)/map_parser/file_content_map_at_the_end.c \
+						$(SRC_DIR)/utils/file_content_check_utils.c \
 						$(SRC_DIR)/utils/game_cleaner.c \
 						$(SRC_DIR)/utils/map_copy.c \
 						$(SRC_DIR)/main.c \
