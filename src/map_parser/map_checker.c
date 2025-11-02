@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 14:20:29 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/21 21:45:21 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/02 19:18:02 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,17 @@ int	export_map(t_game *game)
 	i = ft_start_index_of_the_map(game->file);
 	end = ft_end_index_of_the_map(game->file, i);
 	game->map.map = malloc(sizeof(char *) * (end - i + 2));
+	if (!game->map.map)
+		return (ft_putstr_fd("Error: allocation memory on map\n", 2), FALSE);
 	if (i == -1)
 		return (FALSE);
 	j = 0;
 	while (i <= end)
 	{
 		game->map.map[j] = ft_strdup(game->file[i]);
+		if (!game->map.map[j])
+			return (ft_putstr_fd("Error: allocation memory on map\n", 2),
+				FALSE);
 		j++;
 		i++;
 	}
@@ -92,21 +97,12 @@ void	init_map_basic_struct(t_game *game)
 int	map_is_valid(t_game *game)
 {
 	if (export_map(game) == FALSE)
-	{
-		printf("Error: Export map failed\n");
-		return (FALSE);
-	}
+		return (ft_putstr_fd("Error: Export map failed\n", 2), FALSE);
 	init_map_basic_struct(game);
 	init_player_pos(game, game->map.map);
 	if (map_have_one_player(game->map.map) == FALSE)
-	{
-		printf("Error: Map havent just one player\n");
-		return (FALSE);
-	}
+		return (ft_putstr_fd("Error: Map havent just one player\n", 2), FALSE);
 	if (map_is_closed(&game->map, &game->player) == FALSE)
-	{
-		printf("Error: Map isnt closed\n");
-		return (FALSE);
-	}
+		return (ft_putstr_fd("Error: Map isnt closed\n", 2), FALSE);
 	return (TRUE);
 }
