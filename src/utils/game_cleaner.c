@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 17:16:43 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/03 01:09:20 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/03 19:15:16 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	exit_game(t_game *game, char *message)
 		clean_textures(game);
 		if (game->mlx_win)
 			mlx_destroy_window(game->mlx, game->mlx_win);
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
 	}
 	ft_putstr_fd(message, 2);
 	if (game)
