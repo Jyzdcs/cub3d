@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 13:13:45 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/03 00:14:01 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/09 11:57:53 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define RENDERING_H
 
 # include "cub3d.h"
-typedef struct s_map			t_map;
 
+typedef struct s_map			t_map;
 typedef struct s_player			t_player;
 typedef struct s_game			t_game;
 typedef struct s_texture		t_texture;

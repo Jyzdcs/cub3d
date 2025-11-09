@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*																			*/
-/*														:::		::::::::   */
-/*   cub3d.h											:+:		:+:	:+:   */
-/*													+:+ +:+			+:+	 */
-/*   By: kclaudan <kclaudan@student.42.fr>			+#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+			*/
-/*   Created: 2025/10/02 12:01:21 by kclaudan			#+#	#+#			 */
-/*   Updated: 2025/10/21 21:24:56 by kclaudan			###   ########.fr	   */
-/*																			*/
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/09 11:57:33 by kclaudan          #+#    #+#             */
+/*   Updated: 2025/11/09 11:58:21 by kclaudan         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
@@ -16,8 +16,8 @@
 # include "../include/map_parser.h"
 # include "../include/rendering.h"
 # include "../libs/libft/libft.h"
-# include "../libs/minilibx_opengl_20191021/mlx.h"
-// # include "../minilibx/mlx/mlx.h"
+// # include "../libs/minilibx_opengl_20191021/mlx.h"
+# include "../minilibx/mlx/mlx.h"
 # include <errno.h>
 # include <fcntl.h>
 
@@ -104,20 +104,20 @@ typedef struct s_map
 
 typedef struct s_ray
 {
-	double dir_x;          // Direction du rayon X
-	double dir_y;          // Direction du rayon Y
-	int map_x;             // Position X sur la map
-	int map_y;             // Position Y sur la map
-	int step_x;            // -1 ou 1
-	int step_y;            // -1 ou 1
-	double side_dist_x;    // Distance du prochain cote X
-	double side_dist_y;    // Distance du prochain cote Y
-	double delta_dist_x;   // |1 / dir_x|
-	double delta_dist_y;   // |1 / dir_y|
-	double perp_wall_dist; // Distance perpendiculaire au mur
-	int side;              // 0 = mur vertical(E/W), 1 = horizontal(N/S)
-	int texture_id;        // 0=NO, 1=SO, 2=WE, 3=EA
-	double wall_x;         // Point de collision du rayon sur le mur
+	double		dir_x;
+	double		dir_y;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	double		perp_wall_dist;
+	int			side;
+	int			texture_id;
+	double		wall_x;
 }				t_ray;
 
 typedef struct s_game
