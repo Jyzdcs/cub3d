@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 12:57:23 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/10 13:01:29 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/09 11:52:50 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int	ft_find_last_index(int index, char **file)
 
 int	ft_map_is_at_the_end(char **file)
 {
-	int start_of_the_map;
-	int end_of_the_map;
-	int end_of_file;
-	int i;
+	int	start_of_the_map;
+	int	end_of_the_map;
+	int	end_of_file;
+	int	i;
 
 	start_of_the_map = ft_start_index_of_the_map(file);
 	if (start_of_the_map == -1)

@@ -20,7 +20,7 @@
 /*
 ** This is run before EACH test, not just once for the whole test suite
 */
-void setUp(void)
+void	setUp(void)
 {
 	/* Initialize things needed by all tests here */
 }
@@ -28,7 +28,7 @@ void setUp(void)
 /*
 ** This is run after EACH test, not just once for the whole test suite
 */
-void tearDown(void)
+void	tearDown(void)
 {
 	/* Clean up after each test */
 }
@@ -36,14 +36,14 @@ void tearDown(void)
 /*
 ** Test function naming convention: test_ModuleName_FunctionName_Scenario
 */
-void test_init_player_data_find_north_player(void)
+void	test_init_player_data_find_north_player(void)
 {
-	t_game *game;
-	static char line0[] = "1111111";
-	static char line1[] = "1000001";
-	static char line2[] = "1000N01";
-	static char line3[] = "1111111";
-	static char *map[] = {line0, line1, line2, line3, NULL};
+	t_game		*game;
+	static char	line0[] = "1111111";
+	static char	line1[] = "1000001";
+	static char	line2[] = "1000N01";
+	static char	line3[] = "1111111";
+	static char	*map[] = {line0, line1, line2, line3, NULL};
 
 	game = malloc(sizeof(t_game));
 	if (!game)
@@ -52,20 +52,19 @@ void test_init_player_data_find_north_player(void)
 	game->map.map = map;
 	game->player.x = 4.0;
 	game->player.y = 2.0;
-
 	init_player_data(game);
 	TEST_ASSERT_EQUAL_CHAR('N', game->player.id);
 	free(game);
 }
 
-void test_init_player_data_find_south_player(void)
+void	test_init_player_data_find_south_player(void)
 {
-	t_game *game;
-	static char line0[] = "1111111";
-	static char line1[] = "1000001";
-	static char line2[] = "1000S01";
-	static char line3[] = "1111111";
-	static char *map[] = {line0, line1, line2, line3, NULL};
+	t_game		*game;
+	static char	line0[] = "1111111";
+	static char	line1[] = "1000001";
+	static char	line2[] = "1000S01";
+	static char	line3[] = "1111111";
+	static char	*map[] = {line0, line1, line2, line3, NULL};
 
 	game = malloc(sizeof(t_game));
 	if (!game)
@@ -74,20 +73,19 @@ void test_init_player_data_find_south_player(void)
 	game->map.map = map;
 	game->player.x = 4.0;
 	game->player.y = 2.0;
-
 	init_player_data(game);
 	TEST_ASSERT_EQUAL_CHAR('S', game->player.id);
 	free(game);
 }
 
-void test_init_player_data_find_east_player(void)
+void	test_init_player_data_find_east_player(void)
 {
-	t_game *game;
-	static char line0[] = "1111111";
-	static char line1[] = "1000001";
-	static char line2[] = "1000E01";
-	static char line3[] = "1111111";
-	static char *map[] = {line0, line1, line2, line3, NULL};
+	t_game		*game;
+	static char	line0[] = "1111111";
+	static char	line1[] = "1000001";
+	static char	line2[] = "1000E01";
+	static char	line3[] = "1111111";
+	static char	*map[] = {line0, line1, line2, line3, NULL};
 
 	game = malloc(sizeof(t_game));
 	if (!game)
@@ -96,20 +94,19 @@ void test_init_player_data_find_east_player(void)
 	game->map.map = map;
 	game->player.x = 4.0;
 	game->player.y = 2.0;
-
 	init_player_data(game);
 	TEST_ASSERT_EQUAL_CHAR('E', game->player.id);
 	free(game);
 }
 
-void test_init_player_data_find_west_player(void)
+void	test_init_player_data_find_west_player(void)
 {
-	t_game *game;
-	static char line0[] = "1111111";
-	static char line1[] = "1000001";
-	static char line2[] = "1000W01";
-	static char line3[] = "1111111";
-	static char *map[] = {line0, line1, line2, line3, NULL};
+	t_game		*game;
+	static char	line0[] = "1111111";
+	static char	line1[] = "1000001";
+	static char	line2[] = "1000W01";
+	static char	line3[] = "1111111";
+	static char	*map[] = {line0, line1, line2, line3, NULL};
 
 	game = malloc(sizeof(t_game));
 	if (!game)
@@ -118,20 +115,19 @@ void test_init_player_data_find_west_player(void)
 	game->map.map = map;
 	game->player.x = 4.0;
 	game->player.y = 2.0;
-
 	init_player_data(game);
 	TEST_ASSERT_EQUAL_CHAR('W', game->player.id);
 	free(game);
 }
 
-void test_init_player_data_north_direction(void)
+void	test_init_player_data_north_direction(void)
 {
-	t_game *game;
-	static char line0[] = "1111111";
-	static char line1[] = "1000001";
-	static char line2[] = "1000N01";
-	static char line3[] = "1111111";
-	static char *map[] = {line0, line1, line2, line3, NULL};
+	t_game		*game;
+	static char	line0[] = "1111111";
+	static char	line1[] = "1000001";
+	static char	line2[] = "1000N01";
+	static char	line3[] = "1111111";
+	static char	*map[] = {line0, line1, line2, line3, NULL};
 
 	game = malloc(sizeof(t_game));
 	if (!game)
@@ -140,9 +136,7 @@ void test_init_player_data_north_direction(void)
 	game->map.map = map;
 	game->player.x = 4.0;
 	game->player.y = 2.0;
-
 	init_player_data(game);
-
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 4.5, game->player.x);
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 2.5, game->player.y);
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 4.5, game->player.old_x);
@@ -157,14 +151,14 @@ void test_init_player_data_north_direction(void)
 	free(game);
 }
 
-void test_init_player_data_south_direction(void)
+void	test_init_player_data_south_direction(void)
 {
-	t_game *game;
-	static char line0[] = "1111111";
-	static char line1[] = "1000001";
-	static char line2[] = "1000S01";
-	static char line3[] = "1111111";
-	static char *map[] = {line0, line1, line2, line3, NULL};
+	t_game		*game;
+	static char	line0[] = "1111111";
+	static char	line1[] = "1000001";
+	static char	line2[] = "1000S01";
+	static char	line3[] = "1111111";
+	static char	*map[] = {line0, line1, line2, line3, NULL};
 
 	game = malloc(sizeof(t_game));
 	if (!game)
@@ -173,9 +167,7 @@ void test_init_player_data_south_direction(void)
 	game->map.map = map;
 	game->player.x = 4.0;
 	game->player.y = 2.0;
-
 	init_player_data(game);
-
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 4.5, game->player.x);
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 2.5, game->player.y);
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 0.0, game->player.dir_x);
@@ -188,14 +180,14 @@ void test_init_player_data_south_direction(void)
 	free(game);
 }
 
-void test_init_player_data_east_direction(void)
+void	test_init_player_data_east_direction(void)
 {
-	t_game *game;
-	static char line0[] = "1111111";
-	static char line1[] = "1000001";
-	static char line2[] = "1000E01";
-	static char line3[] = "1111111";
-	static char *map[] = {line0, line1, line2, line3, NULL};
+	t_game		*game;
+	static char	line0[] = "1111111";
+	static char	line1[] = "1000001";
+	static char	line2[] = "1000E01";
+	static char	line3[] = "1111111";
+	static char	*map[] = {line0, line1, line2, line3, NULL};
 
 	game = malloc(sizeof(t_game));
 	if (!game)
@@ -204,9 +196,7 @@ void test_init_player_data_east_direction(void)
 	game->map.map = map;
 	game->player.x = 4.0;
 	game->player.y = 2.0;
-
 	init_player_data(game);
-
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 4.5, game->player.x);
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 2.5, game->player.y);
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 1.0, game->player.dir_x);
@@ -219,14 +209,14 @@ void test_init_player_data_east_direction(void)
 	free(game);
 }
 
-void test_init_player_data_west_direction(void)
+void	test_init_player_data_west_direction(void)
 {
-	t_game *game;
-	static char line0[] = "1111111";
-	static char line1[] = "1000001";
-	static char line2[] = "1000W01";
-	static char line3[] = "1111111";
-	static char *map[] = {line0, line1, line2, line3, NULL};
+	t_game		*game;
+	static char	line0[] = "1111111";
+	static char	line1[] = "1000001";
+	static char	line2[] = "1000W01";
+	static char	line3[] = "1111111";
+	static char	*map[] = {line0, line1, line2, line3, NULL};
 
 	game = malloc(sizeof(t_game));
 	if (!game)
@@ -235,9 +225,7 @@ void test_init_player_data_west_direction(void)
 	game->map.map = map;
 	game->player.x = 4.0;
 	game->player.y = 2.0;
-
 	init_player_data(game);
-
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 4.5, game->player.x);
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 2.5, game->player.y);
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, -1.0, game->player.dir_x);
@@ -250,14 +238,14 @@ void test_init_player_data_west_direction(void)
 	free(game);
 }
 
-void test_init_player_data_player_position_centered(void)
+void	test_init_player_data_player_position_centered(void)
 {
-	t_game *game;
-	static char line0[] = "1111111";
-	static char line1[] = "1000001";
-	static char line2[] = "1000N01";
-	static char line3[] = "1111111";
-	static char *map[] = {line0, line1, line2, line3, NULL};
+	t_game		*game;
+	static char	line0[] = "1111111";
+	static char	line1[] = "1000001";
+	static char	line2[] = "1000N01";
+	static char	line3[] = "1111111";
+	static char	*map[] = {line0, line1, line2, line3, NULL};
 
 	game = malloc(sizeof(t_game));
 	if (!game)
@@ -266,9 +254,7 @@ void test_init_player_data_player_position_centered(void)
 	game->map.map = map;
 	game->player.x = 3.0;
 	game->player.y = 1.0;
-
 	init_player_data(game);
-
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 3.5, game->player.x);
 	TEST_ASSERT_DOUBLE_WITHIN(0.001, 1.5, game->player.y);
 	free(game);
@@ -277,7 +263,7 @@ void test_init_player_data_player_position_centered(void)
 /*
 ** Main function to run all tests
 */
-int main(void)
+int	main(void)
 {
 	/* Initialize Unity */
 	UNITY_BEGIN();

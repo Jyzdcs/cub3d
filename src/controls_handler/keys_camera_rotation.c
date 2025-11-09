@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys_camera_rotation.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/09 11:55:06 by kclaudan          #+#    #+#             */
+/*   Updated: 2025/11/09 11:55:06 by kclaudan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/controls.h"
 
 void	rotate_player(t_game *game, double angle)
@@ -10,13 +22,12 @@ void	rotate_player(t_game *game, double angle)
 	sin_a = sin(angle);
 	cos_a = cos(angle);
 	old_dir_x = game->player.dir_x;
-	game->player.dir_x = game->player.dir_x
-		* cos_a - game->player.dir_y * sin_a;
-	game->player.dir_y = old_dir_x
-		* sin_a + game->player.dir_y * cos_a;
+	game->player.dir_x = game->player.dir_x * cos_a - game->player.dir_y
+		* sin_a;
+	game->player.dir_y = old_dir_x * sin_a + game->player.dir_y * cos_a;
 	old_plane_x = game->camera.plane_x;
-	game->camera.plane_x = game->camera.plane_x
-		* cos_a - game->camera.plane_y * sin_a;
+	game->camera.plane_x = game->camera.plane_x * cos_a - game->camera.plane_y
+		* sin_a;
 	game->camera.plane_y = old_plane_x * sin_a + game->camera.plane_y * cos_a;
 }
 

@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 18:15:38 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/03 00:13:42 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/09 11:49:07 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	init_texture_clean(t_texture *texture)
 int	init_game_walls_paths_and_colors(t_game *game)
 {
 	int	i;
-	int	path_index;
+	int	path_i;
 	int	j;
 
 	printf("Initializing game walls paths and colors\n");
@@ -41,19 +41,19 @@ int	init_game_walls_paths_and_colors(t_game *game)
 		{
 			while (game->file[i][j] == ' ' || game->file[i][j] == '\t')
 				j++;
-			path_index = ft_find_path_to_textures(game->file[i]);
+			path_i = ft_find_path_to_textures(game->file[i]);
 			if (ft_comp(&game->file[i][j], "NO") == TRUE)
-				game->map.no_wall = ft_strdup(&game->file[i][path_index]);
+				game->map.no_wall = ft_strdup(&game->file[i][path_i]);
 			else if (ft_comp(&game->file[i][j], "SO") == TRUE)
-				game->map.so_wall = ft_strdup(&game->file[i][path_index]);
+				game->map.so_wall = ft_strdup(&game->file[i][path_i]);
 			else if (ft_comp(&game->file[i][j], "WE") == TRUE)
-				game->map.we_wall = ft_strdup(&game->file[i][path_index]);
+				game->map.we_wall = ft_strdup(&game->file[i][path_i]);
 			else if (ft_comp(&game->file[i][j], "EA") == TRUE)
-				game->map.ea_wall = ft_strdup(&game->file[i][path_index]);
+				game->map.ea_wall = ft_strdup(&game->file[i][path_i]);
 			else if (ft_comp(&game->file[i][j], "F") == TRUE)
-				game->map.floor_color = rgb_to_int(&game->file[i][path_index]);
+				game->map.floor_color = rgb_to_int(&game->file[i][path_i]);
 			else if (ft_comp(&game->file[i][j], "C") == TRUE)
-				game->map.ceiling_color = rgb_to_int(&game->file[i][path_index]);
+				game->map.ceiling_color = rgb_to_int(&game->file[i][path_i]);
 		}
 		i++;
 	}
@@ -94,6 +94,7 @@ int	load_all_textures(t_game *game)
 		return (FALSE);
 	return (TRUE);
 }
+
 void	init_game_textures(t_game *game)
 {
 	printf("Initializing game textures\n");

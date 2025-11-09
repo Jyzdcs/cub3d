@@ -1,11 +1,20 @@
-#include "../../include/controls.h"
-#include "../../include/rendering.h"
-#include "../../include/cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keys_input.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/03 00:04:12 by kclaudan          #+#    #+#             */
+/*   Updated: 2025/11/03 01:14:49 by kclaudan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// This function updates the key state when a key is pressed.
-// ESC key returns FALSE to exit the program.
-// Other keys update the corresponding state in game->keys.
-int handle_key_press(int keycode, t_game *game)
+#include "../../include/controls.h"
+#include "../../include/cub3d.h"
+#include "../../include/rendering.h"
+
+int	handle_key_press(int keycode, t_game *game)
 {
 	if (keycode == XK_Escape)
 	{
@@ -27,7 +36,7 @@ int handle_key_press(int keycode, t_game *game)
 }
 
 // This function updates the key state when a key is released.
-int handle_key_release(int keycode, t_game *game)
+int	handle_key_release(int keycode, t_game *game)
 {
 	if (keycode == XK_w)
 		game->keys.w_pressed = 0;
@@ -46,9 +55,9 @@ int handle_key_release(int keycode, t_game *game)
 
 // This function process the value of the
 // game->keys whether they are pressed to move in consequence.
-int process_keys(void *param)
+int	process_keys(void *param)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = (t_game *)param;
 	if (game->keys.w_pressed)
@@ -69,13 +78,13 @@ int process_keys(void *param)
 }
 
 // #include "../../include/controls.h"
-// #include "../../include/rendering.h"
 // #include "../../include/cub3d.h"
+// #include "../../include/rendering.h"
 
 // // This function updates the key state when a key is pressed.
 // // ESC key returns FALSE to exit the program.
 // // Other keys update the corresponding state in game->keys.
-// int handle_key_press(int keycode, t_game *game)
+// int	handle_key_press(int keycode, t_game *game)
 // {
 // 	if (keycode == KEY_ESC)
 // 	{
@@ -97,7 +106,7 @@ int process_keys(void *param)
 // }
 
 // // This function updates the key state when a key is released.
-// int handle_key_release(int keycode, t_game *game)
+// int	handle_key_release(int keycode, t_game *game)
 // {
 // 	if (keycode == KEY_W)
 // 		game->keys.w_pressed = 0;
@@ -116,9 +125,9 @@ int process_keys(void *param)
 
 // // This function process the value of the
 // // game->keys whether they are pressed to move in consequence.
-// int process_keys(void *param)
+// int	process_keys(void *param)
 // {
-// 	t_game *game;
+// 	t_game	*game;
 
 // 	game = (t_game *)param;
 // 	if (game->keys.w_pressed)

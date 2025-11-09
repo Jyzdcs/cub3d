@@ -3,10 +3,13 @@
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -DUNITY_INCLUDE_DOUBLE -DTESTING
-MLX_FLAGS = -framework OpenGL -framework AppKit
-XQUARTZ_LIB = /opt/X11/lib
-XQUARTZ_INCLUDE = /opt/X11/include
-LDFLAGS = -lm -L$(MLX_DIR) -lmlx -L$(XQUARTZ_LIB) -lXext -lX11 $(MLX_FLAGS)
+# For Linux (X11 libs in standard system paths):
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11
+# For macOS with XQuartz/X11 (uncomment if needed):
+# MLX_FLAGS = -framework OpenGL -framework AppKit
+# XQUARTZ_LIB = /opt/X11/lib
+# XQUARTZ_INCLUDE = /opt/X11/include
+LDFLAGS = -lm $(MLX_FLAGS)
 
 # Directories
 ROOT_DIR = ..
@@ -16,7 +19,10 @@ TESTS_DIR = .
 UNITY_DIR = $(TESTS_DIR)/Unity/src
 LIBS_DIR = $(ROOT_DIR)/libs
 LIBFT_DIR = $(LIBS_DIR)/libft
-MLX_DIR = $(LIBS_DIR)/minilibx_opengl_20191021
+# For Linux: Install Linux MiniLibX in minilibx/mlx directory
+MLX_DIR = $(ROOT_DIR)/minilibx/mlx
+# For macOS (uncomment if needed - uses Objective-C .m files):
+# MLX_DIR = $(LIBS_DIR)/minilibx_opengl_20191021n 
 
 # Source files
 SRC_FILES = $(SRC_DIR)/map_parser/check_extension.c \
@@ -58,7 +64,9 @@ LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx.a
 
 # Include directories
-INCLUDES = -I$(INCLUDE_DIR) -I$(UNITY_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -I$(XQUARTZ_INCLUDE)
+INCLUDES = -I$(INCLUDE_DIR) -I$(UNITY_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
+# For macOS with XQuartz (uncomment if needed):
+# INCLUDES = -I$(INCLUDE_DIR) -I$(UNITY_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR) -I$(XQUARTZ_INCLUDE)
 
 # Object files
 TEST_OBJECTS = $(TEST_FILES:.c=.o)

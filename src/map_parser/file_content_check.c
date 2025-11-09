@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 15:51:20 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/02 23:56:09 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/09 11:53:32 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	export_file(t_game *game, int fd, char *path)
 	game->file[i] = NULL;
 	return (TRUE);
 }
+
 int	structure_file_is_valid(t_game *game)
 {
 	char	id[7];

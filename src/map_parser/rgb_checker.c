@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:51:45 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/02 19:27:36 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/09 11:54:19 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_index_of_first_rgb(char *line)
 
 int	ft_rgb_checker(char *line, int *valid_rgb_counter)
 {
-	int j;
+	int	j;
 
 	j = ft_index_of_first_rgb(line);
 	if (ft_is_valid_rgb(&line[j]) == FALSE)

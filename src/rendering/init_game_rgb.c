@@ -6,18 +6,18 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 17:47:32 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/30 17:01:09 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/09 11:51:30 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../include/rendering.h"
 
-int init_game_rgb(t_game *game)
+int	init_game_rgb(t_game *game)
 {
-	int i;
-	int rgb_index;
-	int j;
+	int	i;
+	int	rgb_index;
+	int	j;
 
 	i = 0;
 	game->map.floor_color = -1;

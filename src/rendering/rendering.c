@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rendering.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/09 11:49:17 by kclaudan          #+#    #+#             */
+/*   Updated: 2025/11/09 11:49:17 by kclaudan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/cub3d.h"
 #include "../../include/raycasting.h"
 #include "../../include/rendering.h"
@@ -15,13 +27,13 @@ void	init_texture(t_game *game, t_texture **texture, int *tex_x)
 }
 
 void	init_wall_column(t_wall_column *wall, t_texture *texture,
-			t_render_frame *frame)
+		t_render_frame *frame)
 {
 	wall->step = 1.0 * texture->height / frame->line_height;
 	wall->draw_start = frame->draw_start;
 	wall->draw_end = frame->draw_end;
-	wall->tex_pos = (frame->draw_start
-			- (-frame->line_height / 2 + SCREEN_HEIGHT / 2)) * wall->step;
+	wall->tex_pos = (frame->draw_start - (-frame->line_height / 2
+				+ SCREEN_HEIGHT / 2)) * wall->step;
 	wall->tex_y = 0;
 	wall->color = 0;
 	wall->y = frame->draw_start;
