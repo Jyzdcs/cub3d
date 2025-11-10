@@ -17,8 +17,8 @@
 
 int	count_words(char const *s, char sep)
 {
-	int i;
-	int counter;
+	int	i;
+	int	counter;
 
 	counter = 0;
 	if (s[0] != sep)
@@ -35,9 +35,9 @@ int	count_words(char const *s, char sep)
 
 char	*alloc_word_memory(char const *s, char sep)
 {
-	int i;
-	int len;
-	char *tab;
+	int		i;
+	int		len;
+	char	*tab;
 
 	len = 0;
 	while (s[len] != sep && s[len])
@@ -54,7 +54,7 @@ char	*alloc_word_memory(char const *s, char sep)
 
 char	**free_all_ptr(char **tab)
 {
-	int i;
+	int	i;
 
 	if (!tab)
 		return (NULL);
@@ -67,10 +67,10 @@ char	**free_all_ptr(char **tab)
 
 char	**ft_split(char const *s, char c)
 {
-	int i;
-	int k;
-	int const nbr_of_words = count_words(s, c);
-	char **tab;
+	int			i;
+	int			k;
+	char		**tab;
+	int const	nbr_of_words = count_words(s, c);
 
 	tab = malloc(sizeof(char *) * (nbr_of_words + 1));
 	if (tab == NULL)
