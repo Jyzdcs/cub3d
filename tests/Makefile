@@ -3,12 +3,20 @@
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -DUNITY_INCLUDE_DOUBLE -DTESTING
+# Detect OS for proper MLX linking
+UNAME := $(shell uname)
+
 # For Linux (X11 libs in standard system paths):
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11
-# For macOS with XQuartz/X11 (uncomment if needed):
-# MLX_FLAGS = -framework OpenGL -framework AppKit
-# XQUARTZ_LIB = /opt/X11/lib
-# XQUARTZ_INCLUDE = /opt/X11/include
+# Note: We link the static library $(MLX) directly, so we only need X11 libs here
+# Linux MLX requires -lbsd for BSD utility functions
+ifeq ($(UNAME), Linux)
+	MLX_FLAGS = -lXext -lX11 -lbsd
+else
+	# For macOS with XQuartz/X11 (uncomment if needed):
+	MLX_FLAGS = -framework OpenGL -framework AppKit
+	# XQUARTZ_LIB = /opt/X11/lib
+	# XQUARTZ_INCLUDE = /opt/X11/include
+endif
 LDFLAGS = -lm $(MLX_FLAGS)
 
 # Directories
@@ -20,9 +28,9 @@ UNITY_DIR = $(TESTS_DIR)/Unity/src
 LIBS_DIR = $(ROOT_DIR)/libs
 LIBFT_DIR = $(LIBS_DIR)/libft
 # For Linux: Install Linux MiniLibX in minilibx/mlx directory
-MLX_DIR = $(ROOT_DIR)/minilibx/mlx
+# MLX_DIR = $(ROOT_DIR)/minilibx/mlx
 # For macOS (uncomment if needed - uses Objective-C .m files):
-# MLX_DIR = $(LIBS_DIR)/minilibx_opengl_20191021n 
+MLX_DIR = $(LIBS_DIR)/minilibx_opengl_20191021
 
 # Source files
 SRC_FILES = $(SRC_DIR)/map_parser/check_extension.c \
@@ -61,7 +69,15 @@ UNITY_FILES = $(UNITY_DIR)/unity.c
 
 # Libraries
 LIBFT = $(LIBFT_DIR)/libft.a
-MLX = $(MLX_DIR)/libmlx.a
+# Use OS-specific MLX library
+ifeq ($(UNAME), Linux)
+	MLX = $(MLX_DIR)/libmlx_Linux.a
+	# Use --whole-archive to ensure all MLX symbols are included
+	MLX_LINK_FLAGS = -Wl,--whole-archive $(MLX) -Wl,--no-whole-archive
+else
+	MLX = $(MLX_DIR)/libmlx.a
+	MLX_LINK_FLAGS = $(MLX)
+endif
 
 # Include directories
 INCLUDES = -I$(INCLUDE_DIR) -I$(UNITY_DIR) -I$(LIBFT_DIR) -I$(MLX_DIR)
@@ -85,7 +101,7 @@ $(TESTS_DIR)/tests/%.o: $(TESTS_DIR)/tests/%.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 %: tests/%.o $(UNITY_FILES:.c=.o) $(SRC_FILES:.c=.o) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) $< $(UNITY_FILES:.c=.o) $(SRC_FILES:.c=.o) $(LIBFT) $(MLX) -o $@ $(LDFLAGS)
+	$(CC) $(CFLAGS) $< $(UNITY_FILES:.c=.o) $(SRC_FILES:.c=.o) $(LIBFT) $(MLX_LINK_FLAGS) $(LDFLAGS) -o $@
 
 # Compile Unity source
 $(UNITY_DIR)/%.o: $(UNITY_DIR)/%.c
