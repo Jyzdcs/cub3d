@@ -5,9 +5,7 @@
 
 
 
-
-NO textures/test/north.xpm
-
+NO ./maps/xpm/north.xpm
 
 
 
@@ -15,9 +13,10 @@ NO textures/test/north.xpm
 
 
 
-SO textures/test/south.xpm
-                        WE textures/test/west.xpm
-        EA textures/test/east.xpm            
+
+SO ./maps/xpm/south.xpm
+                        WE ./maps/xpm/west.xpm
+        EA ./maps/xpm/east.xpm     
 
         F 20,           20,             20
 C 230,          200,200
