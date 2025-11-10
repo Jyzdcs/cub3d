@@ -29,7 +29,7 @@ char	*ft_strdup(const char *s)
 
 	i = 0;
 	len = ft_len(s);
-	cp = malloc(sizeof(char) * len + 1);
+	cp = malloc(sizeof(char) * (len + 1));
 	if (cp == NULL)
 		return (NULL);
 	while (i < len)

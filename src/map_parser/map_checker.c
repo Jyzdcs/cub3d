@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 14:20:29 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/02 19:18:02 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:59:38 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,12 @@ void	init_player_pos(t_game *game, char **map)
 	game->player.y = i;
 }
 
-void	init_map_basic_struct(t_game *game)
-{
-	game->map.height = find_map_height(game->map.map);
-	game->map.width = find_map_max_width(game->map.map);
-}
-
 int	map_is_valid(t_game *game)
 {
 	if (export_map(game) == FALSE)
 		return (ft_putstr_fd("Error: Export map failed\n", 2), FALSE);
-	init_map_basic_struct(game);
+	game->map.height = find_map_height(game->map.map);
+	game->map.width = find_map_max_width(game->map.map);
 	init_player_pos(game, game->map.map);
 	if (map_have_one_player(game->map.map) == FALSE)
 		return (ft_putstr_fd("Error: Map havent just one player\n", 2), FALSE);

@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 13:51:45 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/09 11:54:19 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:24:18 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_is_valid_rgb(char *rgb)
 		k = 0;
 		while (rgb_values[i][k] && ft_isspace(rgb_values[i][k]) == TRUE)
 			k++;
-		if (rgb_values[i][k] == '\0')
+		if (rgb_values[i][k] == '\0' || !ft_isdigit(rgb_values[i][k]))
 			return (free_all(rgb_values), FALSE);
 		if (ft_atoi(&rgb_values[i][k]) < 0 || ft_atoi(&rgb_values[i][k]) > 255)
 			return (free_all(rgb_values), FALSE);

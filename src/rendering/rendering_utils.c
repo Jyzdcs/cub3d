@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 11:51:54 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/09 11:52:38 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/10 15:00:16 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ int	rgb_to_int(char *rgb)
 	rgb_values = ft_split(rgb, ',');
 	if (!rgb_values)
 		return (-1);
-	result = ft_atoi(rgb_values[0]) << 16 | ft_atoi(rgb_values[1]) << 8 | ft_atoi(rgb_values[2]);
+	result = ft_atoi(rgb_values[0]) << 16
+		| ft_atoi(rgb_values[1]) << 8
+		| ft_atoi(rgb_values[2]);
 	free_all(rgb_values);
 	return (result);
 }

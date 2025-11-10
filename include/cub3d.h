@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 11:57:33 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/09 11:58:21 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/10 15:28:21 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../include/map_parser.h"
 # include "../include/rendering.h"
 # include "../libs/libft/libft.h"
+# include "../include/controls.h"
 // # include "../libs/minilibx_opengl_20191021/mlx.h"
 # include "../minilibx/mlx/mlx.h"
 # include <errno.h>

@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 11:49:04 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/02 23:59:13 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:15:33 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	init_player_data(t_game *game)
 	game->player.y += 0.5;
 	game->player.old_x = game->player.x;
 	game->player.old_y = game->player.y;
-	game->player.speed = 0.07;
-	game->player.rotation_speed = 0.05;
+	game->player.speed = 0.01;
+	game->player.rotation_speed = 0.01;
 	init_player_direction(game);
 }

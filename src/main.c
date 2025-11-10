@@ -6,14 +6,11 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/08 18:53:27 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/10 15:27:03 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/controls.h"
-#include "../include/map_parser.h"
-#include "../include/rendering.h"
-#include "../libs/minilibx_opengl_20191021/mlx.h"
+#include "../include/cub3d.h"
 
 void	init_game_data(t_game *game)
 {

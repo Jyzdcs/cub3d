@@ -6,12 +6,20 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 17:47:32 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/09 11:51:30 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/10 14:55:51 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 #include "../../include/rendering.h"
+
+int	init_variable(int *i, t_game *game)
+{
+	*i = 0;
+	game->map.floor_color = -1;
+	game->map.ceiling_color = -1;
+	return (1);
+}
 
 int	init_game_rgb(t_game *game)
 {
@@ -19,9 +27,7 @@ int	init_game_rgb(t_game *game)
 	int	rgb_index;
 	int	j;
 
-	i = 0;
-	game->map.floor_color = -1;
-	game->map.ceiling_color = -1;
+	init_variable(&i, game);
 	if (game->file == NULL)
 		return (printf("Error: game->file is NULL\n"), FALSE);
 	while (game->file[i])
