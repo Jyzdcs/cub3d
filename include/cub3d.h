@@ -6,17 +6,17 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/09 11:57:33 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/10 15:28:21 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:20:04 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "../include/controls.h"
 # include "../include/map_parser.h"
 # include "../include/rendering.h"
 # include "../libs/libft/libft.h"
-# include "../include/controls.h"
 // # include "../libs/minilibx_opengl_20191021/mlx.h"
 # include "../minilibx/mlx/mlx.h"
 # include <errno.h>
@@ -147,5 +147,6 @@ void			parsing(t_game *game, int argc, char **argv);
 void			free_all(char **str);
 void			exit_game(t_game *game, char *message);
 int				ft_array_size(char **array);
+void			exit_red_cross(t_game *game);
 
 #endif

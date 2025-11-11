@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 17:16:43 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/10 15:31:53 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:19:44 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,29 @@ void	free_map_wall(t_game *game)
 		free(game->map.we_wall);
 	if (game->map.ea_wall)
 		free(game->map.ea_wall);
+}
+
+void	exit_red_cross(t_game *game)
+{
+	if (game->file)
+		free_all(game->file);
+	if (game->map.map)
+		free_all(game->map.map);
+	free_map_wall(game);
+	if (game->mlx)
+	{
+		if (game->render_img)
+			mlx_destroy_image(game->mlx, game->render_img);
+		clean_textures(game);
+		if (game->mlx_win)
+			mlx_destroy_window(game->mlx, game->mlx_win);
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	ft_putstr_fd("Red cross clicked !\n", 2);
+	if (game)
+		free(game);
+	exit(1);
 }
 
 void	exit_game(t_game *game, char *message)

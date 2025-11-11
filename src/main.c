@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:51:08 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/10 16:39:06 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:20:29 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	main(int argc, char **argv)
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render_img, 0, 0);
 	mlx_hook(game->mlx_win, 2, 1L << 0, handle_key_press, game);
 	mlx_hook(game->mlx_win, 3, 1L << 1, handle_key_release, game);
+	mlx_hook(game->mlx_win, 17, 0, exit_red_cross, game);
 	mlx_loop_hook(game->mlx, process_keys, game);
 	mlx_loop(game->mlx);
 	return (0);
