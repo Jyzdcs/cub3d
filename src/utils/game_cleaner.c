@@ -6,7 +6,7 @@
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/04 17:16:43 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/11/11 14:19:44 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:27:44 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	free_map_wall(t_game *game)
 		free(game->map.ea_wall);
 }
 
-void	exit_red_cross(t_game *game)
+int	exit_red_cross(t_game *game)
 {
 	if (game->file)
 		free_all(game->file);
@@ -75,6 +75,7 @@ void	exit_red_cross(t_game *game)
 	if (game)
 		free(game);
 	exit(1);
+	return (0);
 }
 
 void	exit_game(t_game *game, char *message)

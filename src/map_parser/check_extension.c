@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_check.c                                       :+:      :+:    :+:   */
+/*   check_extension.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kclaudan <kclaudan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:55:04 by kclaudan          #+#    #+#             */
-/*   Updated: 2025/10/15 13:02:47 by kclaudan         ###   ########.fr       */
+/*   Updated: 2025/11/11 14:32:16 by kclaudan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_check_extension(char *file_path, char *extension, int extension_len)
 	if (len < extension_len)
 		return (FALSE);
 	dot = ft_strrchr(file_path, '.');
-	if (!dot || dot == file_path)
+	if (!dot || dot == file_path || *(dot - 1) == '/')
 		return (FALSE);
 	if (ft_strncmp(dot, extension, extension_len) == 0)
 		return (TRUE);
